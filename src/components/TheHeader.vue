@@ -1,0 +1,202 @@
+<template>
+  <header class="header" :class="{'header--active': showMenu}">
+    <div class="container">
+      <div class="header__menu">
+        <img class="header__menu-logo" src="../assets/logo.png" alt="">
+        <div v-if="!isBurger" class="header__nav">
+          <div class="header__nav-item">Play</div>
+          <div class="header__nav-item">News</div>
+          <div class="header__nav-item">Games</div>
+          <div class="header__nav-item">Shop</div>
+          <div class="header__nav-item">Sponsorship</div>
+        </div>
+        <div v-else class="header__burger" @click="toggleMenu">
+          <span/><span/><span/>
+        </div>
+      </div>
+      <div class="header__wrapper" v-if="displayProfile">
+        <div class="header__buttons">
+          <button class="button button-default">Login</button>
+          <button class="button button-gradient">Sign up</button>
+        </div>
+      </div>
+    </div>
+    <transition name="dropdown">
+      <div class="header__content" v-if="showMenu">
+        <ul class="header__content-links">
+          <li class="header__content-link">Play</li>
+          <li class="header__content-link">News</li>
+          <li class="header__content-link">Games</li>
+          <li class="header__content-link">Shop</li>
+          <li class="header__content-link">Sponsorship</li>
+          <li class="header__content-link" v-if="currentUser && !displayProfile">Profile</li>
+        </ul>
+        <div class="header__content-buttons" v-if="!currentUser && !displayProfile">
+          <button class="button button-default">Login</button>
+          <button class="button button-gradient">Sign up</button>
+        </div>
+      </div>
+    </transition>
+  </header>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useMainStore } from '@/stores/main'
+import { useAuthStore } from '@/stores/auth'
+
+const mainStore = useMainStore()
+const authStore = useAuthStore()
+
+const { toggleMenu } = mainStore
+const { windowWidth, headerIndex, showMenu } = storeToRefs(mainStore)
+const { currentUser } = storeToRefs(authStore)
+
+const isBurger = computed(() => {
+  return windowWidth.value < 1440
+})
+
+const displayProfile = computed(() => {
+  return windowWidth.value >= 576
+})
+
+const zIndex = computed(() => headerIndex.value)
+</script>
+
+<style scoped lang="scss">
+@import '@/assets/scss/variables.scss';
+@import '@/assets/scss/media-breakpoints.scss';
+
+.header {
+  position: fixed;
+  z-index: v-bind(zIndex);
+  top: 0;
+  left: 0;
+  right: 0;
+  color: $white;
+  background: $bg-main;
+  padding: 32px 0;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-right: calc(-1 * (100vw - 100%));
+
+  @include media-breakpoint-down(lg) {
+    padding: 24px 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 15px 0;
+  }
+
+  &--active {
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+
+    @include media-breakpoint-down(xs) {
+      width: 100%;
+      justify-content: space-between;
+      flex-direction: row-reverse;
+    }
+
+    &-logo {
+      margin-right: 56px;
+
+      @include media-breakpoint-down(xs) {
+        width: 56px;
+        height: 48px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__nav {
+    display: flex;
+
+    &-item {
+      margin-right: 56px;
+    }
+  }
+
+  &__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 32px;
+    padding: 4px;
+
+    & span {
+      height: 2.67px;
+      width: 24px;
+      background: #F5F5F5;
+      margin-bottom: 4px;
+    }
+
+    & span:nth-last-child(1) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    max-width: 330px;
+    margin: 17px auto 0;
+    overflow-y: hidden;
+
+    &-links {
+      text-align: center;
+    }
+
+    &-link {
+      line-height: 100%;
+      margin-bottom: 30px;
+    }
+
+    &-link:nth-last-child(1) {
+      margin-bottom: 0;
+    }
+
+    &-buttons {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 84px;
+    }
+  }
+}
+
+.container {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-enter-from { max-height: 0 }
+
+.dropdown-enter-to { max-height: 400px }
+
+.dropdown-enter-active { transition: max-height .4s }
+
+.dropdown-leave-from { max-height: 400px }
+
+.dropdown-leave-to { max-height: 0 }
+
+.dropdown-leave-active { transition: max-height .4s }
+
+.button-default {
+  margin-right: 8px;
+
+  @include media-breakpoint-down(xs) {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+}
+</style>

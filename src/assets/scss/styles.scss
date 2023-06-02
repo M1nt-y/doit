@@ -1,0 +1,203 @@
+@import "./media-breakpoints.scss";
+@import "./normalize.scss";
+@import "./variables.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  line-height: 1;
+  -ms-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 14px;
+  line-height: 1.4;
+  position: relative;
+  color: $main-white;
+  background: $bg-main;
+  font-family: 'Rubik', sans-serif;
+
+  @include media-breakpoint-down(xs) {
+    font-size: 15px;
+  }
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: inherit;
+  text-transform: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a {
+  display: inline-block;
+  color: inherit;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  display: block;
+  border-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+h1 {
+  font-size: 75px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 150%;
+
+  @include media-breakpoint-down(md) {
+    font-size: 30px;
+  }
+
+  @include media-breakpoint-down(xs) {
+    font-size: 26px;
+  }
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+#app {
+  height: 100vh;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.main {
+  display: flex;
+  flex: 1 1 auto;
+  padding-top: 128px;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 23px;
+  max-width: 1216px;
+  position: relative;
+}
+
+.button {
+  border: none;
+  color: $white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  background: none;
+  line-height: 20px;
+  font-style: normal;
+  text-align: center;
+  padding: 12px 30px;
+  border-radius: 2px;
+  letter-spacing: 0.2px;
+  font-family: 'Rubik', sans-serif;
+}
+
+.button-default {
+  background: #1A222D;
+}
+
+.button-gradient {
+  background: $gradient-primary;
+}
+
+.button-block {
+  width: 100%;
+  line-height: 100%;
+  padding: 16px 30px;
+}

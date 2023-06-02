@@ -1,0 +1,165 @@
+<template>
+  <div class="select-wrapper">
+    <p class="select-wrapper__label">{{ label }}</p>
+    <input
+        class="input"
+        type="text"
+        v-model="customSelect.input"
+        @input="customSelect.active = true"
+        @click="toggleSelect"
+        v-bind="$attrs"
+    />
+    <transition name="dropdown">
+      <div class="options-wrapper" v-if="customSelect.active">
+        <ul class="options">
+          <li class="option option--disabled" v-if="optionsFound.length === 0">There are no matches</li>
+          <li class="option" v-for="(option, index) in optionsFound" :key="index" @click="selectOption(option.name)">{{ option.name }}</li>
+        </ul>
+      </div>
+    </transition>
+    <!--  Errors  -->
+  </div>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import { useMainStore } from '@/stores/main'
+import {storeToRefs} from "pinia";
+
+const mainStore = useMainStore()
+const { customSelect } = storeToRefs(mainStore)
+
+const props = defineProps({
+  label: {
+    type: String,
+    default: ''
+  },
+  modelValue: {
+    type: String,
+    default: ''
+  },
+  options: {
+    required: true,
+    type: Array
+  }
+})
+
+const optionsFound = computed(() => {
+  if (customSelect.value.input) {
+    return props.options.filter(option => option.name.toLowerCase().includes(customSelect.value.input.toLowerCase()))
+  }
+  else
+    return props.options
+})
+
+const emits = defineEmits(['update:modelValue'])
+
+function toggleSelect() {
+  emits('update:modelValue', '')
+  if (customSelect.value.input === customSelect.value.selected && customSelect.value.input !== '') {
+    customSelect.value.selected = customSelect.value.input = ''
+    customSelect.value.active = !customSelect.value.active
+  }
+  else {
+    customSelect.value.active = true
+  }
+}
+
+function selectOption(option) {
+  emits('update:modelValue', option)
+  customSelect.value.selected = option
+  customSelect.value.input = option
+  customSelect.value.active = false
+}
+</script>
+
+<style scoped lang="scss">
+.select-wrapper {
+  margin-bottom: 16px;
+
+  &__label {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 100%;
+    margin-bottom: 6px;
+  }
+
+  &__error-message {
+    color: #B83333;
+    margin-top: 4px;
+  }
+}
+
+.options-wrapper {
+  z-index: 1;
+  width: 100%;
+  margin-top: 4px;
+  overflow: hidden;
+  max-height: 240px;
+  position: absolute;
+  border-radius: 2px;
+  background: #0B1729;
+  border: 1px solid #1472FF;
+}
+
+.options {
+  max-height: 240px;
+  margin-right: 6px;
+  overflow-y: scroll;
+  position: relative;
+  scrollbar-color: #121F33 #627CA3; /* track thumb */
+  scrollbar-width: 4px; /* none, thin, or auto */
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #627CA3;
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #121F33;
+    border-radius: 2px;
+  }
+}
+
+.option {
+  color: #627CA3;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 100%;
+  padding: 10px 15px;
+  margin-right: 15px;
+  transition: all .3s;
+
+  &--disabled {
+    cursor: default;
+  }
+
+  &:hover {
+    color: #E6E6E6;
+    background: #1472FF;
+  }
+
+  &--disabled:hover {
+    color: #627CA3;
+    background: none;
+  }
+}
+
+.dropdown-enter-from { max-height: 0 }
+
+.dropdown-enter-to { max-height: 240px }
+
+.dropdown-enter-active { transition: max-height .4s }
+
+.dropdown-leave-from { max-height: 240px }
+
+.dropdown-leave-to { max-height: 0 }
+
+.dropdown-leave-active { transition: max-height .4s }
+</style>
