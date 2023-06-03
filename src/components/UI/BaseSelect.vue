@@ -1,30 +1,33 @@
 <template>
   <div class="select-wrapper">
     <p class="select-wrapper__label">{{ label }}</p>
+
     <input
         class="input"
         type="text"
-        v-model="customSelect.input"
-        @input="customSelect.active = true"
+        v-model="select.search"
         @click="toggleSelect"
         v-bind="$attrs"
     />
+
     <transition name="dropdown">
-      <div class="options-wrapper" v-if="customSelect.active">
+      <div class="options-wrapper" v-if="active">
         <ul class="options">
           <li class="option option--disabled" v-if="optionsFound.length === 0">There are no matches</li>
+
           <li class="option" v-for="(option, index) in optionsFound" :key="index" @click="selectOption(option.name)">{{ option.name }}</li>
         </ul>
       </div>
     </transition>
-    <!--  Errors  -->
+
+    <!--  Errors?  -->
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useMainStore } from '@/stores/main'
-import {storeToRefs} from "pinia";
+import { storeToRefs } from 'pinia'
 
 const mainStore = useMainStore()
 const { customSelect } = storeToRefs(mainStore)
@@ -39,42 +42,46 @@ const props = defineProps({
     default: ''
   },
   options: {
-    required: true,
-    type: Array
+    type: Array,
+    default: () => []
+  },
+  active: {
+    type: Boolean,
+    default: false
   }
 })
 
 const optionsFound = computed(() => {
-  if (customSelect.value.input) {
-    return props.options.filter(option => option.name.toLowerCase().includes(customSelect.value.input.toLowerCase()))
+  if (select.value.search) {
+    return props.options.filter(option => option.name.toLowerCase().includes(select.value.search.toLowerCase()))
   }
   else
     return props.options
 })
 
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue', 'click'])
 
-function toggleSelect() {
-  emits('update:modelValue', '')
-  if (customSelect.value.input === customSelect.value.selected && customSelect.value.input !== '') {
-    customSelect.value.selected = customSelect.value.input = ''
-    customSelect.value.active = !customSelect.value.active
-  }
-  else {
-    customSelect.value.active = true
-  }
+const select = ref({
+  search: '',
+  selected: ''
+})
+
+function toggleSelect(e) {
+  e.stopPropagation()
+  emits('update:modelValue', select.value.selected)
+  emits('click')
 }
 
 function selectOption(option) {
   emits('update:modelValue', option)
-  customSelect.value.selected = option
-  customSelect.value.input = option
-  customSelect.value.active = false
+  select.value.selected = option
+  select.value.search = option
 }
 </script>
 
 <style scoped lang="scss">
 .select-wrapper {
+  position: relative;
   margin-bottom: 16px;
 
   &__label {

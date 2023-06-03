@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" @click="customSelect.active = false">
+  <div class="modal" @click="selectOptions = false">
     <div class="modal__controls">
       <svg class="modal__controls-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M25.3334 16H6.66675" stroke="#1C2F4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -15,26 +15,26 @@
     <div class="modal__wrapper" v-if="showTitle">
       <img class="modal__logo" src="@/assets/logo.png" alt="">
 
-      <h1 class="modal__title" v-if="showTitle">{{ modalTitle }}</h1>
+      <h3 class="modal__title" v-if="showTitle">{{ modalTitle }}</h3>
 
       <div class="modal__content">
         <div class="modal__inputs" v-if="showTitle">
           <BaseInput
-              v-if="modalType.login"
+              v-if="modalType === 'Login'"
               :label="'Username or email'"
               placeholder="Username or email"
               v-model="formData.login"
           />
 
           <BaseInput
-              v-else-if="modalType.signup"
+              v-else-if="modalType === 'Signup'"
               :label="'Email'"
               placeholder="Email"
               v-model="formData.email"
           />
 
           <BaseInput
-              v-else-if="modalType.forgotPass"
+              v-else-if="modalType === 'Forgot password'"
               :label="'Username or email'"
               placeholder="Username or email"
               v-model="formData.forgot"
@@ -55,15 +55,16 @@
           />
 
           <BaseSelect
-              v-if="modalType.signupNext"
+              v-if="modalType === 'Signup Next'"
               :label="'Country'"
               v-model="formData.country"
               :options="countries"
               placeholder="Select country"
-              @click.stop
+              :active="selectOptions"
+              @click="selectOptions = !selectOptions"
           />
 
-          <div class="birthdate" v-if="modalType.signupNext">
+          <div class="birthdate" v-if="modalType === 'Signup Next'">
             <p class="birthdate__label">Date of birth</p>
 
             <div class="birthdate__inputs">
@@ -82,6 +83,8 @@
                   v-model="formData.year"
               />
             </div>
+
+            <!--     Validation errors       -->
           </div>
 
 
@@ -94,20 +97,27 @@
         <div class="modal__options" v-if="showOptions">
           <p class="modal__options-text">
             or
-            <span v-if="modalType.login"> login </span>
+
+            <span v-if="modalType === 'Login'"> login </span>
+
             <span v-else> signup </span>
+
             with
           </p>
+
           <div class="modal__options-icons">
             <div class="modal__option">
               <img src="@/assets/icons/facebook.png" alt="">
             </div>
+
             <div class="modal__option">
               <img src="@/assets/icons/battle.png" alt="">
             </div>
+
             <div class="modal__option">
               <img src="@/assets/icons/google.png" alt="">
             </div>
+
             <div class="modal__option">
               <img src="@/assets/icons/steam.png" alt="">
             </div>
@@ -115,24 +125,20 @@
         </div>
 
         <div class="modal__alt">
-          <p class="modal__alt-forgot modal__alt-link"
-             v-if="modalType.login"
-             @click="showForgot">
+          <p v-if="modalType === 'Login'" class="modal__alt-forgot modal__alt-link" @click="showForgot">
             Forgot password?
           </p>
 
-          <p v-if="modalType.login">
+          <p v-if="modalType === 'Login'">
             Don't have an account?
             <span class="modal__alt-link" @click="showSignup">Sign up!</span>
           </p>
 
-          <p class="modal__alt-forgot modal__alt-link"
-             v-else-if="modalType.forgotPass"
-             @click="showLogin">
+          <p v-else-if="modalType === 'Forgot password'" class="modal__alt-forgot modal__alt-link" @click="showLogin">
             Back to login
           </p>
 
-          <p class="modal__alt-link" v-else-if="modalType.signup" @click="showLogin">
+          <p v-else-if="modalType === 'Signup'" class="modal__alt-link" @click="showLogin">
             Already have an account?
           </p>
         </div>
@@ -142,7 +148,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/stores/main'
 import { useAuthStore } from '@/stores/auth'
@@ -150,7 +156,7 @@ import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseSelect from '@/components/UI/BaseSelect.vue'
 
 const mainStore = useMainStore()
-const { modalType, customSelect } = storeToRefs(mainStore)
+const { modalType } = storeToRefs(mainStore)
 const { showLogin, showSignup, showNext, showDone, showForgot, closeModal } = mainStore
 
 const authStore = useAuthStore()
@@ -159,54 +165,60 @@ const { clearForm } = authStore
 
 
 const modalTitle = computed(() => {
-  if (modalType.value.login) {
+  if (modalType.value === 'Login') {
     return 'Login'
-  } else if (modalType.value.signup) {
+  } else if (modalType.value === 'Signup') {
     return 'Sign up 1/2'
-  } else if (modalType.value.signupNext) {
+  } else if (modalType.value === 'Signup Next') {
     return 'Sign up 2/2'
-  } else if (modalType.value.forgotPass) {
+  } else if (modalType.value === 'Forgot password') {
     return 'Forgot password'
   } else {
     return ''
   }
 })
+
 const showTitle = computed(() => {
-  return !(modalType.value.signupDone || modalType.value.reportScores)
+  return !(modalType.value === 'Signup Done' || modalType.value === 'Report scores')
 })
+
 const showPass = computed(() => {
-  return !(modalType.value.signupNext || modalType.value.forgotPass)
+  return !(modalType.value === 'Signup Next' || modalType.value === 'Forgot password')
 })
+
 const btnContent = computed(() => {
-  if (modalType.value.login) {
+  if (modalType.value === 'Login') {
     return 'Login'
-  } else if (modalType.value.signup) {
+  } else if (modalType.value === 'Signup') {
     return 'Next step'
-  } else if (modalType.value.signupNext) {
+  } else if (modalType.value === 'Signup Next') {
     return 'Create an account'
-  } else if (modalType.value.signupDone) {
+  } else if (modalType.value === 'Signup Done') {
     return 'Verify email'
-  } else if (modalType.value.forgotPass) {
+  } else if (modalType.value === 'Forgot password') {
     return 'Reset password'
   } else {
     return 'Submit scores'
   }
 })
+
 const showOptions = computed(() => {
-  return modalType.value.login || modalType.value.signup
+  return modalType.value === 'Login' || modalType.value === 'Signup'
 })
+
+const selectOptions = ref(false)
 
 const submitForm = async () => {
   // validation later
-  if (modalType.value.login) {
+  if (modalType.value === 'Login') {
     // login
     handleClose()
   }
-  else if (modalType.value.signup) {
+  else if (modalType.value === 'Signup') {
     // signup
     showNext()
   }
-  else if (modalType.value.signupNext) {
+  else if (modalType.value === 'Signup Next') {
     // finish signup
     showDone()
   }
@@ -522,7 +534,6 @@ const countries = [
   }
 
   &__title {
-    line-height: 100%;
     margin-bottom: 30px;
 
     @include media-breakpoint-down(sm) {
