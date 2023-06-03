@@ -54,11 +54,11 @@ const { windowWidth, headerIndex, showMenu } = storeToRefs(mainStore)
 const { currentUser } = storeToRefs(authStore)
 
 const isBurger = computed(() => {
-  return windowWidth.value < 1440
+  return windowWidth.value <= 1200
 })
 
 const displayProfile = computed(() => {
-  return windowWidth.value >= 576
+  return windowWidth.value > 577
 })
 
 const zIndex = computed(() => headerIndex.value)
@@ -76,7 +76,7 @@ const zIndex = computed(() => headerIndex.value)
   right: 0;
   color: $white;
   background: $bg-main;
-  padding: 32px 0;
+  padding: 32px 120px;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -84,11 +84,15 @@ const zIndex = computed(() => headerIndex.value)
   margin-right: calc(-1 * (100vw - 100%));
 
   @include media-breakpoint-down(lg) {
-    padding: 24px 0;
+    padding: 24px 120px;
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 24px 23px;
   }
 
   @include media-breakpoint-down(sm) {
-    padding: 15px 0;
+    padding: 15px 23px;
   }
 
   &--active {
@@ -97,17 +101,29 @@ const zIndex = computed(() => headerIndex.value)
   }
 
   &__menu {
+    width: 100%;
     display: flex;
     align-items: center;
+    max-width: 695px;
+    margin-right: 32px;
+
+    @include media-breakpoint-down(md) {
+      width: auto;
+    }
 
     @include media-breakpoint-down(xs) {
       width: 100%;
-      justify-content: space-between;
+      margin-right: 0;
       flex-direction: row-reverse;
+      justify-content: space-between;
     }
 
     &-logo {
-      margin-right: 56px;
+      margin-right: 8.058%;
+
+      @include media-breakpoint-down(md) {
+        margin-right: 56px;
+      }
 
       @include media-breakpoint-down(xs) {
         width: 56px;
@@ -118,11 +134,21 @@ const zIndex = computed(() => headerIndex.value)
   }
 
   &__nav {
+    width: 100%;
     display: flex;
 
     &-item {
-      margin-right: 56px;
+      margin-right: 9.878%;
+
+      &:nth-last-child(1) {
+        margin-right: 0;
+      }
     }
+  }
+
+  &__wrapper {
+    width: 100%;
+    max-width: 234px;
   }
 
   &__burger {
