@@ -3,37 +3,53 @@
     <div class="container">
       <div class="header__menu">
         <img class="header__menu-logo" src="../assets/logo.png" alt="">
+
         <div v-if="!isBurger" class="header__nav">
           <div class="header__nav-item">Play</div>
+
           <div class="header__nav-item">News</div>
+
           <div class="header__nav-item">Games</div>
+
           <div class="header__nav-item">Shop</div>
+
           <div class="header__nav-item">Sponsorship</div>
         </div>
+
         <div v-else class="header__burger" @click="toggleMenu">
           <span/><span/><span/>
         </div>
       </div>
+
       <div class="header__wrapper" v-if="displayProfile">
         <div class="header__buttons">
-          <button class="button button-default">Login</button>
-          <button class="button button-gradient">Sign up</button>
+          <button class="button button-default" @click="showLogin">Login</button>
+
+          <button class="button button-gradient" @click="showSignup">Sign up</button>
         </div>
       </div>
     </div>
+
     <transition name="dropdown">
       <div class="header__content" v-if="showMenu">
         <ul class="header__content-links">
           <li class="header__content-link">Play</li>
+
           <li class="header__content-link">News</li>
+
           <li class="header__content-link">Games</li>
+
           <li class="header__content-link">Shop</li>
+
           <li class="header__content-link">Sponsorship</li>
+
           <li class="header__content-link" v-if="currentUser && !displayProfile">Profile</li>
         </ul>
+
         <div class="header__content-buttons" v-if="!currentUser && !displayProfile">
-          <button class="button button-default">Login</button>
-          <button class="button button-gradient">Sign up</button>
+          <button class="button button-default" @click="showLogin">Login</button>
+
+          <button class="button button-gradient" @click="showSignup">Sign up</button>
         </div>
       </div>
     </transition>
@@ -49,7 +65,7 @@ import { useAuthStore } from '@/stores/auth'
 const mainStore = useMainStore()
 const authStore = useAuthStore()
 
-const { toggleMenu } = mainStore
+const { toggleMenu, showLogin, showSignup } = mainStore
 const { windowWidth, headerIndex, showMenu } = storeToRefs(mainStore)
 const { currentUser } = storeToRefs(authStore)
 

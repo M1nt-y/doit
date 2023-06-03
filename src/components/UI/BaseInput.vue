@@ -1,6 +1,7 @@
 <template>
   <div class="input-wrapper">
     <p class="input-wrapper__label" v-if="label">{{ label }}</p>
+
     <input
         class="input"
         type="text"
@@ -8,7 +9,8 @@
         @input="emitInput($event)"
         v-bind="$attrs"
     />
-    <!--  Errors  -->
+
+    <!--  Errors?  -->
   </div>
 </template>
 
@@ -44,42 +46,6 @@ function emitInput(event) {
   &__error-message {
     color: #B83333;
     margin-top: 4px;
-  }
-}
-
-.input {
-  width: 100%;
-  outline: none;
-  background: none;
-  padding: 12px 16px;
-  border-radius: 2px;
-  border: 1px solid #16263D;
-  font-family: 'Rubik', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 100%;
-  color: #627CA3;
-  transition: all .4s;
-  &:hover {
-    background: #121F33;
-    border: 1px solid #627CA3;
-  }
-  &:focus {
-    color: #E6E6E6;
-    background: #16263D;
-    border: 1px solid #185EC7;
-  }
-  &:disabled {
-    color: #98A4B5;
-    background: #121F33;
-    border: 1px solid #121F33;
-  }
-  &--error {
-    border: 1px solid #B83333;
-  }
-  &--success {
-    border: 1px solid #4CB725;
   }
 }
 

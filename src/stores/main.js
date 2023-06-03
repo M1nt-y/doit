@@ -9,19 +9,7 @@ export const useMainStore = defineStore('main', () => {
     const profileExpanded = ref(false)
     const showModal = ref(false)
     const headerIndex = ref(1)
-    const modalType = ref({
-        login: false,
-        signup: false,
-        signupNext: false,
-        signupDone: false,
-        forgotPass: false,
-        reportScores: false
-    })
-    const customSelect = ref({
-        active: false,
-        input: '',
-        selected: ''
-    })
+    const modalType = ref('')
 
 
     function onWidthChange () {
@@ -44,44 +32,45 @@ export const useMainStore = defineStore('main', () => {
         // }
     }
 
-    // // display modals
+    // display modals
     function showLogin() {
-        showBackdrop.value = showModal.value = modalType.value.login = true
-        modalType.value.signup = modalType.value.forgotPass = false
+        showBackdrop.value = showModal.value = true
+        modalType.value = 'Login'
         if (showMenu.value) {
             headerIndex.value = 1
         }
     }
+
     function showSignup() {
-        showBackdrop.value = showModal.value = modalType.value.signup = true
-        modalType.value.login = false
+        showBackdrop.value = showModal.value = true
+        modalType.value = 'Signup'
         if (showMenu.value) {
             headerIndex.value = 1
         }
     }
     function showNext() {
-        showBackdrop.value = showModal.value = modalType.value.signupNext = true
-        modalType.value.signup = false
+        showBackdrop.value = showModal.value = true
+        modalType.value = 'Signup Next'
     }
     function showDone() {
-        showBackdrop.value = showModal.value = modalType.value.signupDone = true
-        modalType.value.signupNext = false
+        showBackdrop.value = showModal.value = true
+        modalType.value = 'Signup Done'
     }
     function showForgot() {
-        showBackdrop.value = showModal.value = modalType.value.forgotPass = true
-        modalType.value.login = false
+        showBackdrop.value = showModal.value = true
+        modalType.value = 'Forgot password'
     }
     function showReport() {
-        showBackdrop.value = showModal.value = modalType.value.reportScores = true
-        // modalType.value.login = modalType.value.signup = modalType.value.signupNext = modalType.value.signupDone = modalType.value.forgotPass = false
+        showBackdrop.value = showModal.value = true
+        modalType.value = 'Report scores'
         // if (showMenu.value) {
         //     headerIndex.value = 1
         // }
     }
 
     function closeModal() {
-        showModal.value = modalType.value.login = modalType.value.signup = modalType.value.signupNext = modalType.value.signupDone = modalType.value.forgotPass = modalType.value.reportScores = customSelect.value.active = false
-        customSelect.value.input = customSelect.value.selected = ''
+        showModal.value = false
+        modalType.value = ''
         if (!showMenu.value) {
             showBackdrop.value = false
         } else {
@@ -107,7 +96,6 @@ export const useMainStore = defineStore('main', () => {
         showModal,
         headerIndex,
         modalType,
-        customSelect,
         onWidthChange,
         toggleMenu,
         toggleProfile,
