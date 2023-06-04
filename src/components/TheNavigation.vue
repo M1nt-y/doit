@@ -117,7 +117,7 @@
   background: $bg-main;
   padding: 16px 40px;
 
-  @include media-breakpoint-down(lg) {
+  @include media-breakpoint-down(md) {
     height: auto;
     width: 100%;
     bottom: 0;
@@ -137,7 +137,7 @@
     align-items: center;
     justify-content: center;
 
-    @include media-breakpoint-down(lg) {
+    @include media-breakpoint-down(md) {
       flex-direction: row;
     }
 
@@ -146,7 +146,7 @@
       height: 32px;
       margin-bottom: 80px;
 
-      @include media-breakpoint-down(lg) {
+      @include media-breakpoint-down(md) {
         //height: 32px;
         margin-bottom: 0;
         margin-right: 12.245%;
@@ -179,7 +179,7 @@
     &-icon:nth-last-child(1) {
       margin-bottom: 0;
 
-      @include media-breakpoint-down(lg) {
+      @include media-breakpoint-down(md) {
         margin-right: 0;
       }
     }
