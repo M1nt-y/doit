@@ -45,11 +45,23 @@ import IconMail from '@/assets/icons/Mail.vue'
 .contact{
   margin-top: 193px;
   margin-bottom: 100px;
+  @include media-breakpoint-down(lg){
+    margin-top: 100px;
+  }
+  @include media-breakpoint-down(xs){
+    margin-top: 17px;
+  }
   &-title{
     font-style: normal;
     font-weight: 700;
     font-size: 48px;
     line-height: 56px;
+    @include media-breakpoint-down(xs){
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 56px;
+    }
   }
   &__adress{
     display: flex;
@@ -57,6 +69,11 @@ import IconMail from '@/assets/icons/Mail.vue'
     gap: 13px;
     margin-top: 52px;
     padding-bottom: 40px;
+    @include media-breakpoint-down(xs){
+      margin-top: 32px;
+      margin-left: 9px;
+      padding-bottom: 30px;
+    }
     position: relative;
     &::before{
       content: '';
@@ -66,6 +83,9 @@ import IconMail from '@/assets/icons/Mail.vue'
       width: 2px;
       height: 41px;
       background: #151A1F;
+      @include media-breakpoint-down(xs){
+        height: 34px;
+      }
     }
     &-point{
       border: 2px solid #151A1F;
@@ -84,6 +104,12 @@ import IconMail from '@/assets/icons/Mail.vue'
         font-size: 22px;
         line-height: 100%;
         color: #707880;
+        @include media-breakpoint-down(xs){
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 130%;
+        }
       }
     }
   }
@@ -93,6 +119,10 @@ import IconMail from '@/assets/icons/Mail.vue'
     gap: 13px;
     padding-bottom: 40px;
     position: relative;
+    @include media-breakpoint-down(xs){
+      margin-left: 10px;
+      padding-bottom: 30px;
+    }
     &::before{
       content: '';
       position: absolute;
@@ -101,6 +131,9 @@ import IconMail from '@/assets/icons/Mail.vue'
       width: 2px;
       height: 41px;
       background: #151A1F;
+      @include media-breakpoint-down(xs){
+        height: 34px;
+      }
     }
     &-point{
       border: 2px solid #151A1F;
@@ -119,6 +152,12 @@ import IconMail from '@/assets/icons/Mail.vue'
         font-size: 22px;
         line-height: 100%;
         color: #707880;
+        @include media-breakpoint-down(xs){
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 100%;
+        }
         a{
           font-style: normal;
           font-weight: 400;
@@ -126,6 +165,13 @@ import IconMail from '@/assets/icons/Mail.vue'
           line-height: 100%;
           color: #CCCCCC;
           margin-left: 6px;
+          @include media-breakpoint-down(xs){
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 100%;
+            margin-left: 2px;
+          }
         }
       }
     }
@@ -135,6 +181,9 @@ import IconMail from '@/assets/icons/Mail.vue'
     gap: 16px;
     padding-bottom: 40px;
     position: relative;
+    @include media-breakpoint-down(xs){
+      margin-left: 10px;
+    }
     &::before{
       content: '';
       position: absolute;
@@ -160,12 +209,20 @@ import IconMail from '@/assets/icons/Mail.vue'
     }
     &-text{
       margin-top: 11px;
+      @include media-breakpoint-down(xs){
+        margin-top: 18px;
+      }
       p{
         font-style: normal;
         font-weight: 400;
         font-size: 22px;
         line-height: 100%;
         color: #707880;
+        @include media-breakpoint-down(xs){
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 100%;
+        }
         a{
           span{
             color: #CCCCCC;
@@ -174,9 +231,15 @@ import IconMail from '@/assets/icons/Mail.vue'
       }
       p:nth-child(2){
         margin-top: 22px;
+        @include media-breakpoint-down(xs){
+          margin-top: 15px;
+        }
       }
       p:nth-child(3){
         margin-top: 22px;
+        @include media-breakpoint-down(xs){
+          margin-top: 15px;
+        }
       }
       
     }
