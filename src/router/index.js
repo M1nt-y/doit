@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'Contact Page',
       path: '/contacts',
       component: () => import("@/pages/ContactsPage.vue")
+    },
+    {
+      name: 'Rules Page',
+      path: '/rules',
+      component: () => import("@/pages/RulesPage.vue")
     }
   ]
 })
