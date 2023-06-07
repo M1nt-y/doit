@@ -22,41 +22,67 @@
           <BaseInput
               v-if="modalType === 'Login'"
               :label="'Username or email'"
+              :has-error="v$.login && v$.login.$errors.length > 0"
               placeholder="Username or email"
               v-model="formData.login"
           />
 
+          <p v-if="v$.login && v$.login.$errors.length > 0" class="modal__inputs-error">
+            {{ v$.login.$errors[0].$message }}
+          </p>
+
           <BaseInput
-              v-else-if="modalType === 'Signup'"
+              v-if="modalType === 'Signup'"
               :label="'Email'"
+              :has-error="v$.email && v$.email.$errors.length > 0"
               placeholder="Email"
               v-model="formData.email"
           />
 
+          <p v-if="v$.email && v$.email.$errors.length > 0" class="modal__inputs-error">
+            {{ v$.email.$errors[0].$message }}
+          </p>
+
           <BaseInput
-              v-else-if="modalType === 'Forgot password'"
+              v-if="modalType === 'Forgot password'"
               :label="'Username or email'"
+              :has-error="v$.forgot && v$.forgot.$errors.length > 0"
               placeholder="Username or email"
               v-model="formData.forgot"
           />
 
+          <p v-if="v$.forgot && v$.forgot.$errors.length > 0" class="modal__inputs-error">
+            {{ v$.forgot.$errors[0].$message }}
+          </p>
+
           <BaseInput
-              v-else
+              v-if="modalType === 'Signup Next'"
               :label="'Username'"
+              :has-error="v$.username && v$.username.$errors.length > 0"
               placeholder="Username"
               v-model="formData.username"
           />
 
+          <p v-if="v$.username && v$.username.$errors.length > 0" class="modal__inputs-error">
+            {{ v$.username.$errors[0].$message }}
+          </p>
+
           <BaseInput
               v-if="showPass"
               :label="'Password'"
+              :has-error="v$.password && v$.password.$errors.length > 0"
               placeholder="Password"
               v-model="formData.password"
           />
 
+          <p v-if="v$.password && v$.password.$errors.length > 0" class="modal__inputs-error">
+            {{ v$.password.$errors[0].$message }}
+          </p>
+
           <BaseSelect
               v-if="modalType === 'Signup Next'"
               :label="'Country'"
+              :has-error="v$.country && v$.country.$errors.length > 0"
               v-model="formData.country"
               :options="countries"
               placeholder="Select country"
@@ -64,27 +90,36 @@
               @click="selectOptions = !selectOptions"
           />
 
+          <p v-if="v$.country && v$.country.$errors.length > 0" class="modal__inputs-error">
+            {{ v$.country.$errors[0].$message }}
+          </p>
+
           <div class="birthdate" v-if="modalType === 'Signup Next'">
             <p class="birthdate__label">Date of birth</p>
 
             <div class="birthdate__inputs">
               <BaseInput
                   placeholder="dd" type="number"
+                  :has-error="v$.day && v$.day.$errors.length > 0"
                   v-model="formData.day"
               />
 
               <BaseInput
                   placeholder="mm" type="number"
+                  :has-error="v$.month && v$.month.$errors.length > 0"
                   v-model="formData.month"
               />
 
               <BaseInput
                   placeholder="yyyy" type="number"
+                  :has-error="v$.year && v$.year.$errors.length > 0"
                   v-model="formData.year"
               />
             </div>
 
-            <!--     Validation errors       -->
+            <p v-if="birthdateError" class="modal__inputs-error">
+              {{ birthdateError }}
+            </p>
           </div>
 
 
@@ -138,7 +173,7 @@
             Back to login
           </p>
 
-          <p v-else-if="modalType === 'Signup'" class="modal__alt-link" @click="showLogin">
+          <p v-else-if="modalType === 'Signup'" class="modal__alt-link modal__alt-link--login" @click="showLogin">
             Already have an account?
           </p>
         </div>
@@ -148,10 +183,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/stores/main'
 import { useAuthStore } from '@/stores/auth'
+import { useVuelidate } from '@vuelidate/core'
+import { required, or, email, helpers, maxValue, between } from '@vuelidate/validators'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseSelect from '@/components/UI/BaseSelect.vue'
 
@@ -160,8 +197,7 @@ const { modalType } = storeToRefs(mainStore)
 const { showLogin, showSignup, showNext, showDone, showForgot, closeModal } = mainStore
 
 const authStore = useAuthStore()
-const { formData } = storeToRefs(authStore)
-const { clearForm } = authStore
+const { currentUser } = storeToRefs(authStore)
 
 
 const modalTitle = computed(() => {
@@ -208,25 +244,204 @@ const showOptions = computed(() => {
 
 const selectOptions = ref(false)
 
-const submitForm = async () => {
-  // validation later
+const admin = ref({
+  id: 0,
+  email: 'admin@doit.gg',
+  username: 'admin',
+  password: 'password',
+  fullName: 'Doit Admin',
+  birthdate: '',
+  createdAt: Date.now(),
+  country: '',
+  gender: '',
+  balance: 0,
+  coins: 0,
+  level: 0,
+  mainTeam: '',
+  teams: [],
+  payments: [],
+  gameProfile: {
+    riot: '',
+    battlenet: '',
+    steam: ''
+  }
+})
+
+const user = ref({
+  id: 7917450,
+  email: 'user@doit.gg',
+  username: 'BlacerLordTV',
+  password: 'password',
+  fullName: 'Nikodem Świder',
+  birthdate: '',
+  createdAt: Date.now(),
+  country: 'Poland',
+  gender: 'Male',
+  balance: 1000,
+  coins: 16,
+  level: 0,
+  mainTeam: '',
+  teams: [],
+  payments: [],
+  gameProfile: {
+    riot: '',
+    battlenet: '',
+    steam: ''
+  }
+})
+
+const formData = ref({
+  login: '',
+  email: '',
+  username: '',
+  forgot: '',
+  password: '',
+  country: '',
+  day: '',
+  month: '',
+  year: ''
+})
+
+const emailExists = (value) => value === admin.value.email || value === user.value.email
+const emailAvailable = (value) => value !== admin.value.email || value !== user.value.email
+
+const username = helpers.regex(/^([a-z0-9]|[-._](?![-._])){4,20}$/)
+const usernameExists = (value) => value === admin.value.username || value === user.value.username
+const usernameAvailable = (value) => value !== admin.value.username || value !== user.value.username
+
+const validPassword = (value) => value === admin.value.password || value === user.value.password
+
+const rules = computed(() => {
   if (modalType.value === 'Login') {
-    // login
-    handleClose()
+    return {
+      login: {
+        required,
+        valid: helpers.withMessage('Invalid email or username', or(email, username)),
+        exist: helpers.withMessage('Email or username doesnt exist', or(emailExists, usernameExists))
+      },
+      password: {
+        required,
+        valid: helpers.withMessage('Invalid password', validPassword)
+      },
+    }
   }
   else if (modalType.value === 'Signup') {
-    // signup
-    showNext()
+    return {
+      email: {
+        required,
+        email,
+        available: helpers.withMessage('Email is already taken', emailAvailable)
+      },
+      password: { required },
+    }
   }
   else if (modalType.value === 'Signup Next') {
-    // finish signup
-    showDone()
+    return {
+      username: {
+        required,
+        username,
+        available: helpers.withMessage('Username is already taken', usernameAvailable)
+      },
+      country: { required },
+      day: {
+        required,
+        maxValue: maxValue(31)
+      },
+      month: {
+        required,
+        maxValue: maxValue(12)
+      },
+      year: {
+        required,
+        betweenValue: between(1900, 2010)
+      }
+    }
+  }
+  else {
+    return {
+      forgot: {
+        required,
+        valid: helpers.withMessage('Invalid email or username', or(email, username)),
+        exist: helpers.withMessage('Email or username doesnt exist', or(emailExists, usernameExists))
+      }
+    }
+  }
+})
+
+const v$ = useVuelidate(rules, formData)
+
+watch(() => modalType.value, () => {
+  v$.value.$reset()
+})
+
+const submitForm = async () => {
+  const results = await v$.value.$validate()
+  if (results) {
+    if (modalType.value === 'Login') {
+      // login
+      if (formData.value.login === user.value.username || formData.value.login === user.value.email) {
+        currentUser.value = user.value
+        handleClose()
+      } else if (formData.value.login === admin.value.username || formData.value.login === admin.value.email) {
+        currentUser.value = admin.value
+        handleClose()
+      }
+    }
+    else if (modalType.value === 'Signup') {
+      // signup
+      showNext()
+    }
+    else if (modalType.value === 'Signup Next') {
+      // finish signup
+      currentUser.value = {
+        id: 1,
+        email: formData.value.email,
+        username: formData.value.username,
+        password: formData.value.password,
+        fullName: '',
+        birthdate: '',
+        country: formData.value.country,
+        gender: '',
+        balance: 0,
+        coins: 0,
+        level: 0,
+        mainTeam: '',
+        teams: [],
+        payments: [],
+        gameProfile: {
+          riot: '',
+          battlenet: '',
+          steam: ''
+        }
+      }
+      showDone()
+    }
+    else if (modalType.value === 'Forgot password') {
+      if (formData.value.forgot === user.value.username || formData.value.forgot === user.value.email) {
+        currentUser.value = user.value
+        handleClose()
+      } else if (formData.value.forgot === admin.value.username || formData.value.forgot === admin.value.email) {
+        currentUser.value = admin.value
+        handleClose()
+      }
+    }
   }
 }
 
+const birthdateError = computed(() => {
+  if (v$.value.day?.$errors[0]?.$message === 'Value is required'|| v$.value.month?.$errors[0]?.$message === 'Value is required' || v$.value.year?.$errors[0]?.$message === 'Value is required') {
+    return 'Value is required'
+  }
+  else if (v$.value.day?.$errors[0]?.$message === 'The maximum value allowed is 31' || v$.value.month?.$errors[0]?.$message === 'The maximum value allowed is 12' || v$.value.year?.$errors[0]?.$message === 'The value must be between 1900 and 2010') {
+    return 'Invalid date'
+  }
+  else {
+    return ''
+  }
+})
+
 function handleClose () {
   closeModal()
-  clearForm()
 }
 
 const countries = [
@@ -493,7 +708,7 @@ const countries = [
   padding: 16px;
   width: 100%;
   max-width: 698px;
-  aspect-ratio: 1 / 1;
+  //aspect-ratio: 1 / 1;
   background: $bg-dark;
   transform: translate(-50%, -50%);
 
@@ -513,6 +728,7 @@ const countries = [
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 46px;
   }
 
   &__content {
@@ -543,11 +759,17 @@ const countries = [
 
   &__inputs {
     width: 100%;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
+
+    &-error {
+      color: #B83333;
+      margin-top: -12px;
+      margin-bottom: 16px;
+    }
   }
 
   &__options {
-    margin-top: 30px;
+    margin-top: 31px;
 
     @include media-breakpoint-down(sm) {
       margin-top: 22px;
@@ -591,13 +813,17 @@ const countries = [
     }
 
     &-forgot {
-      margin-bottom: 12px;
+      margin-bottom: 1px;
     }
 
     &-link {
       color: #0A68F5;
       cursor: pointer;
       transition: color 0.4s;
+
+      &--login {
+        margin-bottom: 24px;
+      }
     }
 
     &-link:hover {

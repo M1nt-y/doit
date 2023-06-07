@@ -7,10 +7,9 @@
         type="text"
         :value="modelValue"
         @input="emitInput($event)"
+        :class="{'input--error': hasError}"
         v-bind="$attrs"
     />
-
-    <!--  Errors?  -->
   </div>
 </template>
 
@@ -23,6 +22,10 @@ defineProps({
   modelValue: {
     type: String,
     default: ''
+  },
+  hasError: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -36,16 +39,13 @@ function emitInput(event) {
 <style scoped lang="scss">
 .input-wrapper {
   margin-bottom: 16px;
+
   &__label {
     font-weight: 400;
     font-size: 14px;
     line-height: 100%;
     color: #FFFFFF;
     margin-bottom: 6px;
-  }
-  &__error-message {
-    color: #B83333;
-    margin-top: 4px;
   }
 }
 
