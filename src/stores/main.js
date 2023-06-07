@@ -16,8 +16,7 @@ export const useMainStore = defineStore('main', () => {
         windowWidth.value = window.innerWidth
     }
 
-    function toggleMenu () {
-        showBackdrop.value = showMenu.value = !showMenu.value
+    function changeIndex () {
         if (headerIndex.value === 1) {
             headerIndex.value = 2
         } else {
@@ -25,11 +24,20 @@ export const useMainStore = defineStore('main', () => {
         }
     }
 
+    function toggleMenu () {
+        showBackdrop.value = showMenu.value = !showMenu.value
+        if (profileExpanded.value) {
+            profileExpanded.value = false
+        }
+        changeIndex()
+    }
+
     function toggleProfile () {
         profileExpanded.value = !profileExpanded.value
-        // if (showMenu.value) {
-        //     toggleMenu()
-        // }
+        if (showMenu.value) {
+            showBackdrop.value = showMenu.value = false
+            changeIndex()
+        }
     }
 
     // display modals

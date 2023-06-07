@@ -22,7 +22,44 @@
       </div>
 
       <div class="header__wrapper" v-if="displayProfile">
-        <div class="header__buttons">
+        <div v-if="currentUser" class="header__profile">
+          <div class="header__profile-info">
+            <img class="header__profile-pfp" src="" alt="">
+            <div class="header__profile-text">
+              <p class="header__profile-name">{{ currentUser.username }}</p>
+
+              <p class="header__profile-balance">{{ currentUser.balance }} EUR <span>/</span> {{ currentUser.coins }} DTC</p>
+            </div>
+            <div class="header__profile-toggle" @click="toggleProfile" />
+          </div>
+
+          <!--        change route name to profile            -->
+          <transition name="dropdown">
+            <div v-if="profileExpanded" class="header__profile-dropdown">
+              <div class="header__profile-row">
+                <div class="header__profile-level">
+                  <p>LVL {{ currentUser.level }}</p>
+
+                  <div class="header__profile-progress"></div>
+                </div>
+              </div>
+
+              <ul class="header__profile-links">
+                <li class="header__profile-link" v-for="(link, index) in mainLinks" :key="index">
+                  <RouterLink :to="{ name: 'home', query: { 'q': link } }">{{ link }}</RouterLink>
+                </li>
+              </ul>
+
+              <div class="header__profile-bot">
+                <RouterLink class="header__profile-link" :to="{ name: 'home', query: { 'q': 'Support' } }">Support</RouterLink>
+                <RouterLink class="header__profile-link" :to="{ name: 'home', query: { 'q': 'Settings' } }">Settings</RouterLink>
+                <p class="header__profile-link" @click="handleLogout">Logout</p>
+              </div>
+            </div>
+          </transition>
+        </div>
+
+        <div v-else class="header__buttons">
           <button class="button button-default" @click="showLogin">Login</button>
 
           <button class="button button-gradient" @click="showSignup">Sign up</button>
@@ -65,9 +102,15 @@ import { useAuthStore } from '@/stores/auth'
 const mainStore = useMainStore()
 const authStore = useAuthStore()
 
-const { toggleMenu, showLogin, showSignup } = mainStore
-const { windowWidth, headerIndex, showMenu } = storeToRefs(mainStore)
+const { toggleMenu, showLogin, showSignup, toggleProfile } = mainStore
+const { windowWidth, headerIndex, showMenu, profileExpanded } = storeToRefs(mainStore)
 const { currentUser } = storeToRefs(authStore)
+const { logout } = authStore
+
+function handleLogout () {
+  toggleProfile()
+  logout()
+}
 
 const isBurger = computed(() => {
   return windowWidth.value <= 1200
@@ -78,6 +121,15 @@ const displayProfile = computed(() => {
 })
 
 const zIndex = computed(() => headerIndex.value)
+
+const mainLinks = ['My profile', 'My team', 'Withdraw', 'Deposit', 'Premium', 'Statistics']
+
+const background = computed(() => {
+  if (profileExpanded.value)
+    return '#161A1F'
+  else
+    return 'none'
+})
 </script>
 
 <style scoped lang="scss">
@@ -165,6 +217,124 @@ const zIndex = computed(() => headerIndex.value)
   &__wrapper {
     width: 100%;
     max-width: 234px;
+  }
+
+  &__profile {
+    width: 100%;
+    max-width: 225px;
+    position: relative;
+    background: v-bind(background);
+    transition: all 0.3s ease;
+
+    &-info {
+      width: 100%;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    &-pfp {
+      width: 40px;
+      height: 40px;
+      background: #0a68f5;
+    }
+
+    &-text {
+      margin: 0 8px;
+      font-weight: 500;
+      line-height: 100%;
+    }
+
+    &-name {
+      font-size: 14px;
+    }
+
+    &-balance {
+      font-size: 12px;
+      color: #55AAFF;
+
+      & span {
+        margin: 0 4px;
+      }
+    }
+
+    &-toggle {
+      width: 24px;
+      height: 24px;
+      margin-left: auto;
+      background: #0a68f5;
+    }
+
+    &-dropdown {
+      width: 100%;
+      overflow: hidden;
+      background: #161A1F;
+      position: absolute;
+      z-index: 2;
+      font-weight: 400;
+    }
+
+    &-row {
+      padding: 0 8px;
+    }
+
+    &-level {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: $main-white;
+      font-size: 11px;
+      line-height: 100%;
+    }
+
+    &-progress {
+      width: 107px;
+      height: 2px;
+      margin-left: 7px;
+      margin-right: 14px;
+      border-radius: 2px;
+      background: #2B353F;
+    }
+
+    &-links {
+      border: 2px solid #0F1215;
+      color: $main-white;
+      border-left: 0;
+      border-right: 0;
+      font-size: 12px;
+      margin-top: 14px;
+      line-height: 100%;
+      padding: 14px 12px;
+      text-transform: uppercase;
+    }
+
+    &-link {
+      margin-bottom: 16px;
+    }
+
+    &-link a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    &-link:nth-last-child(1) {
+      margin-bottom: 0;
+    }
+
+    &-bot {
+      display: flex;
+      color: #969BA3;
+      font-size: 12px;
+      padding: 14px 12px;
+      line-height: 100%;
+      justify-content: space-between;
+
+      & .header__profile-link {
+        color: inherit;
+        margin-bottom: 0;
+        text-decoration: none;
+      }
+    }
   }
 
   &__burger {

@@ -1,20 +1,12 @@
 <template>
-  <div class="backdrop" @click="handleClick" />
+  <div class="backdrop" @click="closeAll" />
 </template>
 
 <script setup>
 import { useMainStore } from '@/stores/main'
-import { useAuthStore } from '@/stores/auth'
 
 const mainStore = useMainStore()
-const authStore = useAuthStore()
 const { closeAll } = mainStore
-const { clearForm } = authStore
-
-function handleClick () {
-  closeAll()
-  clearForm()
-}
 </script>
 
 <style scoped lang="scss">
