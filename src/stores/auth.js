@@ -6,6 +6,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     function logout () {
         currentUser.value = undefined
+        window.localStorage.removeItem('isAuthorised')
     }
 
     return {

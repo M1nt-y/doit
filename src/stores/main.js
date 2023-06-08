@@ -56,18 +56,22 @@ export const useMainStore = defineStore('main', () => {
             headerIndex.value = 1
         }
     }
+
     function showNext() {
         showBackdrop.value = showModal.value = true
         modalType.value = 'Signup Next'
     }
+
     function showDone() {
         showBackdrop.value = showModal.value = true
         modalType.value = 'Signup Done'
     }
+
     function showForgot() {
         showBackdrop.value = showModal.value = true
         modalType.value = 'Forgot password'
     }
+
     function showReport() {
         showBackdrop.value = showModal.value = true
         modalType.value = 'Report scores'

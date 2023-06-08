@@ -381,9 +381,11 @@ const submitForm = async () => {
       // login
       if (formData.value.login === user.value.username || formData.value.login === user.value.email) {
         currentUser.value = user.value
+        localStorage.setItem('isAuthorised', 'true')
         handleClose()
       } else if (formData.value.login === admin.value.username || formData.value.login === admin.value.email) {
         currentUser.value = admin.value
+        localStorage.setItem('isAuthorised', 'true')
         handleClose()
       }
     }
@@ -414,14 +416,17 @@ const submitForm = async () => {
           steam: ''
         }
       }
+      localStorage.setItem('isAuthorised', 'true')
       showDone()
     }
     else if (modalType.value === 'Forgot password') {
       if (formData.value.forgot === user.value.username || formData.value.forgot === user.value.email) {
         currentUser.value = user.value
+        localStorage.setItem('isAuthorised', 'true')
         handleClose()
       } else if (formData.value.forgot === admin.value.username || formData.value.forgot === admin.value.email) {
         currentUser.value = admin.value
+        localStorage.setItem('isAuthorised', 'true')
         handleClose()
       }
     }
