@@ -32,7 +32,9 @@
 
               <p class="header__profile-balance">{{ currentUser.balance }} EUR <span>/</span> {{ currentUser.coins }} DTC</p>
             </div>
-            <div class="header__profile-toggle" @click="toggleProfile" />
+            <div class="header__profile-toggle" :class="{'header__profile-toggle--active': profileExpanded}" @click="toggleProfile">
+              <span /><span />
+            </div>
           </div>
 
           <transition name="dropdown">
@@ -243,6 +245,8 @@ const background = computed(() => {
     position: relative;
     background: v-bind(background);
     transition: all 0.3s ease;
+    margin-left: 20px;
+    margin-top: 10px;
 
     &-info {
       width: 100%;
@@ -281,7 +285,41 @@ const background = computed(() => {
       height: 24px;
       cursor: pointer;
       margin-left: auto;
-      background: #0a68f5;
+      position: relative;
+
+      &:hover {
+
+        & span {
+          background-color: #969BA3;
+        }
+      }
+
+      &--active {
+        & span {
+          rotate: 90deg;
+        }
+      }
+
+      & span{
+        background-color: #2B353F;
+        position: absolute;
+        border-radius: 2px;
+        width:100%;
+        height: 2px;
+        transition: all 0.3s ease;
+
+        &:nth-child(1){
+          transform: rotate(45deg) scaleX(0.35);
+          top: 12px;
+          left: -1px;
+        }
+
+        &:nth-child(2){
+          transform: rotate(-45deg) scaleX(0.35);
+          top: 12px;
+          left: 4px;
+        }
+      }
     }
 
     &-dropdown {
