@@ -15,7 +15,7 @@
     <div class="games__content">
       <div class="card" v-for="card in resultGame" :key="card.id">
         <div class="card__content">
-          <img class="card__content-img" :src="card.imageSrc" alt=""/>
+          <img class="card__content-img" :src="card.image" alt=""/>
 
           <p>{{ card.title }}</p>
         </div>
@@ -37,61 +37,55 @@ const gamesArray = ref([
   {
     id: 0,
     title: 'Dota ll',
-    image: 'dota'
+    image: new URL('../assets/images/dota.png', import.meta.url)
   },
   {
     id: 1,
     title: 'CS:GO',
-    image: 'csgo'
+    image: new URL('../assets/images/csgo.png', import.meta.url)
   },
   {
     id: 2,
     title: 'StarCraft ll',
-    image: 'starcraft'
+    image: new URL('../assets/images/starcraft.png', import.meta.url)
   },
   {
     id: 3,
     title: 'WarCraft lll',
-    image: 'dota'
+    image: new URL('../assets/images/dota.png', import.meta.url)
   },
   {
     id: 4,
     title: 'FIFA 2020',
-    image: 'fifa'
+    image: new URL('../assets/images/fifa.png', import.meta.url)
   },
   {
     id: 5,
     title: 'Valorant',
-    image: 'valorant'
+    image: new URL('../assets/images/valorant.png', import.meta.url)
   },
   {
     id: 6,
     title: 'BrawlStars',
-    image: 'dota'
+    image: new URL('../assets/images/dota.png', import.meta.url)
   },
   {
     id: 7,
     title: 'StarCraft ll',
-    image: 'csgo'
+    image: new URL('../assets/images/csgo.png', import.meta.url)
   },
   {
     id: 8,
     title: 'StarCraft ll',
-    image: 'starcraft'
+    image: new URL('../assets/images/starcraft.png', import.meta.url)
   }
 ])
 
 const resultGame = computed(() => {
   if (!gamesSearch.value) {
-    return gamesArray.value.map(card => ({
-      ...card,
-      imageSrc: `/src/assets/images/${card.image}.png`
-    }))
+    return gamesArray.value
   } else {
-    return gamesArray.value.filter(game => game.title.toLowerCase().includes(gamesSearch.value.toLowerCase())).map(card => ({
-      ...card,
-      imageSrc: `/src/assets/images/${card.image}.png`
-    }))
+    return gamesArray.value.filter(game => game.title.toLowerCase().includes(gamesSearch.value.toLowerCase()))
   }
 })
 </script>
