@@ -1,29 +1,37 @@
 <template>
 <main class="main games">
   <div class="container">
-
     <div class="games__header">
-      <h2>Games</h2>
+      <h2 class="games__header-title">Games</h2>
+
       <div class="games__header-input">
-        <input type="text" placeholder="Search the game">
+        <BaseInput
+            placeholder="Search the game"
+            v-model="gamesSearch"
+        />
       </div>
     </div>
 
     <div class="games__content">
       <div class="card" v-for="card in resultGame" :key="card.id">
         <div class="card__content">
-          <img :src="card.imageSrc" alt=""/>
+          <img class="card__content-img" :src="card.imageSrc" alt=""/>
+
           <p>{{ card.title }}</p>
         </div>
       </div>
     </div>
-    
+
   </div>
 </main>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue'
+import BaseInput from '@/components/UI/BaseInput.vue'
+
+
+const gamesSearch = ref('')
 
 const gamesArray = ref([
   {
@@ -74,11 +82,18 @@ const gamesArray = ref([
 ])
 
 const resultGame = computed(() => {
-  return gamesArray.value.map(card => ({
-    ...card,
-    imageSrc: `/src/assets/games/${card.image}.png`
-  }));
-});
+  if (!gamesSearch.value) {
+    return gamesArray.value.map(card => ({
+      ...card,
+      imageSrc: `/src/assets/images/${card.image}.png`
+    }))
+  } else {
+    return gamesArray.value.filter(game => game.title.toLowerCase().includes(gamesSearch.value.toLowerCase())).map(card => ({
+      ...card,
+      imageSrc: `/src/assets/images/${card.image}.png`
+    }))
+  }
+})
 </script>
 
 <style lang="scss">
@@ -87,75 +102,187 @@ const resultGame = computed(() => {
 
 .games{
   margin-top: 55px;
+
+  @include media-breakpoint-down(md) {
+    margin-top: 15px;
+  }
+
+  & .container {
+    padding: 0;
+
+    @include media-breakpoint-down(lg) {
+      padding: 0 23px;
+    }
+  }
+
   &__header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include media-breakpoint-down(xs) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &-title {
+      font-size: 44px;
+    }
+
     &-input{
-      max-width: 510px;
       width: 100%;
-      @include media-breakpoint-down(lg){
+      max-width: 510px;
+      margin-top: 22px;
+      margin-left: 40px;
+
+      @include media-breakpoint-down(lg) {
         max-width: 300px;
       }
+
+      @include media-breakpoint-down(xs) {
+        margin-left: 0;
+        margin-top: 32px;
+        margin-bottom: -16px;
+        max-width: unset;
+      }
+
       input{
-        margin-top: 22px;
-        padding: 10px 16px;
-        border: 2px solid #20252B;
-        width: 100%;
-        margin-left: 40px;
-        background: #0F1215;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 100%;
         color: #CCCDCD;
-        border-radius: 10px;
-        @include media-breakpoint-down(lg){
-          margin-left: 0px;
+        border: 2px solid #20252B;
+        border-radius: 4px;
+
+        @include media-breakpoint-down(lg) {
+          margin-left: 0;
+        }
+
+        @include media-breakpoint-down(xs) {
+          padding: 13px 10px;
+        }
+
+        &:hover {
+          background: #121F33;
+          border: 2px solid #627CA3;
+        }
+
+        &:focus {
+          color: #E6E6E6;
+          background: #16263D;
+          border: 2px solid #185EC7;
+        }
+
+        &:disabled {
+          color: #98A4B5;
+          background: #121F33;
+          border: 2px solid #121F33;
         }
       }
     }
   }
-  &__content{
+
+  &__content {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     margin-top: 20px;
-    width: 1210px;
-    @include media-breakpoint-down(lg){
-      width: 100%;
-      justify-content: space-between;
-    }
-    @include media-breakpoint-down(sm){
+    max-width: 1210px;
+
+    @include media-breakpoint-down(sm) {
       flex-wrap: nowrap;
       flex-direction: column;
     }
-    .card{
+
+    .card {
       max-width: 387px;
-      max-height: 500px;
-      @include media-breakpoint-down(lg){
-        max-width: 300px;
+      margin-right: 21px;
+      margin-bottom: 21px;
+      width: calc(100% / 3 - 7px);
+
+      &:nth-child(1),
+      &:nth-child(4),
+      &:nth-child(7) {
+
+        img {
+          object-position: unset;
+        }
       }
-      @include media-breakpoint-down(sm){
+
+      &:nth-child(2),
+      &:nth-child(8) {
+
+        img {
+          object-position: -120px top;
+
+          @include media-breakpoint-down(sm) {
+            object-position: center top;
+          }
+        }
+      }
+
+      &:nth-child(5) {
+
+        img {
+          object-position: -410px top;
+
+          @include media-breakpoint-down(lg) {
+            object-position: -320px top;
+          }
+
+          @include media-breakpoint-down(sm) {
+            object-position: center top;
+          }
+        }
+      }
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+
+      @include media-breakpoint-down(lg) {
+        max-width: none;
+        margin-right: 20px;
+        width: calc(100% / 2 - 10px);
+
+        &:nth-child(3n) {
+          margin-right: 20px;
+        }
+
+        &:nth-child(2n) {
+          margin-right: 0;
+        }
+      }
+
+      @include media-breakpoint-down(sm) {
         width: 100%;
         max-width: 100%;
-        
+        margin-bottom: 8px;
       }
-      img{
-        display: block;
-        width: 100%;
-        @include media-breakpoint-down(sm){
-          width: 100%;
-          aspect-ratio: 1/.56;
-        }
-      }
-      &__content{
+
+      &__content {
+        height: 500px;
         position: relative;
 
-        @include media-breakpoint-down(sm){
-          max-height: 128px;
+        @include media-breakpoint-down(sm) {
+          height: 380px;
         }
-        p{
+
+        @include media-breakpoint-down(xs) {
+          height: 280px;
+        }
+
+        @include media-breakpoint-down(xxs) {
+          height: 128px;
+        }
+
+        &-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+
+          @include media-breakpoint-down(sm) {
+            object-position: center top;
+          }
+        }
+
+        p {
           position: absolute;
           left: 0;
           bottom: 35px;
@@ -165,6 +292,11 @@ const resultGame = computed(() => {
           font-weight: 700;
           font-size: 30px;
           line-height: 100%;
+
+          @include media-breakpoint-down(xxs) {
+            top: 50%;
+            transform: translateY(-50%);
+          }
         }
       }
     }
