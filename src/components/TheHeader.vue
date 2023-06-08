@@ -33,7 +33,6 @@
             <div class="header__profile-toggle" @click="toggleProfile" />
           </div>
 
-          <!--        change route name to profile            -->
           <transition name="dropdown">
             <div v-if="profileExpanded" class="header__profile-dropdown">
               <div class="header__profile-row">
@@ -46,13 +45,13 @@
 
               <ul class="header__profile-links">
                 <li class="header__profile-link" v-for="(link, index) in mainLinks" :key="index">
-                  <RouterLink :to="{ name: 'home', query: { 'q': link } }">{{ link }}</RouterLink>
+                  <RouterLink :to="{ name: 'profile', query: { 'q': link } }">{{ link }}</RouterLink>
                 </li>
               </ul>
 
               <div class="header__profile-bot">
-                <RouterLink class="header__profile-link" :to="{ name: 'home', query: { 'q': 'Support' } }">Support</RouterLink>
-                <RouterLink class="header__profile-link" :to="{ name: 'home', query: { 'q': 'Settings' } }">Settings</RouterLink>
+                <RouterLink class="header__profile-link" :to="{ name: 'profile', query: { 'q': 'Support' } }">Support</RouterLink>
+                <RouterLink class="header__profile-link" :to="{ name: 'profile', query: { 'q': 'Settings' } }">Settings</RouterLink>
                 <p class="header__profile-link" @click="handleLogout">Logout</p>
               </div>
             </div>
