@@ -2,14 +2,16 @@
   <header class="header" :class="{'header--active': showMenu}">
     <div class="container">
       <div class="header__menu">
-        <img class="header__menu-logo" src="../assets/logo.png" alt="">
+        <RouterLink class="header__menu-logo" to="/">
+          <img src="../assets/logo.png" alt="">
+        </RouterLink>
 
         <div v-if="!isBurger" class="header__nav">
           <div class="header__nav-item">Play</div>
 
           <div class="header__nav-item">News</div>
 
-          <div class="header__nav-item">Games</div>
+          <RouterLink class="header__nav-item" to="/games">Games</RouterLink>
 
           <div class="header__nav-item">Shop</div>
 
@@ -73,13 +75,13 @@
 
           <li class="header__content-link">News</li>
 
-          <li class="header__content-link">Games</li>
+          <RouterLink class="header__content-link" to="/games">Games</RouterLink>
 
           <li class="header__content-link">Shop</li>
 
           <li class="header__content-link">Sponsorship</li>
 
-          <li class="header__content-link" v-if="currentUser && !displayProfile">Profile</li>
+          <RouterLink class="header__content-link" v-if="currentUser && !displayProfile" to="/profile">Profile</RouterLink>
         </ul>
 
         <div class="header__content-buttons" v-if="!currentUser && !displayProfile">
@@ -93,18 +95,32 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/stores/main'
 import { useAuthStore } from '@/stores/auth'
+import { useRoute, useRouter } from 'vue-router'
+
+
+const route = useRoute()
+const router = useRouter()
 
 const mainStore = useMainStore()
 const authStore = useAuthStore()
 
 const { toggleMenu, showLogin, showSignup, toggleProfile } = mainStore
-const { windowWidth, headerIndex, showMenu, profileExpanded } = storeToRefs(mainStore)
+const { windowWidth, headerIndex, showMenu, showBackdrop, profileExpanded } = storeToRefs(mainStore)
 const { currentUser } = storeToRefs(authStore)
 const { logout } = authStore
+
+
+onMounted(async () => {
+  await router.isReady();
+})
+
+watch(() => route.name, () => {
+  profileExpanded.value = showMenu.value = showBackdrop.value = false
+})
 
 function handleLogout () {
   toggleProfile()
@@ -116,7 +132,7 @@ const isBurger = computed(() => {
 })
 
 const displayProfile = computed(() => {
-  return windowWidth.value > 577
+  return windowWidth.value > 577 && route.name !== 'profile' && route.name !== 'Not Found'
 })
 
 const zIndex = computed(() => headerIndex.value)
@@ -186,6 +202,8 @@ const background = computed(() => {
     }
 
     &-logo {
+      width: 100%;
+      max-width: 72px;
       margin-right: 8.058%;
 
       @include media-breakpoint-down(md) {
@@ -205,6 +223,7 @@ const background = computed(() => {
     display: flex;
 
     &-item {
+      cursor: pointer;
       margin-right: 9.878%;
 
       &:nth-last-child(1) {
@@ -260,6 +279,7 @@ const background = computed(() => {
     &-toggle {
       width: 24px;
       height: 24px;
+      cursor: pointer;
       margin-left: auto;
       background: #0a68f5;
     }
@@ -308,6 +328,7 @@ const background = computed(() => {
     }
 
     &-link {
+      cursor: pointer;
       margin-bottom: 16px;
     }
 
