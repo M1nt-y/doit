@@ -7,7 +7,7 @@
       <div class="games__header-input">
         <BaseInput
             placeholder="Search the game"
-            :model-value="gamesSearch"
+            v-model="gamesSearch"
         />
       </div>
     </div>
@@ -82,10 +82,17 @@ const gamesArray = ref([
 ])
 
 const resultGame = computed(() => {
-  return gamesArray.value.map(card => ({
-    ...card,
-    imageSrc: `/src/assets/images/${card.image}.png`
-  }))
+  if (!gamesSearch.value) {
+    return gamesArray.value.map(card => ({
+      ...card,
+      imageSrc: `/src/assets/images/${card.image}.png`
+    }))
+  } else {
+    return gamesArray.value.filter(game => game.title.toLowerCase().includes(gamesSearch.value.toLowerCase())).map(card => ({
+      ...card,
+      imageSrc: `/src/assets/images/${card.image}.png`
+    }))
+  }
 })
 </script>
 
