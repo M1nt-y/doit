@@ -309,6 +309,10 @@ function profileNavigation(goTo) {
       padding-left: 20px;
       margin-bottom: 24px;
       transition: all 0.4s ease;
+
+      & label {
+        cursor: pointer;
+      }
     }
 
     &-link:nth-last-child(1) {
