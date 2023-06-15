@@ -242,15 +242,17 @@ function profileNavigation(goTo) {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/media-breakpoints.scss';
+
 .profile {
   margin-top: 50px;
-  margin-left: 101px;
+  margin-left: 6.313%;
 
   &__info {
     display: flex;
     margin-top: 65px;
-    margin-right: 69px;
-    padding-right: 135px;
+    // margin-right: 69px;
+    padding-right: 70px;
     flex-direction: column;
     border-right: 1px solid #1A1F24;
 
@@ -370,14 +372,15 @@ function profileNavigation(goTo) {
     }
 
     &-controls {
+      width: 100%;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     &-button {
-      max-width: 274px;
-      width: 100%;
+      // max-width: 236px;
+      width: calc(100% / 3 - 7.109%);
       color: #F5F5F5;
       cursor: pointer;
       font-size: 22px;
@@ -385,14 +388,29 @@ function profileNavigation(goTo) {
       line-height: 100%;
       text-align: center;
       padding: 30px 15px;
-      margin-right: 64px;
+      margin-right: 7.109%;
       margin-bottom: 50px;
       border: 2px solid #20252B;
+
+      @include media-breakpoint-down(lg) {
+        width: calc(100% / 2 - 7.109%);
+      }
     }
 
     &-button:nth-child(3n),
     &-button:nth-last-child(1){
       margin-right: 0;
+
+      @include media-breakpoint-down(lg) {
+        margin-right: 7.109%;
+      }
+    }
+
+    &-button:nth-child(2n) {
+
+      @include media-breakpoint-down(lg) {
+        margin-right: 0;
+      }
     }
 
     &-table {

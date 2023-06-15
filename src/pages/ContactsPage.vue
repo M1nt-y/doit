@@ -2,26 +2,32 @@
 <main class="main contact">
   <div class="container">
     <h3 class="contact-title">Contact us</h3>
+
     <div class="contact__adress">
       <div class="contact__adress-point">
         <IconPoint/>
       </div>
+
       <div class="contact__adress-text">
         <p>2440, Daisy Dr undefined Pembroke Pines, Arizona</p>
       </div>
     </div>
+
     <div class="contact__phone">
       <div class="contact__phone-point">
         <IconPhone/>
       </div>
+
       <div class="contact__phone-text">
         <p>Headquater  <a href="#">(+48) 517 429 774</a></p>
       </div>
     </div>
+
     <div class="contact__mail">
       <div class="contact__mail-point">
         <IconMail/>
       </div>
+      
       <div class="contact__mail-text">
         <p><a href="#"> <span>Support</span>@doit.gg</a></p>
         <p><a href="#"><span>Organizer</span>@doit.gg</a></p>

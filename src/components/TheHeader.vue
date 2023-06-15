@@ -45,6 +45,14 @@
 
                   <div class="header__profile-progress"></div>
                 </div>
+
+                <div class="header__profile-icon">
+                  <ProfileMail />
+                </div>
+
+                <div class="header__profile-icon">
+                  <ProfileBell />
+                </div>
               </div>
 
               <ul class="header__profile-links">
@@ -102,6 +110,8 @@ import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/stores/main'
 import { useAuthStore } from '@/stores/auth'
 import { useRoute, useRouter } from 'vue-router'
+import ProfileMail from '@/assets/icons/ProfileMail.vue'
+import ProfileBell from '@/assets/icons/ProfileBell.vue'
 
 
 const route = useRoute()
@@ -121,6 +131,7 @@ onMounted(async () => {
 })
 
 watch(() => route.name, () => {
+  headerIndex.value = 1
   profileExpanded.value = showMenu.value = showBackdrop.value = false
 })
 
@@ -332,6 +343,7 @@ const background = computed(() => {
     }
 
     &-row {
+      display: flex;
       padding: 0 8px;
     }
 
@@ -342,15 +354,22 @@ const background = computed(() => {
       color: $main-white;
       font-size: 11px;
       line-height: 100%;
+      margin-right: auto;
     }
 
     &-progress {
-      width: 107px;
+      width: 108px;
       height: 2px;
       margin-left: 7px;
+      position: relative;
       margin-right: 14px;
       border-radius: 2px;
       background: #2B353F;
+    }
+
+    &-icon {
+      cursor: pointer;
+      margin-left: 4px;
     }
 
     &-links {
