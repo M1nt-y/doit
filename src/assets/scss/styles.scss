@@ -160,11 +160,11 @@ h3 {
 .main {
   display: flex;
   flex: 1 1 auto;
-  padding: 128px 120px 0 120px;
+  padding: 128px 114px 0 114px;
   justify-content: center;
 
   @include media-breakpoint-down(lg) {
-    padding: 112px 120px 0 120px;
+    padding: 112px 114px 0 114px;
   }
 
   @include media-breakpoint-down(md) {
