@@ -23,6 +23,13 @@
           <h4>Total Players: <span>322</span></h4>
         </div>
       </div>
+      <div class="top__btn">
+        <div class="btn" 
+        v-for="btn in btnTab"
+        :class="{ active: btn === selectedBtn }"
+        @click="selectedBtn = btn"
+        >{{ btn.title }}</div>
+      </div>
     </div>
   </main>
 </template>
@@ -40,6 +47,26 @@ function showYears() {
 const yearsArray = ref([2019, 2020, 2021, 2022])
 const resultYear = yearsArray.value[0]
 
+const btnTab = ref([
+  {
+    title: 'Top Countries',
+    search: 'countries',
+  },
+  {
+    title: 'Top Players',
+    search: 'players',
+  },
+  {
+    title: 'Top Teams',
+    search: 'teams',
+  },
+  {
+    title: 'Top Games',
+    search: 'games',
+  },
+])
+
+const selectedBtn = ref(btnTab.value[1]);
 
 </script>
 
@@ -177,6 +204,37 @@ const resultYear = yearsArray.value[0]
     @include media-breakpoint-down(lg) {
       flex-direction: column-reverse;
       gap: 18px;
+    }
+  }
+  &__btn{
+    display: flex;
+    margin-top: 50px;
+    .btn{
+      max-width: 294px;
+      width: 100%;
+      text-align: center;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 100%;
+      background: #0F1215;
+      border: 2px solid #242B33;
+      padding: 20px 0px;
+      cursor: pointer;
+      transition: .15s;
+      &:hover{
+        background: white;
+        color: black;
+      }
+    }
+    .btn:nth-child(1),
+    .btn:nth-child(2),
+    .btn:nth-child(3){
+      border-right: 0;
+    }
+    .btn.active{
+      background: white;
+      color: black;
     }
   }
 }
