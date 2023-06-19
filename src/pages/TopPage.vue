@@ -12,6 +12,17 @@
           </div>
         </h2>
       </div>
+      <div class="top__price">
+        <div class="price">
+          <h4>Total Tournaments: <span>157,260,352</span></h4>
+        </div>
+        <div class="price">
+          <h4>Total Prize money <span>$157,260,352.09</span></h4>
+        </div>
+        <div class="price">
+          <h4>Total Players: <span>322</span></h4>
+        </div>
+      </div>
     </div>
   </main>
 </template>
@@ -84,6 +95,11 @@ const resultYear = yearsArray.value[0]
         }
       }
     }
+  }
+  &__price{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
   }
 }
 </style>

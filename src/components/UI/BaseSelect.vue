@@ -7,6 +7,7 @@
         type="text"
         v-model="select.search"
         @click="toggleSelect"
+        :class="{'input--error': hasError}"
         v-bind="$attrs"
     />
 
@@ -46,6 +47,10 @@ const props = defineProps({
     default: () => []
   },
   active: {
+    type: Boolean,
+    default: false
+  },
+  hasError: {
     type: Boolean,
     default: false
   }

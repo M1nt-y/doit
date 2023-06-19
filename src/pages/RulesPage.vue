@@ -2,27 +2,35 @@
   <main class="main rules">
     <div class="container">
       <h3 class='rules-title'>Terms of Use</h3>
+
       <div class="rules__info">
         <div class="rules__info-one">
           <h4>1. <span>The purpose</span> </h4>
+
           <div class="info">
             <h5>1.1</h5>
+
             <p>A night to remember for Brazil. Drama is never too far away at Copa America and this final had it by the bucketlad. Thanks for your company.
                 <span style="display: block"></span>
                 Drama is never too far away at Copa America and this final had it by the bucketlad. Thanks for your company.</p>
           </div>
+
           <div class="info info-two">
             <h5>1.2</h5>
+
             <p>A night to remember for Brazil. Drama is never too far away at Copa America and this final had it by the bucketlad. Thanks for your company. A night to remember for Brazil. Drama is never too far away at Copa America and this final had it by the bucketlad. Thanks for your company.</p>
           </div>
         </div>
         <div class="rules__info-one two-info">
           <h4>2. <span>The purpose</span> </h4>
+
           <div class="info">
             <h5>2.1</h5>
+
             <p>A night to remember for Brazil. Drama is never too far away at Copa America and this final had it by the bucketlad. Thanks for your company.
                 <span style="display: block"></span>
-                Drama is never too far away at Copa America and this final had it by the bucketlad. Thanks for your company.</p>
+                Drama is never too far away at Copa America and this final had it by the bucketlad. Thanks for your company.
+            </p>
           </div>
           
         </div>
