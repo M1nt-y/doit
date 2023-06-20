@@ -26,9 +26,11 @@
       <div class="top__btn">
         <div class="btn" 
         v-for="btn in btnTab"
-        :class="{ active: btn === selectedBtn }"
-        @click="selectedBtn = btn"
-        >{{ btn.title }}</div>
+        :class="{ active: btn.search === selectedBtn }"
+        @click="selectBtn(btn)"
+        >
+        {{ truncatedTitle(btn.title) }}
+      </div>
       </div>
     </div>
   </main>
@@ -36,7 +38,7 @@
 
 <script setup>
 import IconArrow from '@/assets/icons/Arrow.vue'
-import { ref } from 'vue';
+import { ref, onMounted} from 'vue';
 
 const displayYears = ref(false);
 
@@ -66,7 +68,34 @@ const btnTab = ref([
   },
 ])
 
-const selectedBtn = ref(btnTab.value[1]);
+// для отображения активного таба
+const selectedBtn = ref(null);
+onMounted(() => {
+  let searchQuery = btnTab.value.find(btn => btn.search === 'players');
+  selectedBtn.value = searchQuery.search
+});
+function selectBtn(btn) {
+  selectedBtn.value = btn.search
+}
+
+
+// обрезка слов на изменение ширины экрана
+const truncatedTitle = (title) => {
+  if (isMobile.value) {
+    const words = title.split(' ');
+    if (words.length > 1) {
+      return words[1];
+    }
+  }
+  return title;
+};
+
+const isMobile = ref(window.innerWidth < 768);
+
+window.addEventListener('resize', () => {
+  isMobile.value = window.innerWidth < 768;
+});
+
 
 </script>
 
