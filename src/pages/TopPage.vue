@@ -25,7 +25,7 @@
       </div>
       <div class="top__btn">
         <div class="btn" 
-        v-for="btn in btnTab"
+        v-for="btn in sortedBtnTab"
         :class="{ active: btn.search === selectedBtn }"
         @click="selectBtn(btn)"
         >
@@ -38,7 +38,7 @@
 
 <script setup>
 import IconArrow from '@/assets/icons/Arrow.vue'
-import { ref, onMounted} from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 const displayYears = ref(false);
 
@@ -96,6 +96,15 @@ window.addEventListener('resize', () => {
   isMobile.value = window.innerWidth < 768;
 });
 
+const sortedBtnTab = computed(() => {
+  if(isMobile.value){
+    const oneElement = btnTab.value[0];
+    const twoElement = btnTab.value[1];
+    return [btnTab.value[1], btnTab.value[0], btnTab.value[2], btnTab.value[3]]
+  }else{
+    return btnTab.value
+  }
+});
 
 </script>
 
@@ -238,6 +247,9 @@ window.addEventListener('resize', () => {
   &__btn{
     display: flex;
     margin-top: 50px;
+    @include media-breakpoint-down(xs) {
+      margin-top: 39px;
+    }
     .btn{
       max-width: 294px;
       width: 100%;
@@ -255,6 +267,13 @@ window.addEventListener('resize', () => {
         background: white;
         color: black;
       }
+      @include media-breakpoint-down(xs) {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 100%;
+        padding: 12px 0px;
+        padding-bottom: 11px;
+      }
     }
     .btn:nth-child(1),
     .btn:nth-child(2),
@@ -264,6 +283,11 @@ window.addEventListener('resize', () => {
     .btn.active{
       background: white;
       color: black;
+    };
+    .btn:nth-child(4){
+      @include media-breakpoint-down(xs) {
+        transform: translateX(2px);
+      }
     }
   }
 }
