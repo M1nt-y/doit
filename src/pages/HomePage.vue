@@ -52,6 +52,85 @@
         </swiper>
       </div>
 
+      <div class="streams">
+        <h2 class="title">Streams</h2>
+
+        <swiper
+            v-if="!streamsMobile"
+            class="streams__swiper"
+            :slides-per-view="1"
+            :pagination="{ clickable: true }"
+            :modules="[Pagination]"
+        >
+          <swiper-slide class="streams__wrapper">
+            <img class="streams__img" src="@/assets/images/streams-2.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-1.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-3.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-4.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-5.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-6.png" alt="">
+          </swiper-slide>
+
+          <swiper-slide class="streams__wrapper">
+            <img class="streams__img" src="@/assets/images/streams-1.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-2.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-3.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-4.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-5.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-6.png" alt="">
+          </swiper-slide>
+
+          <swiper-slide class="streams__wrapper">
+            <img class="streams__img" src="@/assets/images/streams-1.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-2.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-4.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-6.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-3.png" alt="">
+
+            <img class="streams__img" src="@/assets/images/streams-5.png" alt="">
+          </swiper-slide>
+        </swiper>
+
+        <swiper
+            v-else
+            class="streams__swiper"
+            :pagination="{ clickable: true }"
+            :modules="[Pagination]"
+        >
+          <swiper-slide v-for="stream in streams" :key="stream.id">
+            <div class="stream">
+              <div class="stream-wrapper">
+                <img class="stream__img" :src="stream.image" alt="">
+
+                <div class="stream__viewers">{{ stream.viewers }} зрителей</div>
+              </div>
+
+              <div class="stream__content">
+                <img :src="stream.logo" alt="">
+
+                <div class="stream__content-main">
+                  <h3 class="stream__content-title">{{ stream.title }}</h3>
+                  <p class="stream__content-channel">{{ stream.channel }}</p>
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
     </div>
   </main>
 </template>
@@ -83,7 +162,7 @@ const { currentUser } = storeToRefs(authStore)
 
 
 const display = computed(() => {
-  return windowWidth.value <= 577;
+  return windowWidth.value <= 577
 })
 
 const spaceBetween = computed(() => {
@@ -112,6 +191,10 @@ const perGroup = computed(() => {
   } else {
     return 1
   }
+})
+
+const streamsMobile = computed(() => {
+  return windowWidth.value <= 769
 })
 
 const tournaments = [
@@ -399,6 +482,49 @@ const news = [
   }
 ]
 
+const streams = [
+  {
+    id: 0,
+    image: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    title: 'Project Mega Kappa! Day 4',
+    channel: 'streamer-1',
+    viewers: 1500
+  },
+  {
+    id: 1,
+    image: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    title: 'Cool stream title',
+    channel: 'cool_streamer',
+    viewers: 264
+  },
+  {
+    id: 2,
+    image: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    title: 'Project Ozone 3 Kappa Mode! Day1',
+    channel: 'cjabka',
+    viewers: 740
+  },
+  {
+    id: 3,
+    image: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    title: 'Dummy stream! Playing something Day 3',
+    channel: 'dummy-channel',
+    viewers: 333
+  },
+  {
+    id: 4,
+    image: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    title: 'Another dummy stream',
+    channel: 'not_cjabka',
+    viewers: 24
+  }
+]
+
 </script>
 
 <style scoped lang="scss">
@@ -529,6 +655,91 @@ const news = [
   }
 }
 
+.streams {
+  margin-top: 134px;
+
+  @include media-breakpoint-down(xs) {
+    margin-top: 50px;
+  }
+
+  &__swiper {
+    margin-top: 44px;
+    padding-bottom: 65px;
+
+    @include media-breakpoint-down(xs) {
+      margin-top: 31px;
+      padding-bottom: 26px;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__img {
+    margin-right: 4px;
+    width: calc(25% - 3px);
+
+    &:nth-child(2),
+    &:nth-child(6) {
+      margin-right: 0;
+    }
+
+    &:nth-child(1),
+    &:nth-child(2) {
+      margin-bottom: 4px;
+      width: calc(50% - 2px);
+    }
+  }
+}
+
+.stream {
+
+  &-wrapper {
+    position: relative;
+  }
+
+  &__viewers {
+    left: 19px;
+    bottom: 15px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 2px 4px;
+    line-height: 100%;
+    position: absolute;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.75);
+  }
+
+  &__content {
+    display: flex;
+    padding: 16px 12px;
+    align-items: center;
+    background: #151A1F;
+
+    &-main {
+      margin-left: 12px;
+    }
+
+    &-title {
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 100%;
+      margin-bottom: 4px;
+    }
+
+    &-channel {
+      color: #C4C7CC;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 100%;
+    }
+  }
+}
+
 </style>
 
 <style lang="scss">
@@ -563,4 +774,14 @@ const news = [
     background: #4F5F70;
   }
 }
+
+.streams .swiper-pagination-bullet {
+  width: 8px;
+  height: 6px;
+}
+
+.streams .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 2px;
+}
+
 </style>
