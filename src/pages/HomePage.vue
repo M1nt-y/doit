@@ -17,7 +17,11 @@
       </div>
 
       <div class="tournaments">
-        <h2 class="title">Tournaments</h2>
+        <div class="row">
+          <h2 class="title">Tournaments</h2>
+
+          <GameTabs v-if="!isMobile" />
+        </div>
 
         <swiper
             class="tournaments__cards"
@@ -35,7 +39,11 @@
       </div>
 
       <div class="news">
-        <h2 class="title">News</h2>
+        <div class="row">
+          <h2 class="title">News</h2>
+
+          <GameTabs v-if="!isMobile" />
+        </div>
 
         <swiper
             class="news__cards"
@@ -53,10 +61,16 @@
       </div>
 
       <div class="streams">
-        <h2 class="title">Streams</h2>
+        <div class="row">
+          <h2 class="title">Streams</h2>
+
+          <div class="streams__live" />
+
+          <GameTabs v-if="!isMobile" />
+        </div>
 
         <swiper
-            v-if="!streamsMobile"
+            v-if="!isMobile"
             class="streams__swiper"
             :slides-per-view="1"
             :pagination="{ clickable: true }"
@@ -108,6 +122,7 @@
         <swiper
             v-else
             class="streams__swiper"
+            :slides-per-view="'auto'"
             :pagination="{ clickable: true }"
             :modules="[Pagination]"
         >
@@ -142,6 +157,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useMainStore } from '@/stores/main'
 import Triangles from '@/assets/icons/Triangles.vue'
 import TheCard from '@/components/TheCard.vue'
+import GameTabs from '@/components/GameTabs.vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -193,7 +209,7 @@ const perGroup = computed(() => {
   }
 })
 
-const streamsMobile = computed(() => {
+const isMobile = computed(() => {
   return windowWidth.value <= 769
 })
 
@@ -616,58 +632,113 @@ const streams = [
 }
 
 .tournaments {
-  margin-top: 132px;
+  margin-top: 126px;
 
   @include media-breakpoint-down(xs) {
     margin-top: 126px;
+  }
 
-    & .title {
+  & .title {
+    margin-bottom: 2px;
+
+    @include media-breakpoint-down(xs) {
       margin-left: -8px;
     }
   }
 
   &__cards {
-    margin-top: 44px;
+    margin-top: 34px;
     padding-bottom: 41px;
 
     @include media-breakpoint-down(xs) {
       margin-top: 30px;
-      padding-bottom: 38px;
+      padding-bottom: 36px;
     }
   }
 }
 
 .news {
-  margin-top: 148px;
+  margin-top: 146px;
 
   @include media-breakpoint-down(xs) {
     margin-top: 50px;
   }
 
   &__cards {
-    margin-top: 43px;
+    margin-top: 29px;
     padding-bottom: 53px;
 
     @include media-breakpoint-down(xs) {
-      margin-top: 31px;
+      margin-top: 18px;
       padding-bottom: 38px;
     }
+  }
+
+  & .title {
+    margin-bottom: 12px;
   }
 }
 
 .streams {
-  margin-top: 134px;
+  margin-top: 138px;
 
   @include media-breakpoint-down(xs) {
     margin-top: 50px;
   }
 
-  &__swiper {
-    margin-top: 44px;
-    padding-bottom: 65px;
+  & .title {
+    margin-top: -25px;
 
     @include media-breakpoint-down(xs) {
-      margin-top: 31px;
+      margin-top: 0;
+    }
+  }
+
+  &__live,
+  &__live:before,
+  &__live:after {
+    background: #EA4545;
+    border-radius: 100px;
+  }
+
+  &__live {
+    width: 8px;
+    height: 8px;
+    position: relative;
+    margin: 0 28px 22px;
+
+    @include media-breakpoint-down(xs) {
+      margin: 0 28px 0;
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      opacity: 0.12;
+      position: absolute;
+    }
+
+    &:before {
+      top: -6px;
+      left: -6px;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:after {
+      top: -12px;
+      left: -12px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__swiper {
+    margin-top: 22px;
+    padding-bottom: 64px;
+
+    @include media-breakpoint-down(xs) {
+      margin-top: 32px;
       padding-bottom: 26px;
     }
   }
@@ -695,6 +766,7 @@ const streams = [
 }
 
 .stream {
+  width: 329px;
 
   &-wrapper {
     position: relative;
@@ -740,6 +812,11 @@ const streams = [
   }
 }
 
+.row {
+  display: flex;
+  align-items: center;
+}
+
 </style>
 
 <style lang="scss">
@@ -754,9 +831,9 @@ const streams = [
 }
 
 // for pixel perfect
-//.news__cards .swiper-pagination-bullets {
-//  left: 5px;
-//}
+.news__cards .swiper-pagination-bullets {
+  left: 5px;
+}
 
 .swiper-pagination-bullet {
   width: 12px;
@@ -775,13 +852,40 @@ const streams = [
   }
 }
 
-.streams .swiper-pagination-bullet {
-  width: 8px;
-  height: 6px;
-}
+.streams {
 
-.streams .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
-  margin: 0 2px;
+  & .tabs {
+    margin-top: 4px;
+  }
+
+  & .swiper-slide {
+    width: 329px;
+    margin-right: 10px;
+  }
+
+  & .swiper-pagination-bullet {
+
+    @include media-breakpoint-down(xs) {
+      width: 8px;
+      height: 6px;
+    }
+  }
+
+  & .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+
+    @include media-breakpoint-down(xs) {
+      margin: 0 2px;
+    }
+  }
+
+  // for pixel perfect
+  &__swiper .swiper-pagination-bullets {
+    left: 11px;
+
+    @include media-breakpoint-down(xs) {
+      left: 6px;
+    }
+  }
 }
 
 </style>
