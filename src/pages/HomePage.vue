@@ -21,9 +21,12 @@
 
         <swiper
             class="tournaments__cards"
-            :slides-per-view="3"
-            :slides-per-group="3"
-            :space-between="30"
+            :slides-per-view="perView"
+            :slides-per-group="perGroup"
+            :centered-slides="centeredSlides"
+            :space-between="spaceBetween"
+            :pagination="{ clickable: true }"
+            :modules="[Pagination]"
         >
           <swiper-slide v-for="tournament in tournaments" :key="tournament.id">
             <TheCard :card="tournament" />
@@ -32,13 +35,16 @@
       </div>
 
       <div class="news">
-        <h2>News</h2>
+        <h2 class="title">News</h2>
 
         <swiper
             class="news__cards"
-            :slides-per-view="3"
-            :slides-per-group="3"
-            :space-between="30"
+            :slides-per-view="perView"
+            :slides-per-group="perGroup"
+            :centered-slides="centeredSlides"
+            :space-between="spaceBetween"
+            :pagination="{ clickable: true }"
+            :modules="[Pagination]"
         >
           <swiper-slide v-for="item in news" :key="item.id">
             <TheCard :card="item" is-white />
@@ -60,8 +66,12 @@ import TheCard from '@/components/TheCard.vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
+// import Swiper core and required modules
+import { Pagination } from 'swiper'
+
 // Import Swiper styles
-import 'swiper/css'
+import 'swiper/scss'
+import 'swiper/scss/pagination'
 
 
 const mainStore = useMainStore()
@@ -73,7 +83,35 @@ const { currentUser } = storeToRefs(authStore)
 
 
 const display = computed(() => {
-  return windowWidth.value < 730;
+  return windowWidth.value <= 577;
+})
+
+const spaceBetween = computed(() => {
+  if (windowWidth.value <= 577) {
+    return 16
+  } else {
+    return 30
+  }
+})
+
+const centeredSlides = computed(() => {
+  return windowWidth.value <= 577;
+})
+
+const perView = computed(() => {
+  if (windowWidth.value >= 1440) {
+    return 3
+  } else {
+    return 'auto'
+  }
+})
+
+const perGroup = computed(() => {
+  if (windowWidth.value >= 1440) {
+    return 3
+  } else {
+    return 1
+  }
 })
 
 const tournaments = [
@@ -371,24 +409,12 @@ const news = [
   position: relative;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 128px);
-
-  @include media-breakpoint-down(lg) {
-    height: calc(100vh - 112px);
-  }
-
-  @include media-breakpoint-down(md) {
-    height: calc(100vh - 194px);
-  }
-
-  @include media-breakpoint-down(md) {
-    height: calc(100vh - 176px);
-  }
+  margin-top: 15px;
 
   @include media-breakpoint-down(xs) {
-    height: calc(100vh - 134px);
     padding: 0 5px;
     margin-top: -6px;
+    height: calc(100vh - 134px);
   }
 
   &__triangles {
@@ -397,7 +423,7 @@ const news = [
 
   &__content {
     width: 100%;
-    padding-top: 18.8%;
+    padding-top: 13.1%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -464,28 +490,77 @@ const news = [
 }
 
 .tournaments {
-  margin-top: 68px;
+  margin-top: 132px;
+
+  @include media-breakpoint-down(xs) {
+    margin-top: 126px;
+  }
 
   &__cards {
     margin-top: 44px;
+    padding-bottom: 41px;
+
+    @include media-breakpoint-down(xs) {
+      margin-top: 30px;
+      padding-bottom: 38px;
+    }
   }
 }
 
 .news {
-  margin-top: 188px;
+  margin-top: 148px;
+
+  @include media-breakpoint-down(xs) {
+    margin-top: 50px;
+
+    & .title {
+      margin-left: 6px;
+    }
+  }
 
   &__cards {
-    margin-top: 44px;
+    margin-top: 43px;
+    padding-bottom: 53px;
+
+    @include media-breakpoint-down(xs) {
+      margin-top: 31px;
+      padding-bottom: 38px;
+    }
   }
 }
 
-.swiper__slide {
+</style>
+
+<style lang="scss">
+@import '@/assets/scss/media-breakpoints.scss';
+
+.swiper-slide {
   width: 370px;
+
+  @include media-breakpoint-down(xxs) {
+    width: 329px;
+  }
 }
 
-@media screen and (min-height: 1050px) {
-  .first-screen {
-    margin-top: -50px;
+// for pixel perfect
+//.news__cards .swiper-pagination-bullets {
+//  left: 5px;
+//}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 17px;
+  opacity: 1;
+  border-radius: 0;
+  background: #20272E;
+
+  @include media-breakpoint-down(xs) {
+    width: 6px;
+    height: 8px;
+  }
+
+  &-active {
+    background: #4F5F70;
   }
 }
 </style>

@@ -132,10 +132,6 @@ h2 {
   @include media-breakpoint-down(md) {
     font-size: 30px;
   }
-
-  @include media-breakpoint-down(xs) {
-    font-size: 26px;
-  }
 }
 
 h3 {
@@ -186,6 +182,10 @@ h3 {
   padding: 0 23px;
   max-width: 1216px;
   position: relative;
+
+  @include media-breakpoint-down(xs) {
+    padding: 0 16px;
+  }
 }
 
 .button {

@@ -29,13 +29,19 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/media-breakpoints.scss';
+
 .card {
   width: 370px;
   background: #151A1F;
   filter: drop-shadow(0px 16px 44px rgba(0, 0, 0, 0.12));
 
+  @include media-breakpoint-down(xxs) {
+    width: 329px;
+  }
+
   &__img {
-    width: 370px;
+    width: 100%;
     height: 200px;
     border-radius: 2px 2px 0 0;
   }
@@ -47,11 +53,20 @@ defineProps({
     flex-direction: column;
     justify-content: flex-end;
 
+    @include media-breakpoint-down(xs) {
+      height: 152px;
+      padding: 22px 16px 30px 16px;
+    }
+
     &-title {
       color: #E6E8EB;
       font-size: 22px;
       font-weight: 500;
       line-height: 130%;
+
+      @include media-breakpoint-down(xs) {
+        font-size: 16px;
+      }
     }
 
     &-row {
@@ -72,6 +87,10 @@ defineProps({
       line-height: 100%;
       margin-bottom: 8px;
 
+      @include media-breakpoint-down(xs) {
+        font-size: 14px;
+      }
+
       &--right {
         text-align: right;
       }
@@ -82,20 +101,27 @@ defineProps({
       font-size: 16px;
       font-weight: 500;
       line-height: 100%;
+
+      @include media-breakpoint-down(xs) {
+        font-size: 14px;
+      }
     }
   }
 
   &--white {
     background: #E1E6EB;
+    padding: 2px 2px 0 2px;
 
     & .card__img {
-      width: 366px;
       height: 198px;
-      margin: 2px 2px 0 2px;
     }
 
     & .card__content {
       height: 224px;
+
+      @include media-breakpoint-down(xs) {
+        height: 169px;
+      }
     }
 
     & .card__content-title {
@@ -107,6 +133,10 @@ defineProps({
       margin-top: auto;
       line-height: 150%;
       margin-bottom: 12px;
+
+      @include media-breakpoint-down(xs) {
+        margin-bottom: 0;
+      }
     }
   }
 }
