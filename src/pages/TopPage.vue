@@ -24,6 +24,7 @@
         </div>
       </div>
       <TheTabTop :button="sortedBtnTab" />
+      <TheTable :thead="tableHead" :tbody="tableBody"/>
     </div>
   </main>
 </template>
@@ -31,6 +32,7 @@
 <script setup>
 import IconArrow from '@/assets/icons/Arrow.vue'
 import TheTabTop from '@/components/TheTabTop.vue'
+import TheTable from '@/components/TheTable.vue'
 import { ref, onMounted, computed } from 'vue';
 
 const displayYears = ref(false);
@@ -75,6 +77,158 @@ const isMobile = ref(window.innerWidth < 768);
 window.addEventListener('resize', () => {
   isMobile.value = window.innerWidth < 768;
 });
+
+
+const tableBody = [
+  {
+    rank: 1,
+    country: new URL('../assets/icons/country/Ukraine.svg', import.meta.url),
+    nick: 'twtv Rykomastery',
+    name: 'Albert Fox',
+    year: '$800,652.82',
+    overal: '$542,986.37',
+  },
+  {
+    rank: 2,
+    country: new URL('../assets/icons/country/Spain.svg', import.meta.url),
+    nick: 'lazymeercat616',
+    name: 'Morris Watson',
+    year: '$9303.98',
+    overal: '$7433.16',
+  },
+  {
+    rank: 3,
+    country: new URL('../assets/icons/country/Greice.svg', import.meta.url),
+    nick: 'smallsnake312',
+    name: 'Shane Alexander',
+    year: '$3553.25',
+    overal: '$8778.93',
+  },
+  {
+    rank: 4,
+    country: new URL('../assets/icons/country/Poland.svg', import.meta.url),
+    nick: 'ticklishostrich764',
+    name: 'Kristin Flores',
+    year: '$4734.57',
+    overal: '$3949.90',
+  },
+  {
+    rank: 5,
+    country: new URL('../assets/icons/country/Ukraine.svg', import.meta.url),
+    nick: 'brownbird866',
+    name: 'Stella Wilson',
+    year: '$4915.73',
+    overal: '$8672.51',
+  },
+  {
+    rank: 6,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'purpleleopard757',
+    name: 'Claire Black',
+    year: '$7269.50',
+    overal: '$7631.11',
+  },
+  {
+    rank: 7,
+    country: new URL('../assets/icons/country/Spain.svg', import.meta.url),
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+  {
+    rank: 8,
+    country: new URL('../assets/icons/country/Poland.svg', import.meta.url),
+    nick: 'beautifullion765',
+    name: 'Greg Simmmons',
+    year: '$6691.64',
+    overal: '$6751.18',
+  },
+  {
+    rank: 9,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'beautifullion765',
+    name: 'Greg Simmmons',
+    year: '$6691.64',
+    overal: '$6751.18',
+  },
+  {
+    rank: 10,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+  {
+    rank: 11,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+  {
+    rank: 12,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+  {
+    rank: 13,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+  {
+    rank: 14,
+    country: 'Ukraine',
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+  {
+    rank: 15,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+  {
+    rank: 16,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+];
+
+
+const tableHead = ref([
+  {
+    title: 'RANK',
+  },
+  {
+    title: 'Country & Nickname',
+  },
+  {
+    title: 'NAME',
+  },
+  {
+    title: 'Total (year)',
+  },
+  {
+    title: 'Total (OVERAl)',
+  },
+
+])
 
 </script>
 
