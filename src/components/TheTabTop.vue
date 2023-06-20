@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const props = defineProps({
   button: {
@@ -21,7 +21,13 @@ const props = defineProps({
 })
 
 
-const selectedBtn = ref(props.button[1].search);
+const selectedBtn = ref(null);
+
+onMounted(() => {
+  let searchQuery = props.button.find(btn => btn.search === 'players');
+  selectedBtn.value = searchQuery.search;
+});
+
 
 function selectBtn(btn) {
   selectedBtn.value = btn.search
@@ -44,6 +50,7 @@ const isMobile = ref(window.innerWidth < 768);
 window.addEventListener('resize', () => {
   isMobile.value = window.innerWidth < 768;
 });
+
 
 
 
