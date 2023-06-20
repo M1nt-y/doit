@@ -17,7 +17,7 @@
       </div>
 
       <div class="tournaments">
-        <h2>Tournaments</h2>
+        <h2 class="title">Tournaments</h2>
 
         <swiper
             class="tournaments__cards"
@@ -494,6 +494,10 @@ const news = [
 
   @include media-breakpoint-down(xs) {
     margin-top: 126px;
+
+    & .title {
+      margin-left: -8px;
+    }
   }
 
   &__cards {
@@ -512,10 +516,6 @@ const news = [
 
   @include media-breakpoint-down(xs) {
     margin-top: 50px;
-
-    & .title {
-      margin-left: 6px;
-    }
   }
 
   &__cards {

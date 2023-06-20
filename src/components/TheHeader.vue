@@ -421,6 +421,11 @@ const background = computed(() => {
     height: 32px;
     padding: 4px;
 
+    @include media-breakpoint-down(xs) {
+      padding: 0;
+      margin-bottom: 10px;
+    }
+
     & span {
       height: 2.67px;
       width: 24px;
