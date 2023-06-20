@@ -18,10 +18,34 @@
 
       <div class="tournaments">
         <h2>Tournaments</h2>
-        <div class="tournaments__cards">
-          <TheCard v-for="tournament in tournaments" :key="tournament.id" :card="tournament" />
-        </div>
+
+        <swiper
+            class="tournaments__cards"
+            :slides-per-view="3"
+            :slides-per-group="3"
+            :space-between="30"
+        >
+          <swiper-slide v-for="tournament in tournaments" :key="tournament.id">
+            <TheCard :card="tournament" />
+          </swiper-slide>
+        </swiper>
       </div>
+
+      <div class="news">
+        <h2>News</h2>
+
+        <swiper
+            class="news__cards"
+            :slides-per-view="3"
+            :slides-per-group="3"
+            :space-between="30"
+        >
+          <swiper-slide v-for="item in news" :key="item.id">
+            <TheCard :card="item" is-white />
+          </swiper-slide>
+        </swiper>
+      </div>
+
     </div>
   </main>
 </template>
@@ -33,6 +57,11 @@ import { useAuthStore } from '@/stores/auth'
 import { useMainStore } from '@/stores/main'
 import Triangles from '@/assets/icons/Triangles.vue'
 import TheCard from '@/components/TheCard.vue'
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+
+// Import Swiper styles
+import 'swiper/css'
 
 
 const mainStore = useMainStore()
@@ -50,8 +79,8 @@ const display = computed(() => {
 const tournaments = [
   {
     id: 0,
-    image: new URL('../assets/images/tournament-1.png', import.meta.url),
-    title: 'Tournament’s name will be here, maybe, in two lines',
+    image: new URL('../assets/images/tournament-3.png', import.meta.url),
+    title: 'CS:GO Mirageby tournament',
     values: [
       {
         key: 'Start',
@@ -100,6 +129,81 @@ const tournaments = [
   },
   {
     id: 2,
+    image: new URL('../assets/images/tournament-1.png', import.meta.url),
+    title: 'CS:GO Mirageby tournament',
+    values: [
+      {
+        key: 'Start',
+        value: '07/06'
+      },
+      {
+        key: 'Mode',
+        value: '5v5'
+      },
+      {
+        key: 'Slots',
+        value: '16/30',
+        right: true
+      },
+      {
+        key: 'Pool',
+        value: '$1500',
+        right: true
+      }
+    ]
+  },
+  {
+    id: 3,
+    image: new URL('../assets/images/tournament-1.png', import.meta.url),
+    title: 'Tournament’s name will be here, maybe, in two lines',
+    values: [
+      {
+        key: 'Start',
+        value: '07/06'
+      },
+      {
+        key: 'Mode',
+        value: '5v5'
+      },
+      {
+        key: 'Slots',
+        value: '16/30',
+        right: true
+      },
+      {
+        key: 'Pool',
+        value: '$1500',
+        right: true
+      }
+    ]
+  },
+  {
+    id: 4,
+    image: new URL('../assets/images/tournament-2.png', import.meta.url),
+    title: 'Fortnitity evolution X',
+    values: [
+      {
+        key: 'Start',
+        value: '07/06'
+      },
+      {
+        key: 'Mode',
+        value: '5v5'
+      },
+      {
+        key: 'Slots',
+        value: '16/30',
+        right: true
+      },
+      {
+        key: 'Pool',
+        value: '$1500',
+        right: true
+      }
+    ]
+  },
+  {
+    id: 5,
     image: new URL('../assets/images/tournament-3.png', import.meta.url),
     title: 'CS:GO Mirageby tournament',
     values: [
@@ -123,36 +227,140 @@ const tournaments = [
       }
     ]
   },
+  {
+    id: 6,
+    image: new URL('../assets/images/tournament-2.png', import.meta.url),
+    title: 'Fortnitity evolution X',
+    values: [
+      {
+        key: 'Start',
+        value: '07/06'
+      },
+      {
+        key: 'Mode',
+        value: '5v5'
+      },
+      {
+        key: 'Slots',
+        value: '16/30',
+        right: true
+      },
+      {
+        key: 'Pool',
+        value: '$1500',
+        right: true
+      }
+    ]
+  },
+  {
+    id: 7,
+    image: new URL('../assets/images/tournament-3.png', import.meta.url),
+    title: 'CS:GO Mirageby tournament',
+    values: [
+      {
+        key: 'Start',
+        value: '07/06'
+      },
+      {
+        key: 'Mode',
+        value: '5v5'
+      },
+      {
+        key: 'Slots',
+        value: '16/30',
+        right: true
+      },
+      {
+        key: 'Pool',
+        value: '$1500',
+        right: true
+      }
+    ]
+  },
+  {
+    id: 8,
+    image: new URL('../assets/images/tournament-1.png', import.meta.url),
+    title: 'Tournament’s name will be here, maybe, in two lines',
+    values: [
+      {
+        key: 'Start',
+        value: '07/06'
+      },
+      {
+        key: 'Mode',
+        value: '5v5'
+      },
+      {
+        key: 'Slots',
+        value: '16/30',
+        right: true
+      },
+      {
+        key: 'Pool',
+        value: '$1500',
+        right: true
+      }
+    ]
+  }
 ]
 
-const card = {
-  title: 'Tournament’s name will be here, maybe, in two lines',
-  values: [
-    {
-      key: 'Start',
-      value: '07/06'
-    },
-    {
-      key: 'Mode',
-      value: '5v5'
-    },
-    {
-      key: 'Slots',
-      value: '16/30',
-      right: true
-    },
-    {
-      key: 'Pool',
-      value: '$1500',
-      right: true
-    }
-  ]
-}
+const news = [
+  {
+    id: 0,
+    image: new URL('../assets/images/news-3.png', import.meta.url),
+    title: 'Empire of Sin has been delayed until autumn 2020',
+    text: 'Drink up, folks, there\'s been a change of plans. Prohibition-era gangster tactics game Empire of Sin will no longer be...'
+  },
+  {
+    id: 1,
+    image: new URL('../assets/images/news-2.png', import.meta.url),
+    title: 'Your Witcher 3 saves from Steam and GOG will now work on the Nintendo Switch',
+    text: 'If you played The Witcher 3: Wild Hunt when it was new but not the Hearts of Stone...'
+  },
+  {
+    id: 2,
+    image: new URL('../assets/images/news-1.png', import.meta.url),
+    title: 'Fortnite map makers recreate Counter-Strike\'s Dust 2',
+    text: 'Team Evolve, a collective of players who create and share impressive maps using Fortnite\'s in-game Creative mode...'
+  },
+  {
+    id: 3,
+    image: new URL('../assets/images/news-1.png', import.meta.url),
+    title: 'Fortnite map makers recreate Counter-Strike\'s Dust 2',
+    text: 'Team Evolve, a collective of players who create and share impressive maps using Fortnite\'s in-game Creative mode...'
+  },
+  {
+    id: 4,
+    image: new URL('../assets/images/news-2.png', import.meta.url),
+    title: 'Your Witcher 3 saves from Steam and GOG will now work on the Nintendo Switch',
+    text: 'If you played The Witcher 3: Wild Hunt when it was new but not the Hearts of Stone...'
+  },
+  {
+    id: 5,
+    image: new URL('../assets/images/news-3.png', import.meta.url),
+    title: 'Empire of Sin has been delayed until autumn 2020',
+    text: 'Drink up, folks, there\'s been a change of plans. Prohibition-era gangster tactics game Empire of Sin will no longer be...'
+  },
+  {
+    id: 6,
+    image: new URL('../assets/images/news-2.png', import.meta.url),
+    title: 'Fortnitity evolution X',
+    text: 'If you played The Witcher 3: Wild Hunt when it was new but not the Hearts of Stone...'
+  },
+  {
+    id: 7,
+    image: new URL('../assets/images/news-3.png', import.meta.url),
+    title: 'Empire of Sin has been delayed until autumn 2020',
+    text: 'Drink up, folks, there\'s been a change of plans. Prohibition-era gangster tactics game Empire of Sin will no longer be...'
+  },
+  {
+    id: 8,
+    image: new URL('../assets/images/news-1.png', import.meta.url),
+    title: 'Fortnite map makers recreate Counter-Strike\'s Dust 2',
+    text: 'Team Evolve, a collective of players who create and share impressive maps using Fortnite\'s in-game Creative mode...'
+  }
+]
 
-// const card2 = {
-//   title: 'Your Witcher 3 saves from Steam and GOG will now work on the Nintendo Switch',
-//   text: 'If you played The Witcher 3: Wild Hunt when it was new but not the Hearts of Stone...'
-// }
 </script>
 
 <style scoped lang="scss">
@@ -259,10 +467,20 @@ const card = {
   margin-top: 68px;
 
   &__cards {
-    display: flex;
     margin-top: 44px;
-    justify-content: space-between;
   }
+}
+
+.news {
+  margin-top: 188px;
+
+  &__cards {
+    margin-top: 44px;
+  }
+}
+
+.swiper__slide {
+  width: 370px;
 }
 
 @media screen and (min-height: 1050px) {
