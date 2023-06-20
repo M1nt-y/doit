@@ -131,7 +131,7 @@ onMounted(async () => {
 })
 
 watch(() => route.name, () => {
-  headerIndex.value = 1
+  headerIndex.value = 2
   profileExpanded.value = showMenu.value = showBackdrop.value = false
 })
 
