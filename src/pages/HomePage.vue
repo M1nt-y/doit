@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="tournaments">
+      <div class="tournaments" :class="{ 'tournaments--first': currentUser }">
         <div class="row">
           <h2 class="title">Tournaments</h2>
 
@@ -194,6 +194,7 @@
         <swiper
             v-else
             class="streams__swiper"
+            :space-between="10"
             :slides-per-view="'auto'"
             :pagination="{ clickable: true }"
             :modules="[Pagination]"
@@ -231,44 +232,86 @@
       <div class="partners">
         <h2 class="title">Partners</h2>
 
-        <div class="row partners__content">
-          <picture class="partners__img">
+        <div v-if="windowWidth <= 769">
+          <div class="row">
+            <picture class="partners__img google">
+              <source type="image/webp" :srcset="partners[0].image">
+              <source type="image/png" :srcset="partners[0].fallback">
+              <img :src="partners[0].image" alt="">
+            </picture>
+
+            <picture class="partners__img nasa">
+              <source type="image/webp" :srcset="partners[1].image">
+              <source type="image/png" :srcset="partners[1].fallback">
+              <img :src="partners[1].image" alt="">
+            </picture>
+
+            <picture class="partners__img navi">
+              <source type="image/webp" :srcset="partners[2].image">
+              <source type="image/png" :srcset="partners[2].fallback">
+              <img :src="partners[2].image" alt="">
+            </picture>
+          </div>
+
+          <div class="row">
+            <picture class="partners__img airbnb">
+              <source type="image/webp" :srcset="partners[3].image">
+              <source type="image/png" :srcset="partners[3].fallback">
+              <img :src="partners[3].image" alt="">
+            </picture>
+
+            <picture class="partners__img telegram">
+              <source type="image/webp" :srcset="partners[4].image">
+              <source type="image/png" :srcset="partners[4].fallback">
+              <img :src="partners[4].image" alt="">
+            </picture>
+
+            <picture class="partners__img youtube">
+              <source type="image/webp" :srcset="partners[5].image">
+              <source type="image/png" :srcset="partners[5].fallback">
+              <img :src="partners[5].image" alt="">
+            </picture>
+          </div>
+        </div>
+
+        <div class="row partners__content" v-else>
+          <picture class="partners__img google">
             <source type="image/webp" :srcset="partners[0].image">
             <source type="image/png" :srcset="partners[0].fallback">
             <img :src="partners[0].image" alt="">
           </picture>
 
-          <picture class="partners__img">
+          <picture class="partners__img nasa">
             <source type="image/webp" :srcset="partners[1].image">
             <source type="image/png" :srcset="partners[1].fallback">
             <img :src="partners[1].image" alt="">
           </picture>
 
-          <picture class="partners__img">
+          <picture class="partners__img navi">
             <source type="image/webp" :srcset="partners[2].image">
             <source type="image/png" :srcset="partners[2].fallback">
             <img :src="partners[2].image" alt="">
           </picture>
 
-          <picture class="partners__img">
+          <picture class="partners__img airbnb">
             <source type="image/webp" :srcset="partners[3].image">
             <source type="image/png" :srcset="partners[3].fallback">
             <img :src="partners[3].image" alt="">
           </picture>
 
-          <picture class="partners__img">
+          <picture class="partners__img telegram">
             <source type="image/webp" :srcset="partners[4].image">
             <source type="image/png" :srcset="partners[4].fallback">
             <img :src="partners[4].image" alt="">
           </picture>
 
-          <picture class="partners__img">
+          <picture class="partners__img youtube">
             <source type="image/webp" :srcset="partners[5].image">
             <source type="image/png" :srcset="partners[5].fallback">
             <img :src="partners[5].image" alt="">
           </picture>
 
-          <picture class="partners__img" v-if="!display">
+          <picture class="partners__img be" v-if="!display">
             <source type="image/webp" :srcset="partners[6].image">
             <source type="image/png" :srcset="partners[6].fallback">
             <img :src="partners[6].image" alt="">
@@ -1012,6 +1055,10 @@ const games = [
 
   @include media-breakpoint-down(xs) {
     margin-top: 126px;
+
+    &--first {
+      margin-top: 20px;
+    }
   }
 
   & .title {
@@ -1198,68 +1245,87 @@ const games = [
   }
 
   &__content {
-    gap: 20px;
     flex-wrap: wrap;
     margin-top: 44px;
     justify-content: space-between;
+  }
 
-    @include media-breakpoint-down(xxs) {
-      gap: 0;
+  & .row {
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+      justify-content: space-between;
+
+      &:nth-child(1) {
+        margin-top: 44px;
+        margin-bottom: 30px;
+      }
     }
   }
 
-  &__img {
-    margin-right: 20px;
+  .google {
+    width: 130px;
+    height: 48px;
 
-    @include media-breakpoint-down(xxs) {
-      margin-bottom: 33px;
+    @include media-breakpoint-down(xs) {
+      width: 96px;
+      height: 36px;
+    }
+  }
+
+  .nasa {
+    width: 70px;
+    height: 70px;
+
+    @include media-breakpoint-down(xs) {
+      width: 52px;
+      height: 52px;
+    }
+  }
+
+  .navi {
+    width: 64px;
+    height: 64px;
+
+    @include media-breakpoint-down(xs) {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .airbnb {
+    width: 154px;
+    height: 48px;
+
+    @include media-breakpoint-down(xs) {
+      width: 110px;
+      height: 34px;
+    }
+  }
+
+  .telegram {
+    width: 56px;
+    height: 56px;
+
+    @include media-breakpoint-down(sm) {
+      margin-left: -14px;
     }
 
-    &:nth-last-child(1) {
-      margin-right: 0;
-
-      @include media-breakpoint-down(xs) {
-        width: 50px;
-        height: 34px;
-      }
+    @include media-breakpoint-down(xs) {
+      width: 40px;
+      height: 40px;
     }
+  }
 
-    &:nth-child(1) {
+  .youtube {
+    width: 100%;
+    height: 100%;
+    max-width: 80px;
+    max-height: 56px;
 
-      @include media-breakpoint-down(xs) {
-        width: 96px;
-        height: 36px;
-      }
-    }
-
-    &:nth-child(2) {
-
-      @include media-breakpoint-down(xs) {
-        width: 52px;
-      }
-    }
-
-    &:nth-child(3) {
-
-      @include media-breakpoint-down(xs) {
-        width: 50px;
-        margin-right: 0;
-      }
-    }
-
-    &:nth-child(4) {
-
-      @include media-breakpoint-down(xs) {
-        width: 110px;
-      }
-    }
-
-    &:nth-child(5) {
-
-      @include media-breakpoint-down(xs) {
-        width: 40px;
-        margin-left: -14px;
-      }
+    @include media-breakpoint-down(xs) {
+      width: 50px;
+      height: 34px;
     }
   }
 }
@@ -1268,7 +1334,7 @@ const games = [
   margin-top: 105px;
 
   @include media-breakpoint-down(xs) {
-    margin-top: 30px;
+    margin-top: 66px;
   }
 
   &__swiper {
@@ -1376,7 +1442,6 @@ const games = [
 
   & .swiper-slide {
     width: 329px;
-    margin-right: 10px;
   }
 
   & .swiper-pagination-bullet {
@@ -1392,7 +1457,7 @@ const games = [
     left: 11px;
 
     @include media-breakpoint-down(xs) {
-      left: 6px;
+      left: 0;
     }
   }
 }
@@ -1401,7 +1466,7 @@ const games = [
 
   & .swiper-wrapper {
 
-    @include media-breakpoint-down(xxs) {
+    @include media-breakpoint-down(xs) {
       height: 616px!important;
     }
   }
