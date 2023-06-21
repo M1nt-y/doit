@@ -166,10 +166,10 @@
 
         <swiper
             class="games__swiper"
+            auto-height
             :direction="getDirection"
             :slides-per-view="gamesPerView"
             :slides-per-group="perGroup"
-            :space-between="4"
             :pagination="{ clickable: true }"
             :modules="getModules"
         >
@@ -255,7 +255,7 @@ const gamesPerView = computed(() => {
 })
 
 const getDirection = computed(() => {
-  if (windowWidth.value > 376) {
+  if (windowWidth.value > 577) {
     return 'horizontal'
   } else {
     return 'vertical'
@@ -263,7 +263,7 @@ const getDirection = computed(() => {
 })
 
 const getModules = computed(() => {
-  if (windowWidth.value > 376) {
+  if (windowWidth.value > 577) {
     return [Pagination]
   } else {
     return []
@@ -1011,7 +1011,6 @@ const games = [
 
   &__swiper {
     margin-top: 43px;
-    max-height: 676px;
     padding-bottom: 60px;
 
     @include media-breakpoint-down(xs) {
@@ -1021,12 +1020,13 @@ const games = [
   }
 
   &__card {
-    //height: 500px;
+    height: 500px;
     max-width: 387px;
     position: relative;
 
     @include media-breakpoint-down(xs) {
-      max-width: unset;
+      height: auto;
+      max-width: 100%;
     }
 
     &-img {
@@ -1050,8 +1050,6 @@ const games = [
       @include media-breakpoint-down(xs) {
         bottom: 22px;
         font-size: 22px;
-        //top: 50%;
-        //transform: translateY(-50%);
       }
     }
   }
@@ -1138,13 +1136,21 @@ const games = [
 
 .games {
 
+  & .swiper-wrapper {
+
+    @include media-breakpoint-down(xxs) {
+      height: 616px!important;
+    }
+  }
+
   & .swiper-slide {
     width: 387px;
+    margin-right: 4px;
 
     @include media-breakpoint-down(xs) {
       width: 100%;
-      aspect-ratio: 1 / 0.62;
-      max-height: 500px;
+      margin-right: 0;
+      margin-bottom: 2px;
     }
 
     @include media-breakpoint-down(xxs) {
