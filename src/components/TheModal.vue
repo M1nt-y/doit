@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" @click="selectOptions = false">
+  <div class="modal" @click="selectOptions.value = false">
     <div class="modal__controls">
       <svg class="modal__controls-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M25.3334 16H6.66675" stroke="#1C2F4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -87,7 +87,7 @@
               :options="countries"
               placeholder="Select country"
               :active="selectOptions"
-              @click="selectOptions = !selectOptions"
+              @click="selectOptions.value = !selectOptions.value"
           />
 
           <p v-if="v$.country && v$.country.$errors.length > 0" class="modal__inputs-error">
@@ -709,7 +709,7 @@ const countries = [
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 2;
+  z-index: 3;
   padding: 16px;
   width: 100%;
   max-width: 698px;

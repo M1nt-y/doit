@@ -1,6 +1,6 @@
-# doit
+# Doit
 
-This template should help get you started developing with Vue 3 in Vite.
+[View deployment](https://doit-gg.netlify.app)
 
 ## Recommended IDE Setup
 

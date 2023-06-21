@@ -8,7 +8,7 @@ export const useMainStore = defineStore('main', () => {
     const showMenu = ref(false)
     const profileExpanded = ref(false)
     const showModal = ref(false)
-    const headerIndex = ref(1)
+    const headerIndex = ref(2)
     const modalType = ref('')
 
 
@@ -17,10 +17,10 @@ export const useMainStore = defineStore('main', () => {
     }
 
     function changeIndex () {
-        if (headerIndex.value === 1) {
-            headerIndex.value = 2
+        if (headerIndex.value === 2) {
+            headerIndex.value = 3
         } else {
-            headerIndex.value = 1
+            headerIndex.value = 2
         }
     }
 
@@ -45,7 +45,7 @@ export const useMainStore = defineStore('main', () => {
         showBackdrop.value = showModal.value = true
         modalType.value = 'Login'
         if (showMenu.value) {
-            headerIndex.value = 1
+            headerIndex.value = 2
         }
     }
 
@@ -53,7 +53,7 @@ export const useMainStore = defineStore('main', () => {
         showBackdrop.value = showModal.value = true
         modalType.value = 'Signup'
         if (showMenu.value) {
-            headerIndex.value = 1
+            headerIndex.value = 2
         }
     }
 
@@ -75,9 +75,6 @@ export const useMainStore = defineStore('main', () => {
     function showReport() {
         showBackdrop.value = showModal.value = true
         modalType.value = 'Report scores'
-        // if (showMenu.value) {
-        //     headerIndex.value = 1
-        // }
     }
 
     function closeModal() {
@@ -86,15 +83,15 @@ export const useMainStore = defineStore('main', () => {
         if (!showMenu.value) {
             showBackdrop.value = false
         } else {
-            headerIndex.value = 2
+            headerIndex.value = 3
         }
     }
     function closeAll() {
         if (showModal.value && showMenu.value) {
-            headerIndex.value = 2
+            headerIndex.value = 3
         } else {
             showBackdrop.value = showMenu.value = false
-            headerIndex.value = 1
+            headerIndex.value = 2
         }
         closeModal()
     }

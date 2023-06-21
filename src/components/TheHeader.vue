@@ -131,7 +131,7 @@ onMounted(async () => {
 })
 
 watch(() => route.name, () => {
-  headerIndex.value = 1
+  headerIndex.value = 2
   profileExpanded.value = showMenu.value = showBackdrop.value = false
 })
 
@@ -420,6 +420,11 @@ const background = computed(() => {
     justify-content: center;
     height: 32px;
     padding: 4px;
+
+    @include media-breakpoint-down(xs) {
+      padding: 0;
+      margin-bottom: 10px;
+    }
 
     & span {
       height: 2.67px;
