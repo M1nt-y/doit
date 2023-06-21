@@ -33,6 +33,7 @@ defineProps({
 
 .card {
   width: 370px;
+  cursor: pointer;
   background: #151A1F;
   filter: drop-shadow(0px 16px 44px rgba(0, 0, 0, 0.12));
 
@@ -43,6 +44,7 @@ defineProps({
   &__img {
     width: 100%;
     height: 200px;
+    object-fit: cover;
     border-radius: 2px 2px 0 0;
   }
 

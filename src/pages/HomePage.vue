@@ -146,6 +146,43 @@
           </swiper-slide>
         </swiper>
       </div>
+
+      <div class="partners">
+        <h2 class="title">Partners</h2>
+
+        <div class="row partners__content">
+          <img class="partners__img" src="@/assets/images/partner-1.png" alt="">
+          <img class="partners__img" src="@/assets/images/partner-2.png" alt="">
+          <img class="partners__img" src="@/assets/images/partner-3.png" alt="">
+          <img class="partners__img" src="@/assets/images/partner-4.png" alt="">
+          <img class="partners__img" src="@/assets/images/partner-5.png" alt="">
+          <img class="partners__img" src="@/assets/images/partner-6.png" alt="">
+          <img v-if="!display" class="partners__img" src="@/assets/images/partner-7.png" alt="">
+        </div>
+      </div>
+
+      <div class="games">
+        <h2 class="title">Games</h2>
+
+        <swiper
+            class="games__swiper"
+            :direction="getDirection"
+            :slides-per-view="gamesPerView"
+            :slides-per-group="perGroup"
+            :space-between="4"
+            :pagination="{ clickable: true }"
+            :modules="getModules"
+        >
+          <swiper-slide v-for="game in games" :key="game.id">
+            <div class="games__card">
+              <img class="games__card-img" :src="game.image" alt="">
+
+              <h3 class="games__card-title">{{ game.title }}</h3>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+
     </div>
   </main>
 </template>
@@ -206,6 +243,30 @@ const perGroup = computed(() => {
     return 3
   } else {
     return 1
+  }
+})
+
+const gamesPerView = computed(() => {
+  if (windowWidth.value >= 1440 || windowWidth.value <= 376) {
+    return 3
+  } else {
+    return 'auto'
+  }
+})
+
+const getDirection = computed(() => {
+  if (windowWidth.value > 376) {
+    return 'horizontal'
+  } else {
+    return 'vertical'
+  }
+})
+
+const getModules = computed(() => {
+  if (windowWidth.value > 376) {
+    return [Pagination]
+  } else {
+    return []
   }
 })
 
@@ -541,6 +602,54 @@ const streams = [
   }
 ]
 
+const games = [
+  {
+    id: 0,
+    title: 'WarCraft lll',
+    image: new URL('../assets/images/dota.png', import.meta.url)
+  },
+  {
+    id: 1,
+    title: 'FIFA 2020',
+    image: new URL('../assets/images/fifa.png', import.meta.url)
+  },
+  {
+    id: 2,
+    title: 'Valorant',
+    image: new URL('../assets/images/valorant.png', import.meta.url)
+  },
+  {
+    id: 3,
+    title: 'Dota ll',
+    image: new URL('../assets/images/dota.png', import.meta.url)
+  },
+  {
+    id: 4,
+    title: 'CS:GO',
+    image: new URL('../assets/images/csgo.png', import.meta.url)
+  },
+  {
+    id: 5,
+    title: 'StarCraft ll',
+    image: new URL('../assets/images/starcraft.png', import.meta.url)
+  },
+  {
+    id: 6,
+    title: 'BrawlStars',
+    image: new URL('../assets/images/dota.png', import.meta.url)
+  },
+  {
+    id: 7,
+    title: 'StarCraft ll',
+    image: new URL('../assets/images/csgo.png', import.meta.url)
+  },
+  {
+    id: 8,
+    title: 'StarCraft ll',
+    image: new URL('../assets/images/starcraft.png', import.meta.url)
+  }
+]
+
 </script>
 
 <style scoped lang="scss">
@@ -629,6 +738,11 @@ const streams = [
       margin-left: 8px;
     }
   }
+}
+
+.row {
+  display: flex;
+  align-items: center;
 }
 
 .tournaments {
@@ -749,6 +863,7 @@ const streams = [
   }
 
   &__img {
+    cursor: pointer;
     margin-right: 4px;
     width: calc(25% - 3px);
 
@@ -767,6 +882,7 @@ const streams = [
 
 .stream {
   width: 329px;
+  cursor: pointer;
 
   &-wrapper {
     position: relative;
@@ -812,9 +928,133 @@ const streams = [
   }
 }
 
-.row {
-  display: flex;
-  align-items: center;
+.partners {
+  margin-top: 124px;
+
+  @include media-breakpoint-down(xs) {
+    margin-top: 50px;
+  }
+
+  &__content {
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 44px;
+    justify-content: space-between;
+
+    @include media-breakpoint-down(xxs) {
+      gap: 0;
+    }
+  }
+
+  &__img {
+    margin-right: 20px;
+
+    @include media-breakpoint-down(xxs) {
+      margin-bottom: 33px;
+    }
+
+    &:nth-last-child(1) {
+      margin-right: 0;
+
+      @include media-breakpoint-down(xs) {
+        width: 50px;
+        height: 34px;
+      }
+    }
+
+    &:nth-child(1) {
+
+      @include media-breakpoint-down(xs) {
+        width: 96px;
+        height: 36px;
+      }
+    }
+
+    &:nth-child(2) {
+
+      @include media-breakpoint-down(xs) {
+        width: 52px;
+      }
+    }
+
+    &:nth-child(3) {
+
+      @include media-breakpoint-down(xs) {
+        width: 50px;
+        margin-right: 0;
+      }
+    }
+
+    &:nth-child(4) {
+
+      @include media-breakpoint-down(xs) {
+        width: 110px;
+      }
+    }
+
+    &:nth-child(5) {
+
+      @include media-breakpoint-down(xs) {
+        width: 40px;
+        margin-left: -14px;
+      }
+    }
+  }
+}
+
+.games {
+  margin-top: 105px;
+
+  @include media-breakpoint-down(xs) {
+    margin-top: 30px;
+  }
+
+  &__swiper {
+    margin-top: 43px;
+    max-height: 676px;
+    padding-bottom: 60px;
+
+    @include media-breakpoint-down(xs) {
+      margin-top: 30px;
+      padding-bottom: 0;
+    }
+  }
+
+  &__card {
+    //height: 500px;
+    max-width: 387px;
+    position: relative;
+
+    @include media-breakpoint-down(xs) {
+      max-width: unset;
+    }
+
+    &-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      @include media-breakpoint-down(xxs) {
+        height: 204px;
+      }
+    }
+
+    &-title {
+      left: 50%;
+      bottom: 30px;
+      font-size: 30px;
+      line-height: 100%;
+      position: absolute;
+      transform: translateX(-50%);
+
+      @include media-breakpoint-down(xs) {
+        bottom: 22px;
+        font-size: 22px;
+        //top: 50%;
+        //transform: translateY(-50%);
+      }
+    }
+  }
 }
 
 </style>
@@ -822,17 +1062,25 @@ const streams = [
 <style lang="scss">
 @import '@/assets/scss/media-breakpoints.scss';
 
-.swiper-slide {
-  width: 370px;
+.tournaments,
+.news {
 
-  @include media-breakpoint-down(xxs) {
-    width: 329px;
+  & .swiper-slide {
+    width: 370px;
+
+    @include media-breakpoint-down(xxs) {
+      width: 329px!important;
+    }
   }
 }
 
 // for pixel perfect
 .news__cards .swiper-pagination-bullets {
   left: 5px;
+
+  @include media-breakpoint-down(xs) {
+    left: 0;
+  }
 }
 
 .swiper-pagination-bullet {
@@ -849,6 +1097,13 @@ const streams = [
 
   &-active {
     background: #4F5F70;
+  }
+}
+
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+
+  @include media-breakpoint-down(xs) {
+    margin: 0 2px;
   }
 }
 
@@ -871,19 +1126,93 @@ const streams = [
     }
   }
 
-  & .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
-
-    @include media-breakpoint-down(xs) {
-      margin: 0 2px;
-    }
-  }
-
   // for pixel perfect
   &__swiper .swiper-pagination-bullets {
     left: 11px;
 
     @include media-breakpoint-down(xs) {
       left: 6px;
+    }
+  }
+}
+
+.games {
+
+  & .swiper-slide {
+    width: 387px;
+
+    @include media-breakpoint-down(xs) {
+      width: 100%;
+      aspect-ratio: 1 / 0.62;
+      max-height: 500px;
+    }
+
+    @include media-breakpoint-down(xxs) {
+      height: 204px!important;
+    }
+
+    &:nth-child(1),
+    &:nth-child(4),
+    &:nth-child(7) {
+
+      img {
+        object-position: -242px top;
+
+        @include media-breakpoint-down(xs) {
+          object-position: center top;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+
+      img {
+        object-position: -410px top;
+
+        @include media-breakpoint-down(xs) {
+          object-position: center top;
+        }
+
+        //@include media-breakpoint-down(lg) {
+        //  object-position: -320px top;
+        //}
+        //
+        //@include media-breakpoint-down(sm) {
+        //  object-position: center top;
+        //}
+      }
+    }
+
+    &:nth-child(5),
+    &:nth-child(8) {
+
+      img {
+        object-position: -123px top;
+
+        @include media-breakpoint-down(xs) {
+          object-position: center top;
+        }
+
+        //@include media-breakpoint-down(sm) {
+        //  object-position: center top;
+        //}
+      }
+    }
+
+    &:nth-child(6),
+    &:nth-child(9) {
+
+      img {
+        object-position: -281px top;
+
+        @include media-breakpoint-down(xs) {
+          object-position: center top;
+        }
+
+        //@include media-breakpoint-down(sm) {
+        //  object-position: center top;
+        //}
+      }
     }
   }
 }
