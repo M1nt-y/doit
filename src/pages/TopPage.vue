@@ -186,7 +186,7 @@ const tableBody = [
   },
   {
     rank: 14,
-    country: 'Ukraine',
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
     nick: 'whiteswan331',
     name: 'Calvin Miles',
     year: '$6577.43',
@@ -202,6 +202,22 @@ const tableBody = [
   },
   {
     rank: 16,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+  {
+    rank: 17,
+    country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
+    nick: 'whiteswan331',
+    name: 'Calvin Miles',
+    year: '$6577.43',
+    overal: '$6270.13',
+  },
+  {
+    rank: 18,
     country: new URL('../assets/icons/country/Georgia.svg', import.meta.url),
     nick: 'whiteswan331',
     name: 'Calvin Miles',
@@ -229,6 +245,8 @@ const tableHead = ref([
   },
 
 ])
+
+
 
 </script>
 
