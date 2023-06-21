@@ -13,11 +13,15 @@
     </div>
 
     <div class="games__content">
-      <div class="card" v-for="card in resultGame" :key="card.id">
+      <div class="card" v-for="game in resultGame" :key="game.id">
         <div class="card__content">
-          <img class="card__content-img" :src="card.image" alt=""/>
+          <picture>
+            <source type="image/webp" :srcset="game.image">
+            <source type="image/png" :srcset="game.fallback">
+            <img class="card__content-img" :src="game.image" alt="">
+          </picture>
 
-          <p>{{ card.title }}</p>
+          <p>{{ game.title }}</p>
         </div>
       </div>
     </div>
@@ -28,6 +32,11 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import Dota from '@/assets/images/dota.png?w=889&h=500&format=webp'
+import Csgo from '@/assets/images/csgo.png?w=889&h=500&format=webp'
+import Fifa from '@/assets/images/fifa.png?w=889&h=500&format=webp'
+import Valorant from '@/assets/images/valorant.png?w=889&h=500&format=webp'
+import Starcraft from '@/assets/images/starcraft.png?w=889&h=500&format=webp'
 import BaseInput from '@/components/UI/BaseInput.vue'
 
 
@@ -37,47 +46,56 @@ const gamesArray = ref([
   {
     id: 0,
     title: 'Dota ll',
-    image: new URL('../assets/images/dota.png', import.meta.url)
+    image: Dota,
+    fallback: new URL('../assets/images/dota.png', import.meta.url)
   },
   {
     id: 1,
     title: 'CS:GO',
-    image: new URL('../assets/images/csgo.png', import.meta.url)
+    image: Csgo,
+    fallback: new URL('../assets/images/csgo.png', import.meta.url)
   },
   {
     id: 2,
     title: 'StarCraft ll',
-    image: new URL('../assets/images/starcraft.png', import.meta.url)
+    image: Starcraft,
+    fallback: new URL('../assets/images/starcraft.png', import.meta.url)
   },
   {
     id: 3,
     title: 'WarCraft lll',
-    image: new URL('../assets/images/dota.png', import.meta.url)
+    image: Dota,
+    fallback: new URL('../assets/images/dota.png', import.meta.url)
   },
   {
     id: 4,
     title: 'FIFA 2020',
-    image: new URL('../assets/images/fifa.png', import.meta.url)
+    image: Fifa,
+    fallback: new URL('../assets/images/fifa.png', import.meta.url)
   },
   {
     id: 5,
     title: 'Valorant',
-    image: new URL('../assets/images/valorant.png', import.meta.url)
+    image: Valorant,
+    fallback: new URL('../assets/images/valorant.png', import.meta.url)
   },
   {
     id: 6,
     title: 'BrawlStars',
-    image: new URL('../assets/images/dota.png', import.meta.url)
+    image: Dota,
+    fallback: new URL('../assets/images/dota.png', import.meta.url)
   },
   {
     id: 7,
     title: 'StarCraft ll',
-    image: new URL('../assets/images/csgo.png', import.meta.url)
+    image: Csgo,
+    fallback: new URL('../assets/images/csgo.png', import.meta.url)
   },
   {
     id: 8,
     title: 'StarCraft ll',
-    image: new URL('../assets/images/starcraft.png', import.meta.url)
+    image: Starcraft,
+    fallback: new URL('../assets/images/starcraft.png', import.meta.url)
   }
 ])
 

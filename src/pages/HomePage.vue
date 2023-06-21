@@ -77,45 +77,117 @@
             :modules="[Pagination]"
         >
           <swiper-slide class="streams__wrapper">
-            <img class="streams__img" src="@/assets/images/streams-2.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream2">
+              <source type="image/png" srcset="./src/assets/images/streams-2.png">
+              <img :src="Stream2" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-1.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream1">
+              <source type="image/png" srcset="./src/assets/images/streams-1.png">
+              <img :src="Stream1" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-3.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream3">
+              <source type="image/png" srcset="./src/assets/images/streams-3.png">
+              <img :src="Stream3" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-4.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream4">
+              <source type="image/png" srcset="./src/assets/images/streams-4.png">
+              <img :src="Stream4" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-5.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream5">
+              <source type="image/png" srcset="./src/assets/images/streams-5.png">
+              <img :src="Stream5" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-6.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream6">
+              <source type="image/png" srcset="./src/assets/images/streams-6.png">
+              <img :src="Stream6" alt="">
+            </picture>
           </swiper-slide>
 
           <swiper-slide class="streams__wrapper">
-            <img class="streams__img" src="@/assets/images/streams-1.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream1">
+              <source type="image/png" srcset="./src/assets/images/streams-1.png">
+              <img :src="Stream1" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-2.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream2">
+              <source type="image/png" srcset="./src/assets/images/streams-2.png">
+              <img :src="Stream2" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-3.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream3">
+              <source type="image/png" srcset="./src/assets/images/streams-3.png">
+              <img :src="Stream3" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-4.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream4">
+              <source type="image/png" srcset="./src/assets/images/streams-4.png">
+              <img :src="Stream4" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-5.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream5">
+              <source type="image/png" srcset="./src/assets/images/streams-5.png">
+              <img :src="Stream5" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-6.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream6">
+              <source type="image/png" srcset="./src/assets/images/streams-6.png">
+              <img :src="Stream6" alt="">
+            </picture>
           </swiper-slide>
 
           <swiper-slide class="streams__wrapper">
-            <img class="streams__img" src="@/assets/images/streams-1.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream1">
+              <source type="image/png" srcset="./src/assets/images/streams-1.png">
+              <img :src="Stream1" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-2.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream2">
+              <source type="image/png" srcset="./src/assets/images/streams-2.png">
+              <img :src="Stream2" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-4.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream4">
+              <source type="image/png" srcset="./src/assets/images/streams-4.png">
+              <img :src="Stream4" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-6.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream6">
+              <source type="image/png" srcset="./src/assets/images/streams-6.png">
+              <img :src="Stream6" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-3.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream3">
+              <source type="image/png" srcset="./src/assets/images/streams-3.png">
+              <img :src="Stream3" alt="">
+            </picture>
 
-            <img class="streams__img" src="@/assets/images/streams-5.png" alt="">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="Stream5">
+              <source type="image/png" srcset="./src/assets/images/streams-5.png">
+              <img :src="Stream5" alt="">
+            </picture>
           </swiper-slide>
         </swiper>
 
@@ -129,13 +201,22 @@
           <swiper-slide v-for="stream in streams" :key="stream.id">
             <div class="stream">
               <div class="stream-wrapper">
-                <img class="stream__img" :src="stream.image" alt="">
+                <picture>
+                  <source type="image/webp" :srcset="stream.image">
+                  <source type="image/png" :srcset="stream.fallback">
+                  <img class="stream__img" :src="stream.image" alt="">
+                </picture>
 
                 <div class="stream__viewers">{{ stream.viewers }} зрителей</div>
               </div>
 
               <div class="stream__content">
-                <img :src="stream.logo" alt="">
+
+                <picture>
+                  <source type="image/webp" :srcset="stream.logo">
+                  <source type="image/png" :srcset="stream.logoFallback">
+                  <img :src="stream.logo" alt="">
+                </picture>
 
                 <div class="stream__content-main">
                   <h3 class="stream__content-title">{{ stream.title }}</h3>
@@ -151,13 +232,47 @@
         <h2 class="title">Partners</h2>
 
         <div class="row partners__content">
-          <img class="partners__img" src="@/assets/images/partner-1.png" alt="">
-          <img class="partners__img" src="@/assets/images/partner-2.png" alt="">
-          <img class="partners__img" src="@/assets/images/partner-3.png" alt="">
-          <img class="partners__img" src="@/assets/images/partner-4.png" alt="">
-          <img class="partners__img" src="@/assets/images/partner-5.png" alt="">
-          <img class="partners__img" src="@/assets/images/partner-6.png" alt="">
-          <img v-if="!display" class="partners__img" src="@/assets/images/partner-7.png" alt="">
+          <picture>
+            <source type="image/webp" :srcset="Partner1">
+            <source type="image/png" srcset="./src/assets/images/partner-1.png">
+            <img class="partners__img" :src="Partner1" alt="">
+          </picture>
+
+          <picture>
+            <source type="image/webp" :srcset="Partner2">
+            <source type="image/png" srcset="./src/assets/images/partner-2.png">
+            <img class="partners__img" :src="Partner2" alt="">
+          </picture>
+
+          <picture>
+            <source type="image/webp" :srcset="Partner3">
+            <source type="image/png" srcset="./src/assets/images/partner-3.png">
+            <img class="partners__img" :src="Partner3" alt="">
+          </picture>
+
+          <picture>
+            <source type="image/webp" :srcset="Partner4">
+            <source type="image/png" srcset="./src/assets/images/partner-4.png">
+            <img class="partners__img" :src="Partner4" alt="">
+          </picture>
+
+          <picture>
+            <source type="image/webp" :srcset="Partner5">
+            <source type="image/png" srcset="./src/assets/images/partner-5.png">
+            <img class="partners__img" :src="Partner5" alt="">
+          </picture>
+
+          <picture>
+            <source type="image/webp" :srcset="Partner6">
+            <source type="image/png" srcset="./src/assets/images/partner-6.png">
+            <img class="partners__img" :src="Partner6" alt="">
+          </picture>
+
+          <picture v-if="!display">
+            <source type="image/webp" :srcset="Partner7">
+            <source type="image/png" srcset="./src/assets/images/partner-7.png">
+            <img class="partners__img" :src="Partner7" alt="">
+          </picture>
         </div>
       </div>
 
@@ -170,12 +285,17 @@
             :direction="getDirection"
             :slides-per-view="gamesPerView"
             :slides-per-group="perGroup"
+            :space-between="betweenGames"
             :pagination="{ clickable: true }"
             :modules="getModules"
         >
           <swiper-slide v-for="game in games" :key="game.id">
             <div class="games__card">
-              <img class="games__card-img" :src="game.image" alt="">
+              <picture>
+                <source type="image/webp" :srcset="game.image">
+                <source type="image/png" :srcset="game.fallback">
+                <img class="games__card-img" :src="game.image" alt="">
+              </picture>
 
               <h3 class="games__card-title">{{ game.title }}</h3>
             </div>
@@ -195,6 +315,32 @@ import { useMainStore } from '@/stores/main'
 import Triangles from '@/assets/icons/Triangles.vue'
 import TheCard from '@/components/TheCard.vue'
 import GameTabs from '@/components/GameTabs.vue'
+import Tournament1 from '@/assets/images/tournament-1.png?w=370&h=200&format=webp'
+import Tournament2 from '@/assets/images/tournament-2.png?w=370&h=200&format=webp'
+import Tournament3 from '@/assets/images/tournament-3.png?w=370&h=200&format=webp'
+import News1 from '@/assets/images/news-1.png?w=366&h=198&format=webp'
+import News2 from '@/assets/images/news-2.png?w=366&h=198&format=webp'
+import News3 from '@/assets/images/news-3.png?w=366&h=198&format=webp'
+import Stream0 from '@/assets/images/streams-0.png?w=329&h=184&format=webp'
+import Stream1 from '@/assets/images/streams-1.png?w=583&h=320&format=webp'
+import Stream2 from '@/assets/images/streams-2.png?w=583&h=320&format=webp'
+import Stream3 from '@/assets/images/streams-3.png?w=289&h=152&format=webp'
+import Stream4 from '@/assets/images/streams-4.png?w=290&h=152&format=webp'
+import Stream5 from '@/assets/images/streams-5.png?w=287&h=152&format=webp'
+import Stream6 from '@/assets/images/streams-6.png?w=292&h=152&format=webp'
+import StreamLogo from '@/assets/images/stream-logo.png?w=40&h=40&format=webp'
+import Partner1 from '@/assets/images/partner-1.png?w=130&h=48&format=webp'
+import Partner2 from '@/assets/images/partner-2.png?w=70&h=70&format=webp'
+import Partner3 from '@/assets/images/partner-3.png?w=64&h=64&format=webp'
+import Partner4 from '@/assets/images/partner-4.png?w=154&h=50&format=webp'
+import Partner5 from '@/assets/images/partner-5.png?w=56&h=56&format=webp'
+import Partner6 from '@/assets/images/partner-6.png?w=80&h=56&format=webp'
+import Partner7 from '@/assets/images/partner-7.png?w=52&h=52&format=webp'
+import Dota from '@/assets/images/dota.png?w=889&h=500&format=webp'
+import Csgo from '@/assets/images/csgo.png?w=889&h=500&format=webp'
+import Fifa from '@/assets/images/fifa.png?w=889&h=500&format=webp'
+import Valorant from '@/assets/images/valorant.png?w=889&h=500&format=webp'
+import Starcraft from '@/assets/images/starcraft.png?w=889&h=500&format=webp'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -254,6 +400,14 @@ const gamesPerView = computed(() => {
   }
 })
 
+const betweenGames = computed(() => {
+  if (windowWidth.value <= 577) {
+    return 2
+  } else {
+    return 4
+  }
+})
+
 const getDirection = computed(() => {
   if (windowWidth.value > 577) {
     return 'horizontal'
@@ -277,7 +431,8 @@ const isMobile = computed(() => {
 const tournaments = [
   {
     id: 0,
-    image: new URL('../assets/images/tournament-3.png', import.meta.url),
+    image: Tournament3,
+    fallback: new URL('../assets/images/tournament-3.png', import.meta.url),
     title: 'CS:GO Mirageby tournament',
     values: [
       {
@@ -302,7 +457,8 @@ const tournaments = [
   },
   {
     id: 1,
-    image: new URL('../assets/images/tournament-2.png', import.meta.url),
+    image: Tournament2,
+    fallback: new URL('../assets/images/tournament-2.png', import.meta.url),
     title: 'Fortnitity evolution X',
     values: [
       {
@@ -327,7 +483,8 @@ const tournaments = [
   },
   {
     id: 2,
-    image: new URL('../assets/images/tournament-1.png', import.meta.url),
+    image: Tournament1,
+    fallback: new URL('../assets/images/tournament-1.png', import.meta.url),
     title: 'CS:GO Mirageby tournament',
     values: [
       {
@@ -352,7 +509,8 @@ const tournaments = [
   },
   {
     id: 3,
-    image: new URL('../assets/images/tournament-1.png', import.meta.url),
+    image: Tournament1,
+    fallback: new URL('../assets/images/tournament-1.png', import.meta.url),
     title: 'Tournament’s name will be here, maybe, in two lines',
     values: [
       {
@@ -377,7 +535,8 @@ const tournaments = [
   },
   {
     id: 4,
-    image: new URL('../assets/images/tournament-2.png', import.meta.url),
+    image: Tournament2,
+    fallback: new URL('../assets/images/tournament-2.png', import.meta.url),
     title: 'Fortnitity evolution X',
     values: [
       {
@@ -402,7 +561,8 @@ const tournaments = [
   },
   {
     id: 5,
-    image: new URL('../assets/images/tournament-3.png', import.meta.url),
+    image: Tournament3,
+    fallback: new URL('../assets/images/tournament-3.png', import.meta.url),
     title: 'CS:GO Mirageby tournament',
     values: [
       {
@@ -427,7 +587,8 @@ const tournaments = [
   },
   {
     id: 6,
-    image: new URL('../assets/images/tournament-2.png', import.meta.url),
+    image: Tournament2,
+    fallback: new URL('../assets/images/tournament-2.png', import.meta.url),
     title: 'Fortnitity evolution X',
     values: [
       {
@@ -452,7 +613,8 @@ const tournaments = [
   },
   {
     id: 7,
-    image: new URL('../assets/images/tournament-3.png', import.meta.url),
+    image: Tournament3,
+    fallback: new URL('../assets/images/tournament-3.png', import.meta.url),
     title: 'CS:GO Mirageby tournament',
     values: [
       {
@@ -477,7 +639,8 @@ const tournaments = [
   },
   {
     id: 8,
-    image: new URL('../assets/images/tournament-1.png', import.meta.url),
+    image: Tournament1,
+    fallback: new URL('../assets/images/tournament-1.png', import.meta.url),
     title: 'Tournament’s name will be here, maybe, in two lines',
     values: [
       {
@@ -505,55 +668,64 @@ const tournaments = [
 const news = [
   {
     id: 0,
-    image: new URL('../assets/images/news-3.png', import.meta.url),
+    image: News3,
+    fallback: new URL('../assets/images/news-3.png', import.meta.url),
     title: 'Empire of Sin has been delayed until autumn 2020',
     text: 'Drink up, folks, there\'s been a change of plans. Prohibition-era gangster tactics game Empire of Sin will no longer be...'
   },
   {
     id: 1,
-    image: new URL('../assets/images/news-2.png', import.meta.url),
+    image: News2,
+    fallback: new URL('../assets/images/news-2.png', import.meta.url),
     title: 'Your Witcher 3 saves from Steam and GOG will now work on the Nintendo Switch',
     text: 'If you played The Witcher 3: Wild Hunt when it was new but not the Hearts of Stone...'
   },
   {
     id: 2,
-    image: new URL('../assets/images/news-1.png', import.meta.url),
+    image: News1,
+    fallback: new URL('../assets/images/news-1.png', import.meta.url),
     title: 'Fortnite map makers recreate Counter-Strike\'s Dust 2',
     text: 'Team Evolve, a collective of players who create and share impressive maps using Fortnite\'s in-game Creative mode...'
   },
   {
     id: 3,
-    image: new URL('../assets/images/news-1.png', import.meta.url),
+    image: News1,
+    fallback: new URL('../assets/images/news-1.png', import.meta.url),
     title: 'Fortnite map makers recreate Counter-Strike\'s Dust 2',
     text: 'Team Evolve, a collective of players who create and share impressive maps using Fortnite\'s in-game Creative mode...'
   },
   {
     id: 4,
-    image: new URL('../assets/images/news-2.png', import.meta.url),
+    image: News2,
+    fallback: new URL('../assets/images/news-2.png', import.meta.url),
     title: 'Your Witcher 3 saves from Steam and GOG will now work on the Nintendo Switch',
     text: 'If you played The Witcher 3: Wild Hunt when it was new but not the Hearts of Stone...'
   },
   {
     id: 5,
-    image: new URL('../assets/images/news-3.png', import.meta.url),
+    image: News3,
+    fallback: new URL('../assets/images/news-3.png', import.meta.url),
     title: 'Empire of Sin has been delayed until autumn 2020',
     text: 'Drink up, folks, there\'s been a change of plans. Prohibition-era gangster tactics game Empire of Sin will no longer be...'
   },
   {
     id: 6,
-    image: new URL('../assets/images/news-2.png', import.meta.url),
+    image: News2,
+    fallback: new URL('../assets/images/news-2.png', import.meta.url),
     title: 'Fortnitity evolution X',
     text: 'If you played The Witcher 3: Wild Hunt when it was new but not the Hearts of Stone...'
   },
   {
     id: 7,
-    image: new URL('../assets/images/news-3.png', import.meta.url),
+    image: News3,
+    fallback: new URL('../assets/images/news-3.png', import.meta.url),
     title: 'Empire of Sin has been delayed until autumn 2020',
     text: 'Drink up, folks, there\'s been a change of plans. Prohibition-era gangster tactics game Empire of Sin will no longer be...'
   },
   {
     id: 8,
-    image: new URL('../assets/images/news-1.png', import.meta.url),
+    image: News1,
+    fallback: new URL('../assets/images/news-1.png', import.meta.url),
     title: 'Fortnite map makers recreate Counter-Strike\'s Dust 2',
     text: 'Team Evolve, a collective of players who create and share impressive maps using Fortnite\'s in-game Creative mode...'
   }
@@ -562,40 +734,50 @@ const news = [
 const streams = [
   {
     id: 0,
-    image: new URL('../assets/images/streams-0.png', import.meta.url),
-    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    image: Stream0,
+    fallback: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: StreamLogo,
+    logoFallback: new URL('../assets/images/stream-logo.png', import.meta.url),
     title: 'Project Mega Kappa! Day 4',
     channel: 'streamer-1',
     viewers: 1500
   },
   {
     id: 1,
-    image: new URL('../assets/images/streams-0.png', import.meta.url),
-    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    image: Stream0,
+    fallback: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: StreamLogo,
+    logoFallback: new URL('../assets/images/stream-logo.png', import.meta.url),
     title: 'Cool stream title',
     channel: 'cool_streamer',
     viewers: 264
   },
   {
     id: 2,
-    image: new URL('../assets/images/streams-0.png', import.meta.url),
-    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    image: Stream0,
+    fallback: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: StreamLogo,
+    logoFallback: new URL('../assets/images/stream-logo.png', import.meta.url),
     title: 'Project Ozone 3 Kappa Mode! Day1',
     channel: 'cjabka',
     viewers: 740
   },
   {
     id: 3,
-    image: new URL('../assets/images/streams-0.png', import.meta.url),
-    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    image: Stream0,
+    fallback: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: StreamLogo,
+    logoFallback: new URL('../assets/images/stream-logo.png', import.meta.url),
     title: 'Dummy stream! Playing something Day 3',
     channel: 'dummy-channel',
     viewers: 333
   },
   {
     id: 4,
-    image: new URL('../assets/images/streams-0.png', import.meta.url),
-    logo: new URL('../assets/images/stream-logo.png', import.meta.url),
+    image: Stream0,
+    fallback: new URL('../assets/images/streams-0.png', import.meta.url),
+    logo: StreamLogo,
+    logoFallback: new URL('../assets/images/stream-logo.png', import.meta.url),
     title: 'Another dummy stream',
     channel: 'not_cjabka',
     viewers: 24
@@ -606,47 +788,56 @@ const games = [
   {
     id: 0,
     title: 'WarCraft lll',
-    image: new URL('../assets/images/dota.png', import.meta.url)
+    image: Dota,
+    fallback: new URL('../assets/images/dota.png', import.meta.url)
   },
   {
     id: 1,
     title: 'FIFA 2020',
-    image: new URL('../assets/images/fifa.png', import.meta.url)
+    image: Fifa,
+    fallback: new URL('../assets/images/fifa.png', import.meta.url)
   },
   {
     id: 2,
     title: 'Valorant',
-    image: new URL('../assets/images/valorant.png', import.meta.url)
+    image: Valorant,
+    fallback: new URL('../assets/images/valorant.png', import.meta.url)
   },
   {
     id: 3,
     title: 'Dota ll',
-    image: new URL('../assets/images/dota.png', import.meta.url)
+    image: Dota,
+    fallback: new URL('../assets/images/dota.png', import.meta.url)
   },
   {
     id: 4,
     title: 'CS:GO',
-    image: new URL('../assets/images/csgo.png', import.meta.url)
+    image: Csgo,
+    fallback: new URL('../assets/images/csgo.png', import.meta.url)
   },
   {
     id: 5,
     title: 'StarCraft ll',
-    image: new URL('../assets/images/starcraft.png', import.meta.url)
+    image: Starcraft,
+    fallback: new URL('../assets/images/starcraft.png', import.meta.url)
   },
   {
     id: 6,
     title: 'BrawlStars',
-    image: new URL('../assets/images/dota.png', import.meta.url)
+    image: Dota,
+    fallback: new URL('../assets/images/dota.png', import.meta.url)
   },
   {
     id: 7,
     title: 'StarCraft ll',
-    image: new URL('../assets/images/csgo.png', import.meta.url)
+    image: Csgo,
+    fallback: new URL('../assets/images/csgo.png', import.meta.url)
   },
   {
     id: 8,
     title: 'StarCraft ll',
-    image: new URL('../assets/images/starcraft.png', import.meta.url)
+    image: Starcraft,
+    fallback: new URL('../assets/images/starcraft.png', import.meta.url)
   }
 ]
 
@@ -1021,6 +1212,7 @@ const games = [
 
   &__card {
     height: 500px;
+    cursor: pointer;
     max-width: 387px;
     position: relative;
 
@@ -1145,12 +1337,9 @@ const games = [
 
   & .swiper-slide {
     width: 387px;
-    margin-right: 4px;
 
     @include media-breakpoint-down(xs) {
       width: 100%;
-      margin-right: 0;
-      margin-bottom: 2px;
     }
 
     @include media-breakpoint-down(xxs) {
@@ -1178,14 +1367,6 @@ const games = [
         @include media-breakpoint-down(xs) {
           object-position: center top;
         }
-
-        //@include media-breakpoint-down(lg) {
-        //  object-position: -320px top;
-        //}
-        //
-        //@include media-breakpoint-down(sm) {
-        //  object-position: center top;
-        //}
       }
     }
 
@@ -1198,10 +1379,6 @@ const games = [
         @include media-breakpoint-down(xs) {
           object-position: center top;
         }
-
-        //@include media-breakpoint-down(sm) {
-        //  object-position: center top;
-        //}
       }
     }
 
@@ -1214,10 +1391,6 @@ const games = [
         @include media-breakpoint-down(xs) {
           object-position: center top;
         }
-
-        //@include media-breakpoint-down(sm) {
-        //  object-position: center top;
-        //}
       }
     }
   }
