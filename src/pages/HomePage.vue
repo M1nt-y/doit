@@ -78,115 +78,115 @@
         >
           <swiper-slide class="streams__wrapper">
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream2">
-              <source type="image/png" srcset="./src/assets/images/streams-2.png">
-              <img :src="Stream2" alt="">
+              <source type="image/webp" :srcset="pcStreams[1].image">
+              <source type="image/png" :srcset="pcStreams[1].fallback">
+              <img :src="pcStreams[1].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream1">
-              <source type="image/png" srcset="./src/assets/images/streams-1.png">
-              <img :src="Stream1" alt="">
+              <source type="image/webp" :srcset="pcStreams[0].image">
+              <source type="image/png" :srcset="pcStreams[0].fallback">
+              <img :src="pcStreams[0].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream3">
-              <source type="image/png" srcset="./src/assets/images/streams-3.png">
-              <img :src="Stream3" alt="">
+              <source type="image/webp" :srcset="pcStreams[2].image">
+              <source type="image/png" :srcset="pcStreams[2].fallback">
+              <img :src="pcStreams[2].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream4">
-              <source type="image/png" srcset="./src/assets/images/streams-4.png">
-              <img :src="Stream4" alt="">
+              <source type="image/webp" :srcset="pcStreams[3].image">
+              <source type="image/png" :srcset="pcStreams[3].fallback">
+              <img :src="pcStreams[3].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream5">
-              <source type="image/png" srcset="./src/assets/images/streams-5.png">
-              <img :src="Stream5" alt="">
+              <source type="image/webp" :srcset="pcStreams[4].image">
+              <source type="image/png" :srcset="pcStreams[4].fallback">
+              <img :src="pcStreams[4].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream6">
-              <source type="image/png" srcset="./src/assets/images/streams-6.png">
-              <img :src="Stream6" alt="">
-            </picture>
-          </swiper-slide>
-
-          <swiper-slide class="streams__wrapper">
-            <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream1">
-              <source type="image/png" srcset="./src/assets/images/streams-1.png">
-              <img :src="Stream1" alt="">
-            </picture>
-
-            <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream2">
-              <source type="image/png" srcset="./src/assets/images/streams-2.png">
-              <img :src="Stream2" alt="">
-            </picture>
-
-            <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream3">
-              <source type="image/png" srcset="./src/assets/images/streams-3.png">
-              <img :src="Stream3" alt="">
-            </picture>
-
-            <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream4">
-              <source type="image/png" srcset="./src/assets/images/streams-4.png">
-              <img :src="Stream4" alt="">
-            </picture>
-
-            <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream5">
-              <source type="image/png" srcset="./src/assets/images/streams-5.png">
-              <img :src="Stream5" alt="">
-            </picture>
-
-            <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream6">
-              <source type="image/png" srcset="./src/assets/images/streams-6.png">
-              <img :src="Stream6" alt="">
+              <source type="image/webp" :srcset="pcStreams[5].image">
+              <source type="image/png" :srcset="pcStreams[5].fallback">
+              <img :src="pcStreams[5].image" alt="">
             </picture>
           </swiper-slide>
 
           <swiper-slide class="streams__wrapper">
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream1">
-              <source type="image/png" srcset="./src/assets/images/streams-1.png">
-              <img :src="Stream1" alt="">
+              <source type="image/webp" :srcset="pcStreams[0].image">
+              <source type="image/png" :srcset="pcStreams[0].fallback">
+              <img :src="pcStreams[0].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream2">
-              <source type="image/png" srcset="./src/assets/images/streams-2.png">
-              <img :src="Stream2" alt="">
+              <source type="image/webp" :srcset="pcStreams[1].image">
+              <source type="image/png" :srcset="pcStreams[1].fallback">
+              <img :src="pcStreams[1].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream4">
-              <source type="image/png" srcset="./src/assets/images/streams-4.png">
-              <img :src="Stream4" alt="">
+              <source type="image/webp" :srcset="pcStreams[2].image">
+              <source type="image/png" :srcset="pcStreams[2].fallback">
+              <img :src="pcStreams[2].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream6">
-              <source type="image/png" srcset="./src/assets/images/streams-6.png">
-              <img :src="Stream6" alt="">
+              <source type="image/webp" :srcset="pcStreams[3].image">
+              <source type="image/png" :srcset="pcStreams[3].fallback">
+              <img :src="pcStreams[3].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream3">
-              <source type="image/png" srcset="./src/assets/images/streams-3.png">
-              <img :src="Stream3" alt="">
+              <source type="image/webp" :srcset="pcStreams[4].image">
+              <source type="image/png" :srcset="pcStreams[4].fallback">
+              <img :src="pcStreams[4].image" alt="">
             </picture>
 
             <picture class="streams__img">
-              <source type="image/webp" :srcset="Stream5">
-              <source type="image/png" srcset="./src/assets/images/streams-5.png">
-              <img :src="Stream5" alt="">
+              <source type="image/webp" :srcset="pcStreams[5].image">
+              <source type="image/png" :srcset="pcStreams[5].fallback">
+              <img :src="pcStreams[5].image" alt="">
+            </picture>
+          </swiper-slide>
+
+          <swiper-slide class="streams__wrapper">
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="pcStreams[0].image">
+              <source type="image/png" :srcset="pcStreams[0].fallback">
+              <img :src="pcStreams[0].image" alt="">
+            </picture>
+
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="pcStreams[1].image">
+              <source type="image/png" :srcset="pcStreams[1].fallback">
+              <img :src="pcStreams[1].image" alt="">
+            </picture>
+
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="pcStreams[3].image">
+              <source type="image/png" :srcset="pcStreams[3].fallback">
+              <img :src="pcStreams[3].image" alt="">
+            </picture>
+
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="pcStreams[5].image">
+              <source type="image/png" :srcset="pcStreams[5].fallback">
+              <img :src="pcStreams[5].image" alt="">
+            </picture>
+
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="pcStreams[2].image">
+              <source type="image/png" :srcset="pcStreams[2].fallback">
+              <img :src="pcStreams[2].image" alt="">
+            </picture>
+
+            <picture class="streams__img">
+              <source type="image/webp" :srcset="pcStreams[4].image">
+              <source type="image/png" :srcset="pcStreams[4].fallback">
+              <img :src="pcStreams[4].image" alt="">
             </picture>
           </swiper-slide>
         </swiper>
@@ -232,46 +232,46 @@
         <h2 class="title">Partners</h2>
 
         <div class="row partners__content">
-          <picture>
-            <source type="image/webp" :srcset="Partner1">
-            <source type="image/png" srcset="./src/assets/images/partner-1.png">
-            <img class="partners__img" :src="Partner1" alt="">
+          <picture class="partners__img">
+            <source type="image/webp" :srcset="partners[0].image">
+            <source type="image/png" :srcset="partners[0].fallback">
+            <img :src="partners[0].image" alt="">
           </picture>
 
-          <picture>
-            <source type="image/webp" :srcset="Partner2">
-            <source type="image/png" srcset="./src/assets/images/partner-2.png">
-            <img class="partners__img" :src="Partner2" alt="">
+          <picture class="partners__img">
+            <source type="image/webp" :srcset="partners[1].image">
+            <source type="image/png" :srcset="partners[1].fallback">
+            <img :src="partners[1].image" alt="">
           </picture>
 
-          <picture>
-            <source type="image/webp" :srcset="Partner3">
-            <source type="image/png" srcset="./src/assets/images/partner-3.png">
-            <img class="partners__img" :src="Partner3" alt="">
+          <picture class="partners__img">
+            <source type="image/webp" :srcset="partners[2].image">
+            <source type="image/png" :srcset="partners[2].fallback">
+            <img :src="partners[2].image" alt="">
           </picture>
 
-          <picture>
-            <source type="image/webp" :srcset="Partner4">
-            <source type="image/png" srcset="./src/assets/images/partner-4.png">
-            <img class="partners__img" :src="Partner4" alt="">
+          <picture class="partners__img">
+            <source type="image/webp" :srcset="partners[3].image">
+            <source type="image/png" :srcset="partners[3].fallback">
+            <img :src="partners[3].image" alt="">
           </picture>
 
-          <picture>
-            <source type="image/webp" :srcset="Partner5">
-            <source type="image/png" srcset="./src/assets/images/partner-5.png">
-            <img class="partners__img" :src="Partner5" alt="">
+          <picture class="partners__img">
+            <source type="image/webp" :srcset="partners[4].image">
+            <source type="image/png" :srcset="partners[4].fallback">
+            <img :src="partners[4].image" alt="">
           </picture>
 
-          <picture>
-            <source type="image/webp" :srcset="Partner6">
-            <source type="image/png" srcset="./src/assets/images/partner-6.png">
-            <img class="partners__img" :src="Partner6" alt="">
+          <picture class="partners__img">
+            <source type="image/webp" :srcset="partners[5].image">
+            <source type="image/png" :srcset="partners[5].fallback">
+            <img :src="partners[5].image" alt="">
           </picture>
 
-          <picture v-if="!display">
-            <source type="image/webp" :srcset="Partner7">
-            <source type="image/png" srcset="./src/assets/images/partner-7.png">
-            <img class="partners__img" :src="Partner7" alt="">
+          <picture class="partners__img" v-if="!display">
+            <source type="image/webp" :srcset="partners[6].image">
+            <source type="image/png" :srcset="partners[6].fallback">
+            <img :src="partners[6].image" alt="">
           </picture>
         </div>
       </div>
@@ -731,6 +731,39 @@ const news = [
   }
 ]
 
+const pcStreams = [
+  {
+    id: 0,
+    image: Stream1,
+    fallback: new URL('../assets/images/streams-1.png', import.meta.url)
+  },
+  {
+    id: 1,
+    image: Stream2,
+    fallback: new URL('../assets/images/streams-2.png', import.meta.url)
+  },
+  {
+    id: 2,
+    image: Stream3,
+    fallback: new URL('../assets/images/streams-3.png', import.meta.url)
+  },
+  {
+    id: 3,
+    image: Stream4,
+    fallback: new URL('../assets/images/streams-4.png', import.meta.url)
+  },
+  {
+    id: 4,
+    image: Stream5,
+    fallback: new URL('../assets/images/streams-5.png', import.meta.url)
+  },
+  {
+    id: 5,
+    image: Stream6,
+    fallback: new URL('../assets/images/streams-6.png', import.meta.url)
+  }
+]
+
 const streams = [
   {
     id: 0,
@@ -781,6 +814,44 @@ const streams = [
     title: 'Another dummy stream',
     channel: 'not_cjabka',
     viewers: 24
+  }
+]
+
+const partners = [
+  {
+    id: 0,
+    image: Partner1,
+    fallback: new URL('../assets/images/partner-1.png', import.meta.url)
+  },
+  {
+    id: 1,
+    image: Partner2,
+    fallback: new URL('../assets/images/partner-2.png', import.meta.url)
+  },
+  {
+    id: 2,
+    image: Partner3,
+    fallback: new URL('../assets/images/partner-3.png', import.meta.url)
+  },
+  {
+    id: 3,
+    image: Partner4,
+    fallback: new URL('../assets/images/partner-4.png', import.meta.url)
+  },
+  {
+    id: 4,
+    image: Partner5,
+    fallback: new URL('../assets/images/partner-5.png', import.meta.url)
+  },
+  {
+    id: 5,
+    image: Partner6,
+    fallback: new URL('../assets/images/partner-6.png', import.meta.url)
+  },
+  {
+    id: 6,
+    image: Partner7,
+    fallback: new URL('../assets/images/partner-7.png', import.meta.url)
   }
 ]
 
