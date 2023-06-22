@@ -26,7 +26,6 @@
       <TheTabTop :button="sortedBtnTab" />
       <TheTable :thead="tableHead" :tbody="tableBody"/>
     </div>
-    <Checkbox/>
   </main>
 </template>
 
@@ -34,7 +33,7 @@
 import IconArrow from '@/assets/icons/Arrow.vue'
 import TheTabTop from '@/components/TheTabTop.vue'
 import TheTable from '@/components/TheTable.vue'
-import Checkbox from '@/components/UI/BaseCheckbox.vue'
+
 
 
 import { ref, onMounted, computed } from 'vue';

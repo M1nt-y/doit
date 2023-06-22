@@ -303,7 +303,10 @@ function formatYear(year) {
             gap: 5px;
           }
           p:nth-child(1){
-           transform: translateY(6px);
+            @include media-breakpoint-down(xs){
+              transform: translateY(6px);
+            }
+          
           }
           p:nth-child(2){
             display: none;
