@@ -40,6 +40,11 @@ const routes = [
     component: () => import("@/pages/GamesPage.vue" /* webpackChunkName: "games" */)
   },
   {
+    name: 'News Page',
+    path: '/news',
+    component: () => import("@/pages/NewsPage.vue" /* webpackChunkName: "news" */)
+  },
+  {
     name: 'Top Page',
     path: '/top',
     component: () => import("@/pages/TopPage.vue")
