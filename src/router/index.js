@@ -35,6 +35,11 @@ const routes = [
     name: 'Not Found',
     path: '/:pathMatch(.*)*',
     component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)
+  },
+  {
+    name: 'Top Page',
+    path: '/top',
+    component: () => import("@/pages/TopPage.vue")
   }
 ]
 
@@ -64,6 +69,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+})
   // if (to.matched.some((record) => record.meta.requiresAdmin)) {
   //   if (JSON.parse(window.localStorage.isAdmin)) {
   //     next();
@@ -82,7 +88,5 @@ router.beforeEach((to, from, next) => {
   // }
   // else {
   //   next();
-  // }
-})
 
 export default router
