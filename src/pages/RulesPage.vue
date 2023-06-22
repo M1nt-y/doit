@@ -39,16 +39,10 @@
       <div class="component">
 
       </div>
-      <TheCalendar/>
     </div>
-   
   </main>
 </template>
 
-<script setup>
-import TheCalendar from '@/components/UI/BaseCalendar.vue'
-
-</script>
 
 
 
