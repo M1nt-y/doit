@@ -1,6 +1,12 @@
 <template>
   <div class="card" :class="{ 'card--white' : isWhite }">
-    <img class="card__img" :src="card.image" alt="">
+
+    <picture>
+      <source type="image/webp" :srcset="card.image">
+      <source type="image/png" :srcset="card.fallback">
+      <img class="card__img" :src="card.image" alt="">
+    </picture>
+
     <div class="card__content">
       <h3 class="card__content-title">{{ card.title }}</h3>
       <div class="card__content-row" v-if="card.values">

@@ -17,6 +17,14 @@ const routes = [
     }
   },
   {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import("@/pages/DashboardPage.vue" /* webpackChunkName: "dashboard" */),
+    meta: {
+      requiresAdmin: true
+    }
+  },
+  {
     name: 'Contact Page',
     path: '/contacts',
     component: () => import("@/pages/ContactsPage.vue" /* webpackChunkName: "contacts" */)
@@ -32,14 +40,14 @@ const routes = [
     component: () => import("@/pages/GamesPage.vue" /* webpackChunkName: "games" */)
   },
   {
-    name: 'Not Found',
-    path: '/:pathMatch(.*)*',
-    component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)
-  },
-  {
     name: 'Top Page',
     path: '/top',
     component: () => import("@/pages/TopPage.vue")
+  },
+  {
+    name: 'Not Found',
+    path: '/:pathMatch(.*)*',
+    component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)
   }
 ]
 
@@ -66,27 +74,16 @@ router.beforeEach((to, from, next) => {
     } else {
       next('/')
     }
+  } else if (to.matched.some((record) => record.meta.requiresAdmin)) {
+    if (window.localStorage.getItem('isAdmin')) {
+      next()
+    }
+    else {
+      next('/')
+    }
   } else {
     next()
   }
 })
-  // if (to.matched.some((record) => record.meta.requiresAdmin)) {
-  //   if (JSON.parse(window.localStorage.isAdmin)) {
-  //     next();
-  //   }
-  //   else {
-  //     next('/');
-  //   }
-  // }
-  // else if (to.matched.some((record) => record.meta.requiresAuth)) {
-  //   if (JSON.parse(window.localStorage.currentUser) && !JSON.parse(window.localStorage.isAdmin)) {
-  //     next();
-  //   }
-  //   else {
-  //     next('/');
-  //   }
-  // }
-  // else {
-  //   next();
 
 export default router
