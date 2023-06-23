@@ -6,8 +6,8 @@
     </div>
     <div class="date">
       <div class="date-btn">
-        <button v-on:click="decrease">&lt;</button>
-        <button v-on:click="increase">></button>
+        <button @click="decrease">&lt;</button>
+        <button @click="increase">></button>
       </div>
     <table>
     <thead>
