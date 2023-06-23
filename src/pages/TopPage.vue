@@ -45,7 +45,7 @@ function showYears() {
 }
 
 const yearsArray = ref([2019, 2020, 2021, 2022])
-const resultYear = yearsArray.value[0]
+const resultYear = ref(yearsArray.value[0])
 
 const btnTab = ref([
   {
@@ -323,6 +323,7 @@ const tableHead = ref([
         position: absolute;
         top: 50px;
         width: 80%;
+        z-index: 10;
         background: black;
         p{
           font-size: 30px;
