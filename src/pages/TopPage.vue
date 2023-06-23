@@ -323,6 +323,7 @@ const tableHead = ref([
         position: absolute;
         top: 50px;
         width: 80%;
+        z-index: 10;
         background: black;
         p{
           font-size: 30px;
