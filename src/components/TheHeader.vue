@@ -195,6 +195,17 @@ const background = computed(() => {
   &--active {
     overflow-y: scroll;
     height: 100%;
+
+    @include media-breakpoint-down(lg) {
+      margin: 0;
+      padding-left: 120px;
+      padding-right: 120px!important;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding-left: 23px;
+      padding-right: 23px!important;
+    }
   }
 
   &__menu {
