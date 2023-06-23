@@ -31,7 +31,7 @@
             <p class="overal">{{formatYear( item.overal) }}</p>
           </td>
         </tr>
-        <tr v-if="currentPage === 1">
+        <tr v-show="currentPage === 1">
           <td><p class="rank">{{ lastItem.rank }}</p></td>
           <td>
             <div class="flex">
