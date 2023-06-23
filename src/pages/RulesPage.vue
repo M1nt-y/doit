@@ -36,9 +36,6 @@
         </div>
       </div>
 
-      <div class="component">
-
-      </div>
     </div>
   </main>
 </template>
