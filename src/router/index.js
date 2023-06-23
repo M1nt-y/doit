@@ -45,6 +45,11 @@ const routes = [
     component: () => import("@/pages/TopPage.vue")
   },
   {
+    name: 'Faq Page',
+    path: '/faq',
+    component: () => import("@/pages/FaqPage.vue")
+  },
+  {
     name: 'Not Found',
     path: '/:pathMatch(.*)*',
     component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)
