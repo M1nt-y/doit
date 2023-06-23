@@ -172,28 +172,40 @@ const background = computed(() => {
   right: 0;
   color: $white;
   background: $bg-main;
-  padding: 32px 120px;
+  padding: 32px 0;
+  margin: 0 120px;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  margin-right: calc(-1 * (100vw - 100%));
 
   @include media-breakpoint-down(lg) {
-    padding: 24px 120px;
+    padding: 24px 0;
   }
 
   @include media-breakpoint-down(md) {
-    padding: 24px 23px;
+    margin: 0 23px;
   }
 
   @include media-breakpoint-down(sm) {
-    padding: 15px 23px;
+    padding: 15px 0;
+    margin: 0 23px;
   }
 
   &--active {
     overflow-y: scroll;
     height: 100%;
+
+    @include media-breakpoint-down(lg) {
+      margin: 0;
+      padding-left: 120px;
+      padding-right: 120px!important;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding-left: 23px;
+      padding-right: 23px!important;
+    }
   }
 
   &__menu {

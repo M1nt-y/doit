@@ -111,6 +111,7 @@
   position: fixed;
   z-index: 2;
   left: 0;
+  bottom: 0;
   height: 100vh;
   width: 114px;
   border-right: 2px solid $dark-grey;
@@ -120,7 +121,6 @@
   @include media-breakpoint-down(md) {
     height: auto;
     width: 100%;
-    bottom: 0;
     padding: 24px 16px;
     border-right: none;
     border-top: 2px solid $dark-grey;

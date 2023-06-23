@@ -17,13 +17,21 @@ import TheBackdrop from '@/components/TheBackdrop.vue'
 import TheModal from '@/components/TheModal.vue'
 import { RouterView } from 'vue-router'
 import { useMainStore } from '@/stores/main'
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 
 
 const mainStore = useMainStore()
-const { onWidthChange } = mainStore
+const { onWidthChange, disableScroll, enableScroll } = mainStore
 const { showBackdrop, showModal } = storeToRefs(mainStore)
+
+watch(() => showBackdrop.value, (value) => {
+  if (!value) {
+    enableScroll()
+  } else {
+    disableScroll()
+  }
+})
 
 onMounted(() => window.addEventListener('resize', onWidthChange))
 onUnmounted(() => window.removeEventListener('resize', onWidthChange))

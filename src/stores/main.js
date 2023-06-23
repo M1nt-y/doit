@@ -11,6 +11,36 @@ export const useMainStore = defineStore('main', () => {
     const headerIndex = ref(2)
     const modalType = ref('')
 
+    const disableScroll = () => {
+        const scrollY = window.top.scrollY
+        const body = document.body
+        const header = document.getElementsByClassName('header')[0]
+        header.style.paddingRight = `${window.innerWidth - body.clientWidth}px`
+        body.style.paddingRight = `${window.innerWidth - body.clientWidth}px`
+        body.style.position = 'fixed'
+        body.style.top = `-${scrollY}px`
+        body.style.width = '100%'
+        body.style.overflow = 'hidden'
+    }
+
+    const enableScroll = () => {
+        const body = document.body
+        const header = document.getElementsByClassName('header')[0]
+        const scrollY = body.style.top
+        header.style.paddingRight = ''
+        body.style.paddingRight = ''
+        body.style.overflow = ''
+        body.style.position = ''
+        body.style.top = ''
+        body.style.width = ''
+        window.scrollTo({
+            top: parseInt(scrollY || '0') * -1,
+            behavior: "instant"
+        });
+        // setTimeout(() => {
+        //     // body.style.overflow = ''
+        // },300)
+    }
 
     function onWidthChange () {
         windowWidth.value = window.innerWidth
@@ -105,6 +135,8 @@ export const useMainStore = defineStore('main', () => {
         showModal,
         headerIndex,
         modalType,
+        disableScroll,
+        enableScroll,
         onWidthChange,
         toggleMenu,
         toggleProfile,

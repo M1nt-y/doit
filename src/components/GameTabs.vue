@@ -20,6 +20,8 @@ const active = ref('Dota II')
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/media-breakpoints.scss';
+
 .tabs {
   display: flex;
   margin-top: 2px;
@@ -39,6 +41,14 @@ const active = ref('Dota II')
   margin-bottom: 2px;
   background: #14191F;
   transition: all 0.3s ease;
+
+  @include media-breakpoint-down(xs) {
+    margin-left: 0;
+    font-size: 14px;
+    line-height: 100%;
+    margin-right: 7px;
+    margin-bottom: 7px;
+  }
 
   &--active,
   &:hover {
