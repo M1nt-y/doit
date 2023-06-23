@@ -10,9 +10,9 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
-import IconsNormal from '@/assets/icons/checkbox/Normal.vue';
-import IconsSelect from '@/assets/icons/checkbox/Select.vue';
+import { ref } from 'vue'
+import IconsNormal from '@/assets/icons/checkbox/Normal.vue'
+import IconsSelect from '@/assets/icons/checkbox/Select.vue'
 
 const props = defineProps({
   disable: {
@@ -38,10 +38,16 @@ const emits = defineEmits(['update:state', 'click']);
 
 <style lang="scss">
 .checkbox {
-  &__default{
-    svg{
-      &:hover{
-        path{
+
+  &__default {
+    height: 24px;
+    width: 24px;
+
+    svg {
+
+      &:hover {
+
+        path {
           transition: .15s;
           stroke: #294470;
           fill: #0F1929;
@@ -49,33 +55,44 @@ const emits = defineEmits(['update:state', 'click']);
       }
     }
   }
-  &__select{
-    svg{
-      &:hover{
-        path{
+
+  &__select {
+    height: 24px;
+    width: 24px;
+
+    svg {
+
+      &:hover {
+
+        path {
           transition: .15s;
           stroke: #1472FF;
-          
+        }
       }
     }
   }
-  }
+
   &._disable {
     pointer-events: none;
+
     > .checkbox__default {
+
       svg {
+
         path {
           fill: #121519;
           stroke: #1D2129;
         }
       }
     }
+
     > .checkbox__select{
+
       svg{
+
         path{
           stroke: #1D2129;
         }
-        
       }
     }
   }
