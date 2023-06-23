@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="faq__info-input">
-      <input type="text" placeholder="How can we help you?">
+      <input type="text" placeholder="How can we help you?" v-model="searchQuerry">
       <IconSearch/>
     </div>
    </div>
@@ -20,17 +20,22 @@
     <Desktop 
     :leftArr="desktopState" 
     :activeIndex="activeIndexLeft"
-    @update:activeIndex="setActive"/>
+    :rightArr="filteredItems"
+    :activeAccrodeon="activeAccrodeon"
+    @activetab:activeIndex="setActive"
+    @open-accordeon="onOpenAccordeon"/>
    </div>
   </div>
 </main>
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 
 import IconArrow from '@/assets/icons/faq/Arrow.vue'
 import IconSearch from '@/assets/icons/faq/Search.vue'
+
+
 import Desktop from '@/components/FAQ/Destop.vue'
 
 
@@ -55,6 +60,53 @@ const activeIndexLeft = ref(0);
 function setActive(index) {
   activeIndexLeft.value = index;
 }
+
+const textAccrodeon = [
+  {
+    title: 'Where is the region selector?',
+    textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+    textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+    textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+  },
+  {
+    title: 'So wait ... How do i know what region i am in?',
+    textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+    textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+    textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+  },
+  {
+    title: 'Will i still be able to play cs go in other regions?',
+    textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+    textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+    textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+  },
+  {
+    title: 'So wait ... How do i know what region i am in?',
+    textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+    textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+    textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+  },
+  {
+    title: 'Will i still be able to play cs go in other regions?',
+    textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+    textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+    textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+  }
+]
+const activeAccrodeon = ref(0)
+function onOpenAccordeon(index){
+  activeAccrodeon.value = index;
+}
+
+const searchQuerry = ref('');
+const filteredItems = computed(() => {
+  if (searchQuerry.value.trim() === '') {
+    return textAccrodeon;
+  } else {
+    const query = searchQuerry.value.trim().toLowerCase();
+    return textAccrodeon.filter(item => item.title.toLowerCase().includes(query));
+  }
+});
 
 
 
@@ -137,6 +189,7 @@ function setActive(index) {
   }
   &__content{
     display: flex;
+    align-items: flex-start;
     gap: 31px;
     margin-top: 15px;
     &-left{
@@ -178,6 +231,65 @@ function setActive(index) {
       }
       p.active{
         background: var(--primary-gradient, linear-gradient(180deg, #2788F6 0%, #0960E0 100%));
+      }
+    }
+    &-right{
+      .accordeon{
+        border: 2px solid #20252B;
+        width: 100%;
+        .accordion-item {
+          .flex{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #151A1F;
+            border: 2px solid #20252B;
+            padding-top: 24px;
+            padding-left: 26px;
+            padding-right: 26px;
+            padding-bottom: 24px;
+            cursor: pointer;
+            .accordion-title{
+              color:  #E6E8EB;
+              font-size: 18px;
+            }
+          }
+
+          .accordion-content{
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s;
+            opacity: 0;
+            
+            p{
+              color:  #CCC;
+              font-size: 16px;
+              font-weight: 100;
+              line-height: 160%;
+
+            }
+            p:nth-child(2){
+              margin-top: 29px;
+            }
+            p:nth-child(3){
+              margin-top: 25px;
+              margin-bottom: 5px;
+            }
+          }
+          .accordion-content.active {
+            max-height: 500px;
+            transition: all 0.4s;
+            opacity: 1;
+            padding: 30px;
+            padding-right: 35px;
+          }
+        }
+        .accordion-item:nth-child(4){
+          .flex{
+            padding-top: 28px;
+            padding-bottom: 28px;
+          }
+        }
       }
     }
   }
