@@ -18,12 +18,20 @@
    </div>
    <div class="faq__content">
     <Desktop 
+    v-if="!isMobile"
     :leftArr="desktopState" 
     :activeIndex="activeIndexLeft"
     :rightArr="filteredItems"
     :activeAccrodeon="activeAccrodeon"
     @activetab:activeIndex="setActive"
     @open-accordeon="onOpenAccordeon"/>
+    <Mobile v-else
+    :accordeon = 'accordeon'
+    :activeIndex="activeIndexLeft"
+    :activeAccrodeon="activeAccrodeon"
+    @activetab:activeIndex="setActive"
+    @open-accordeon="onOpenAccordeon"
+    />
    </div>
   </div>
 </main>
@@ -37,7 +45,7 @@ import IconSearch from '@/assets/icons/faq/Search.vue'
 
 
 import Desktop from '@/components/FAQ/Destop.vue'
-
+import Mobile from '@/components/FAQ/Mobile.vue'
 
 const select = ref('Counter Strike GO')
 
@@ -109,6 +117,296 @@ const filteredItems = computed(() => {
 });
 
 
+const isMobile = ref(window.innerWidth < 768);
+
+window.addEventListener('resize', () => {
+  isMobile.value = window.innerWidth < 768;
+});
+
+
+const accordeon = [
+  {
+    title: 'Events, apps, promos, & merch and profile name',
+    content: [
+      {
+        title: 'Where is the region selector?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      }
+    ]
+  },
+  {
+    title: 'Account recovery, safety',
+    content: [
+      {
+        title: 'Where is the region selector?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      }
+    ]
+  },
+  {
+    title: 'Ranked gameplay, honor',
+    content: [
+      {
+        title: 'Where is the region selector?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      }
+    ]
+  },
+  {
+    title: 'Lag, low FPS, hardware, & bugs',
+    content: [
+      {
+        title: 'Where is the region selector?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      }
+    ]
+  },
+  {
+    title: 'Login, patching, crashing',
+    content: [
+      {
+        title: 'Where is the region selector?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      }
+    ]
+  },
+  {
+    title: 'League store, gifting',
+    content: [
+      {
+        title: 'Where is the region selector?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      }
+    ]
+  },
+  {
+    title: 'Reporting, suspensions, & bans',
+    content: [
+      {
+        title: 'Where is the region selector?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      }
+    ]
+  },
+  {
+    title: 'Reporting, suspensions, & bans',
+    content: [
+      {
+        title: 'Where is the region selector?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'So wait ... How do i know what region i am in?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      },
+      {
+        title: 'Will i still be able to play cs go in other regions?',
+        textOne: 'Over the past few months, we’ve been transitioning all players from League of Legends accounts to Riot Accounts. Now that most players have made the transition, we’re going to be taking the next step towards enabling.',
+        textTwo: 'Riot’s long-term capabilities towards supporting multiple games: removing the region selector from the login screen. While you can chat with players on other servers, and in other Riot games, you can still only play League of Legends with players in the same region as you.',
+        textLast: 'If you wish to Transfer your account, say due to work or moving to a new region, you can do so! Click here to learn more.',
+      }
+    ]
+  },
+]
+
 
 </script>
 
@@ -121,6 +419,10 @@ const filteredItems = computed(() => {
     margin-top: 64px;
     display: flex;
     gap: 34px;
+    @include media-breakpoint-down(sm) {
+      flex-direction: column-reverse;
+      margin-top: 12px;
+    }
     &-select{
       max-width: 400px;
       width: 100%;
@@ -136,6 +438,18 @@ const filteredItems = computed(() => {
         line-height: 120%;
         color: #E6E8EB;
         justify-content: space-between;
+        @include media-breakpoint-down(sm) {
+          padding: 0;
+          border: 0;
+          border-bottom: 2px solid #20252B;;
+          font-size: 22px;
+          justify-content: flex-start;
+          gap: 21px;
+          padding-bottom: 19px;
+          p{
+            transform: translateY(-2px);
+          }
+        }
         svg{
           transform: translateX(-1px) translateY(-1px);
           transition: .15s;
@@ -155,10 +469,17 @@ const filteredItems = computed(() => {
         width: 100%;
         padding-left: 30px;
         z-index: 10;
+        @include media-breakpoint-down(sm) {
+          top: 40px;
+        }
         p{
           margin-top: 5px;
           margin-bottom: 5px;
         }
+      }
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+        max-width: 100%;
       }
     }
     &-input{
@@ -174,16 +495,31 @@ const filteredItems = computed(() => {
         border: 2px solid #20252B;
         background: rgba(255, 255, 255, 0);
         color: white;
+        @include media-breakpoint-down(sm) {
+          padding: 10px;
+          padding-top: 9px;
+          padding-bottom: 9px;
+        }
       }
       svg{
         position: absolute;
         right: 30px;
         bottom: 20px;
+        @include media-breakpoint-down(sm) {
+          right: 20px;
+          bottom: 10px;
+          width: 16px;
+          height: 16px;
+        }
       }
       input::placeholder{
         color: #29313B;
         font-size: 16px;
         line-height: 120%;
+        @include media-breakpoint-down(sm) {
+          font-size: 14px;
+          transform: translateX(-1px);
+        }
       }
     }
   }
@@ -234,6 +570,7 @@ const filteredItems = computed(() => {
       }
     }
     &-right{
+      width: 100%;
       .accordeon{
         border: 2px solid #20252B;
         width: 100%;
