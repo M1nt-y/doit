@@ -131,7 +131,10 @@ const resultGame = computed(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    transform: translateX(25px);
+    @include media-breakpoint-down(lg) {
+      transform: none;
+    }
     @include media-breakpoint-down(xs) {
       flex-direction: column;
       align-items: flex-start;
@@ -139,6 +142,10 @@ const resultGame = computed(() => {
 
     &-title {
       font-size: 44px;
+      transform: translateY(-10px);
+      @include media-breakpoint-down(lg) {
+        transform: none;
+      }
     }
 
     &-input{
@@ -146,9 +153,11 @@ const resultGame = computed(() => {
       max-width: 510px;
       margin-top: 22px;
       margin-left: 40px;
+      transform: translateX(-10px) translateY(-1px);
 
       @include media-breakpoint-down(lg) {
         max-width: 300px;
+        transform: none;
       }
 
       @include media-breakpoint-down(xs) {
@@ -162,6 +171,9 @@ const resultGame = computed(() => {
         color: #CCCDCD;
         border: 2px solid #20252B;
         border-radius: 4px;
+        &::placeholder{
+          transform: translateX(-2px);
+        }
 
         @include media-breakpoint-down(lg) {
           margin-left: 0;
@@ -194,12 +206,16 @@ const resultGame = computed(() => {
   &__content {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 0px;
     max-width: 1210px;
-
+    transform: translateX(25px);
+    @include media-breakpoint-down(lg) {
+      transform: translateX(0px);
+    }
     @include media-breakpoint-down(sm) {
       flex-wrap: nowrap;
       flex-direction: column;
+      margin-top: 20px;
     }
 
     .card {
