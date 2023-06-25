@@ -14,6 +14,7 @@
   
       <div class="games__content">
         <div class="card" v-for="game in resultGame" :key="game.id">
+          <router-link :to="{ path: `/tournir/${game.name}` }">
           <div class="card__content">
             <picture>
               <source type="image/webp" :srcset="game.image">
@@ -23,6 +24,7 @@
   
             <p>{{ game.title }}</p>
           </div>
+          </router-link>
         </div>
       </div>
   
@@ -46,54 +48,63 @@
     {
       id: 0,
       title: 'Dota ll',
+      name: 'dota',
       image: Dota,
       fallback: new URL('../assets/images/dota.png', import.meta.url)
     },
     {
       id: 1,
       title: 'CS:GO',
+      name: 'cs-go',
       image: Csgo,
       fallback: new URL('../assets/images/csgo.png', import.meta.url)
     },
     {
       id: 2,
       title: 'StarCraft ll',
+      name: 'starcraft',
       image: Starcraft,
       fallback: new URL('../assets/images/starcraft.png', import.meta.url)
     },
     {
       id: 3,
       title: 'WarCraft lll',
+      name: 'warcraft',
       image: Dota,
       fallback: new URL('../assets/images/dota.png', import.meta.url)
     },
     {
       id: 4,
       title: 'FIFA 2020',
+      name: 'fifa',
       image: Fifa,
       fallback: new URL('../assets/images/fifa.png', import.meta.url)
     },
     {
       id: 5,
       title: 'Valorant',
+      name: 'valorant',
       image: Valorant,
       fallback: new URL('../assets/images/valorant.png', import.meta.url)
     },
     {
       id: 6,
       title: 'BrawlStars',
+      name: 'brawlstars',
       image: Dota,
       fallback: new URL('../assets/images/dota.png', import.meta.url)
     },
     {
       id: 7,
       title: 'StarCraft ll',
+      name: 'starcraft',
       image: Csgo,
       fallback: new URL('../assets/images/csgo.png', import.meta.url)
     },
     {
       id: 8,
       title: 'StarCraft ll',
+      name: 'starcraft',
       image: Starcraft,
       fallback: new URL('../assets/images/starcraft.png', import.meta.url)
     }

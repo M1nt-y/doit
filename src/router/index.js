@@ -55,6 +55,11 @@ const routes = [
     component: () => import("@/pages/LeaguagesPage.vue")
   },
   {
+    name: 'Tournir Page',
+    path: '/tournir/:id',
+    component: () => import("@/pages/TournirPage.vue")
+  },
+  {
     name: 'Not Found',
     path: '/:pathMatch(.*)*',
     component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)
