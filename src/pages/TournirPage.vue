@@ -22,10 +22,30 @@
             :modules="[Pagination]"
         >
           <swiper-slide v-for="tournament in gamesArray" :key="tournament.id">
-            <TheCard :card="tournament" />
+            <MyCard :card="tournament" />
           </swiper-slide>
         </swiper>
         <h6 class="more">More</h6>
+      </div>
+      </div>
+      <div class="tournir__news">
+        <div class="news">
+        <div class="row">
+          <h2 class="title">News</h2>
+        </div>
+        <swiper
+            class="news__cards"
+            :slides-per-view="perView"
+            :slides-per-group="perGroup"
+            :centered-slides="centeredSlides"
+            :space-between="spaceBetween"
+            :pagination="{ clickable: true }"
+            :modules="[Pagination]"
+        >
+          <swiper-slide v-for="item in news" :key="item.id">
+            <TheCard :card="item" is-white />
+          </swiper-slide>
+        </swiper>
       </div>
       </div>
     </div>
@@ -35,11 +55,14 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useMainStore } from '@/stores/main'
+import News1 from '@/assets/images/news-1.png?w=366&h=198&format=webp'
+import News2 from '@/assets/images/news-2.png?w=366&h=198&format=webp'
+import News3 from '@/assets/images/news-3.png?w=366&h=198&format=webp'
 import Tournament1 from '@/assets/images/tournament-1.png?w=370&h=200&format=webp'
 import Tournament2 from '@/assets/images/tournament-2.png?w=370&h=200&format=webp'
 import Tournament3 from '@/assets/images/tournament-3.png?w=370&h=200&format=webp'
-import TheCard from '@/components/Leagues/CardLeagues.vue'
-
+import MyCard from '@/components/Leagues/CardLeagues.vue'
+import TheCard from '@/components/TheCard.vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -89,6 +112,29 @@ const games = [
   {
     game: 'StarCraft ll',
     gamesPage: 'starcraft',
+  },
+]
+const news = [
+{
+    id: 1,
+    image: News1,
+    fallback: new URL('../assets/images/news-1.png', import.meta.url),
+    title: 'Fortnite map makers recreate Counter-Strike\'s Dust 2',
+    text: 'Team Evolve, a collective of players who create and share impressive maps using Fortnite\'s in-game Creative mode...'
+  },
+  {
+    id: 1,
+    image: News2,
+    fallback: new URL('../assets/images/news-2.png', import.meta.url),
+    title: 'Your Witcher 3 saves from Steam and GOG will now work on the Nintendo Switch',
+    text: 'If you played The Witcher 3: Wild Hunt when it was new but not the Hearts of Stone...'
+  },
+  {
+    id: 2,
+    image: News3,
+    fallback: new URL('../assets/images/news-3.png', import.meta.url),
+    title: 'Empire of Sin has been delayed until autumn 2020',
+    text: 'Drink up, folks, there\'s been a change of plans. Prohibition-era gangster tactics game Empire of Sin will no longer be...'
   },
 ]
 
@@ -1082,6 +1128,7 @@ const centeredSlides = computed(() => {
 @import '@/assets/scss/media-breakpoints.scss';
 
 .tournir{
+  margin-bottom: 100px;
   .container{
     max-width: 1380px ;
     padding-left: 95px;
@@ -1099,6 +1146,7 @@ const centeredSlides = computed(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     h2{
       color: #F5F5F5;
       font-size: 48px;
@@ -1114,7 +1162,7 @@ const centeredSlides = computed(() => {
       }
       span{
         display: block;
-        transform: translateX(18px);
+        transform: translateX(22px);
         @include media-breakpoint-down(md) {
           transform: translateX(10px);
         }
@@ -1134,6 +1182,15 @@ const centeredSlides = computed(() => {
         height: 100%;
       }
     }
+  }
+  &__header::after{
+    content: '';
+    position: absolute;
+    left: -10px;
+    bottom: -10px;
+    width: 99%;
+    height: 2px;
+    background: #FFF;
   }
   &__leage{
     &-title{
@@ -1176,6 +1233,116 @@ const centeredSlides = computed(() => {
           padding-bottom: 36px;
         }
       }
+    }
+  }
+  &__news{
+    margin-top: 5px;
+    h2{
+      color: #FFF;
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 56px;
+      text-transform: uppercase;
+    }
+    .swiper{
+      padding-bottom: 40px;
+    }
+    .swiper-slide:nth-child(2){
+     .card{
+      width: 380px;
+      transform: translateX(-4px);
+      @include media-breakpoint-down(lg) {
+        transform: none;
+        width: 370px;
+      }
+      @include media-breakpoint-down(xs) {
+        width: 329px;
+      }
+      .card__content{
+        height: 240px;
+        padding-top: 0 !important;
+        @include media-breakpoint-down(xs) {
+          height: 169px;
+        }
+      }
+      h3{
+        transform: translateX(-2px) translateY(-4px);
+        @include media-breakpoint-down(lg) {
+          transform: none;
+        }
+      }
+      p{
+        margin-top: 20px;
+        transform: translateX(-1px) translateY(-2px);
+        @include media-breakpoint-down(lg) {
+          transform: none;
+        }
+      }
+     }
+    }
+    .swiper-slide:nth-child(1){
+     .card{
+      width: 380px;
+      @include media-breakpoint-down(lg) {
+        width: 370px;
+      }
+      @include media-breakpoint-down(xs) {
+        width: 329px;
+      }
+      .card__content{
+        height: 240px;
+        padding-top: 0 !important;
+        @include media-breakpoint-down(xs) {
+          height: 169px;
+        }
+      }
+      h3{
+        transform: translateX(-1px) translateY(-10px);
+        @include media-breakpoint-down(lg) {
+          transform: none;
+        }
+      }
+      p{
+        margin-top: 20px;
+        transform: translateX(-1px) translateY(-5px);
+        @include media-breakpoint-down(lg) {
+          transform: none;
+        }
+      }
+     }
+    }
+    .swiper-slide:nth-child(3){
+     .card{
+      width: 380px;
+      transform: translateX(-8px);
+      @include media-breakpoint-down(lg) {
+        transform: none;
+        width: 370px;
+      }
+      @include media-breakpoint-down(xs) {
+        width: 329px;
+      }
+      .card__content{
+        height: 240px;
+        padding-top: 0 !important;
+        @include media-breakpoint-down(xs) {
+          height: 169px;
+        }
+      }
+      h3{
+        transform: translateX(-2px) translateY(-8px);
+        @include media-breakpoint-down(lg) {
+          transform: none;
+        }
+      }
+      p{
+        margin-top: 20px;
+        transform: translateX(-2px) translateY(-3px);
+        @include media-breakpoint-down(lg) {
+          transform: none;
+        }
+      }
+     }
     }
   }
 }
