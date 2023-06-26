@@ -9,13 +9,13 @@
         <div v-if="!isBurger" class="header__nav">
           <div class="header__nav-item">Play</div>
 
-          <div class="header__nav-item">News</div>
+          <RouterLink class="header__nav-item" to="/news">News</RouterLink>
 
           <RouterLink class="header__nav-item" to="/games">Games</RouterLink>
 
           <div class="header__nav-item">Shop</div>
 
-          <div class="header__nav-item">Sponsorship</div>
+          <RouterLink class="header__nav-item" to="/sponsorship">Sponsorship</RouterLink>
         </div>
 
         <div v-else class="header__burger" @click="toggleMenu">
@@ -83,13 +83,13 @@
         <ul class="header__content-links">
           <li class="header__content-link">Play</li>
 
-          <li class="header__content-link">News</li>
+          <RouterLink class="header__content-link" to="/news">News</RouterLink>
 
           <RouterLink class="header__content-link" to="/games">Games</RouterLink>
 
           <li class="header__content-link">Shop</li>
 
-          <li class="header__content-link">Sponsorship</li>
+          <RouterLink class="header__content-link" to="/sponsorship">Sponsorship</RouterLink>
 
           <RouterLink class="header__content-link" v-if="currentUser && !displayProfile" to="/profile">Profile</RouterLink>
         </ul>
@@ -121,7 +121,7 @@ const mainStore = useMainStore()
 const authStore = useAuthStore()
 
 const { toggleMenu, showLogin, showSignup, toggleProfile } = mainStore
-const { windowWidth, headerIndex, showMenu, showBackdrop, profileExpanded } = storeToRefs(mainStore)
+const { windowWidth, headerIndex, showMenu, showBackdrop, showModal, profileExpanded } = storeToRefs(mainStore)
 const { currentUser } = storeToRefs(authStore)
 const { logout } = authStore
 
@@ -132,7 +132,7 @@ onMounted(async () => {
 
 watch(() => route.name, () => {
   headerIndex.value = 2
-  profileExpanded.value = showMenu.value = showBackdrop.value = false
+  profileExpanded.value = showMenu.value = showBackdrop.value = showModal.value = false
 })
 
 function handleLogout () {
