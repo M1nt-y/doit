@@ -50,6 +50,11 @@ const routes = [
     component: () => import("@/pages/TopPage.vue")
   },
   {
+    name: 'Premium Page',
+    path: '/premium',
+    component: () => import("@/pages/PremiumPage.vue" /* webpackChunkName: "premium" */)
+  },
+  {
     name: 'Not Found',
     path: '/:pathMatch(.*)*',
     component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)
