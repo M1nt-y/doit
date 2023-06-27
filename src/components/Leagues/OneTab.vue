@@ -60,6 +60,10 @@ import IconLast from '@/assets/icons/leage/Last.vue'
   outline: 1px solid #565656;
   padding: 40px;
   width: 100%;
+  @include media-breakpoint-down(sm){
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   .tab-top{
     display: flex;
     justify-content: space-between;
@@ -72,10 +76,23 @@ import IconLast from '@/assets/icons/leage/Last.vue'
         display: flex;
         align-items: center;
         gap: 8px;
+        @include media-breakpoint-down(sm){
+          font-size: 10px;
+          gap: 4px;
+        }
+        @include media-breakpoint-down(xs){
+          font-size: 7px;
+        }
       }
       p{
         color: #67707A;
         font-size: 16px;
+        @include media-breakpoint-down(sm){
+          font-size: 10px;
+        }
+        @include media-breakpoint-down(xs){
+          font-size: 7px;
+        }
       }
     }
     .block:nth-child(1){

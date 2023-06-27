@@ -26,6 +26,9 @@
         <OneRight/>
       </div>
     </div>
+    <div class="leage-id__last">
+      <TheTab/>
+    </div>
   </div>
 </main>
 </template>
@@ -33,7 +36,8 @@
 <script setup>
 import OneTab from '@/components/Leagues/OneTab.vue'
 import OneRight from '@/components/Leagues/OneRight.vue'
-import { ref, computed, watchEffect } from 'vue'
+import TheTab from '@/components/Leagues/Tab.vue'
+import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router';
 const route = useRoute()
 
@@ -199,17 +203,32 @@ function addTab(index){
     transform: translateX(-12px);
     display: flex;
     justify-content: space-between;
+    @include media-breakpoint-down(lg){
+      flex-direction: column;
+      gap: 20px;
+      transform: none;
+    }
     width: 100%;
     &-table{
       max-width: 66.1%;
       width: 100%;
+      @include media-breakpoint-down(lg){
+        max-width: 100%;
+      }
       .tabs{
         display: flex;
         width: 100%;
+        max-width: 100%;
         p{
           color: #67707A;
           font-weight: 300;
           font-size: 16px;
+          @include media-breakpoint-down(md){
+              font-size: 12px
+            }
+            @include media-breakpoint-down(xs){
+              font-size: 8px;
+            }
           
         }
         .info{
@@ -269,6 +288,12 @@ function addTab(index){
             color: #F5F5F5;
           }
         }
+      }
+    }
+    &-info{
+      width: 33%;
+      @include media-breakpoint-down(lg){
+        width: 100%;
       }
     }
   }
