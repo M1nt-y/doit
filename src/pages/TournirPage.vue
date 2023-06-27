@@ -151,6 +151,7 @@ const tournaments = [
     title: 'CS:GO Mirageby tournament',
     games: 'StarCraft II',
     leaguage: 'Europe League',
+    leage: 'europe',
     values: [
       {
         key: 'Start',
@@ -185,6 +186,7 @@ const tournaments = [
     title: 'Fortnitity evolution X',
     games: 'StarCraft II',
     leaguage: 'Grandmaster League',
+    leage: 'grandmaster',
     values: [
       {
         key: 'Start',
@@ -217,6 +219,7 @@ const tournaments = [
     title: 'CS:GO Mirageby tournament',
     games: 'StarCraft II',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -249,6 +252,7 @@ const tournaments = [
     title: 'Tournament’s name will be here, maybe, in two lines',
     games: 'StarCraft II',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -284,6 +288,7 @@ const dota = [
     title: 'CS:GO Mirageby tournament',
     games: 'Dota ll',
     leaguage: 'Europe League',
+    leage: 'europe',
     values: [
       {
         key: 'Start',
@@ -318,6 +323,7 @@ const dota = [
     title: 'Fortnitity evolution X',
     games: 'Dota ll',
     leaguage: 'Grandmaster League',
+    leage: 'grandmaster',
     values: [
       {
         key: 'Start',
@@ -350,6 +356,7 @@ const dota = [
     title: 'CS:GO Mirageby tournament',
     games: 'Dota ll',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -382,6 +389,7 @@ const dota = [
     title: 'Tournament’s name will be here, maybe, in two lines',
     games: 'Dota ll',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -416,6 +424,7 @@ const cs = [
     title: 'CS:GO Mirageby tournament',
     games: 'CS:GO',
     leaguage: 'Europe League',
+    leage: 'europe',
     values: [
       {
         key: 'Start',
@@ -450,6 +459,7 @@ const cs = [
     title: 'Fortnitity evolution X',
     games: 'CS:GO',
     leaguage: 'Grandmaster League',
+    leage: 'grandmaster',
     values: [
       {
         key: 'Start',
@@ -482,6 +492,7 @@ const cs = [
     title: 'CS:GO Mirageby tournament',
     games: 'CS:GO',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -514,6 +525,7 @@ const cs = [
     title: 'Tournament’s name will be here, maybe, in two lines',
     games: 'CS:GO',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -548,6 +560,7 @@ const warcraft = [
     title: 'CS:GO Mirageby tournament',
     games: 'WarCraft lll',
     leaguage: 'Europe League',
+    leage: 'europe',
     values: [
       {
         key: 'Start',
@@ -582,6 +595,7 @@ const warcraft = [
     title: 'Fortnitity evolution X',
     games: 'WarCraft lll',
     leaguage: 'Grandmaster League',
+    leage: 'grandmaster',
     values: [
       {
         key: 'Start',
@@ -614,6 +628,7 @@ const warcraft = [
     title: 'CS:GO Mirageby tournament',
     games: 'WarCraft lll',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -646,6 +661,7 @@ const warcraft = [
     title: 'Tournament’s name will be here, maybe, in two lines',
     games: 'WarCraft lll',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -680,6 +696,7 @@ const fifa = [
     title: 'CS:GO Mirageby tournament',
     games: 'Fifa 2020',
     leaguage: 'Europe League',
+    leage: 'europe',
     values: [
       {
         key: 'Start',
@@ -714,6 +731,7 @@ const fifa = [
     title: 'Fortnitity evolution X',
     games: 'Fifa 2020',
     leaguage: 'Grandmaster League',
+    leage: 'grandmaster',
     values: [
       {
         key: 'Start',
@@ -746,6 +764,7 @@ const fifa = [
     title: 'CS:GO Mirageby tournament',
     games: 'Fifa 2020',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -778,6 +797,7 @@ const fifa = [
     title: 'Tournament’s name will be here, maybe, in two lines',
     games: 'Fifa 2020',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -813,6 +833,7 @@ const valorant = [
     title: 'CS:GO Mirageby tournament',
     games: 'Valorant',
     leaguage: 'Europe League',
+    leage: 'europe',
     values: [
       {
         key: 'Start',
@@ -847,6 +868,7 @@ const valorant = [
     title: 'Fortnitity evolution X',
     games: 'Valorant',
     leaguage: 'Grandmaster League',
+    leage: 'grandmaster',
     values: [
       {
         key: 'Start',
@@ -879,6 +901,7 @@ const valorant = [
     title: 'CS:GO Mirageby tournament',
     games: 'Valorant',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -911,6 +934,7 @@ const valorant = [
     title: 'Tournament’s name will be here, maybe, in two lines',
     games: 'Valorant',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -946,6 +970,7 @@ const brawlstars = [
     title: 'CS:GO Mirageby tournament',
     games: 'BrawlStars',
     leaguage: 'Europe League',
+    leage: 'europe',
     values: [
       {
         key: 'Start',
@@ -980,6 +1005,7 @@ const brawlstars = [
     title: 'Fortnitity evolution X',
     games: 'BrawlStars',
     leaguage: 'Grandmaster League',
+    leage: 'grandmaster',
     values: [
       {
         key: 'Start',
@@ -1012,6 +1038,7 @@ const brawlstars = [
     title: 'CS:GO Mirageby tournament',
     games: 'BrawlStars',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',
@@ -1044,6 +1071,7 @@ const brawlstars = [
     title: 'Tournament’s name will be here, maybe, in two lines',
     games: 'BrawlStars',
     leaguage: 'Team League',
+    leage: 'team',
     values: [
       {
         key: 'Start',

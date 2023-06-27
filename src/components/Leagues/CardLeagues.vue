@@ -1,6 +1,6 @@
 <template>
   <div class="card" :class="{ 'card--white' : isWhite }">
-
+  <router-link :to="{ path: `/tournir/${$route.params.id}/${card.leage}` }">
     <picture>
       <source type="image/webp" :srcset="card.image">
       <source type="image/png" :srcset="card.fallback">
@@ -18,6 +18,7 @@
       </div>
       <p class="card__content-text" v-else>{{ card.text }}</p>
     </div>
+    </router-link>
   </div>
 </template>
 
