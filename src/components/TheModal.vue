@@ -91,6 +91,7 @@
               :options="countries"
               placeholder="Select country"
               :active="selectOptions"
+              has-search
               @click="selectOptions = !selectOptions"
           />
 
@@ -278,7 +279,8 @@ const admin = ref({
     riot: '',
     battlenet: '',
     steam: ''
-  }
+  },
+  pfp: new URL('../assets/images/profile-icon.png', import.meta.url)
 })
 
 const user = ref({
@@ -301,7 +303,8 @@ const user = ref({
     riot: '',
     battlenet: '',
     steam: ''
-  }
+  },
+  pfp: new URL('../assets/images/profile-icon.png', import.meta.url)
 })
 
 const formData = ref({
@@ -428,7 +431,8 @@ const submitForm = async () => {
           riot: '',
           battlenet: '',
           steam: ''
-        }
+        },
+        pfp: new URL('../assets/images/profile-icon.png', import.meta.url)
       }
       localStorage.setItem('isAuthorised', 'true')
       showDone()

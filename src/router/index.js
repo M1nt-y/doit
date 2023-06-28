@@ -50,6 +50,21 @@ const routes = [
     component: () => import("@/pages/TopPage.vue")
   },
   {
+    name: 'Premium Page',
+    path: '/premium',
+    component: () => import("@/pages/PremiumPage.vue" /* webpackChunkName: "premium" */)
+  },
+  {
+    name: 'Sponsorship Page',
+    path: '/sponsorship',
+    component: () => import("@/pages/SoonPage.vue" /* webpackChunkName: "sponsorship" */)
+  },
+  {
+    name: 'Coming Soon',
+    path: '/soon',
+    component: () => import("@/pages/SoonPage.vue" /* webpackChunkName: "soon" */)
+  },
+  {
     name: 'Not Found',
     path: '/:pathMatch(.*)*',
     component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)

@@ -345,7 +345,6 @@
           </swiper-slide>
         </swiper>
       </div>
-
     </div>
   </main>
 </template>
@@ -1417,6 +1416,15 @@ const games = [
 
 <style lang="scss">
 @import '@/assets/scss/media-breakpoints.scss';
+
+.swipe-slide {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0,0,0);
+}
+
+.swiper-wrapper {
+  -webkit-transform-style: preserve-3d;
+}
 
 .tournaments,
 .news {

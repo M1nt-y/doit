@@ -16,7 +16,12 @@ const { closeAll } = mainStore
   z-index: 2;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(12px);
-  background: rgba(15, 18, 21, 0.3);
+  background: url("../assets/images/backdrop.svg");
+
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    background: rgba(15, 18, 21, 0.3);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
 }
 </style>
