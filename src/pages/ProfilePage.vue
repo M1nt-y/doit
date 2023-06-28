@@ -1,8 +1,8 @@
 <template>
-  <main class="main profile">
+  <main class="main profile" @click="closeSelect">
     <div class="profile__info">
       <div class="profile__info-wrapper">
-        <img class="profile__info-pfp" src="" alt="">
+        <img class="profile__info-pfp" :src="currentUser.pfp" alt="">
 
         <div class="profile__info-content">
           <p class="profile__info-name">{{ currentUser.fullName }}</p>
@@ -17,18 +17,26 @@
         </div>
       </div>
 
-      <ul class="profile__info-nav">
-        <li v-for="(page, index) in profilePages" :key="index" class="profile__info-link" :class="{ 'profile__info-link--active': isActive(page) }">
+      <ul class="profile__info-nav" v-if="windowWidth > 769">
+        <li v-for="page in profilePages" :key="page.id" class="profile__info-link" :class="{ 'profile__info-link--active': isActive(page.name) }">
           <label>
-            {{ page }}
-            <input type="radio" :value="page" v-model="currentPage" />
+            {{ page.name }}
+            <input type="radio" :value="page.name" v-model="currentPage" />
           </label>
         </li>
       </ul>
+
+      <BaseSelect
+          v-else
+          :options="profilePages"
+          v-model="currentPage"
+          :active="selectPage"
+          @click="selectPage = !selectPage"
+      />
     </div>
 
     <div class="profile__main">
-      <h1 class="profile__main-title">{{ currentPage }}</h1>
+      <h1 class="profile__main-title" v-if="windowWidth > 769">{{ currentPage }}</h1>
 
 
       <div class="profile__main-controls" v-if="currentPage === 'User panel'">
@@ -47,7 +55,18 @@
 
       <div class="profile__main-payments" v-else-if="currentPage === 'Deposit/Withdraw'">
         <div class="info">
-          <div class="info__profile"></div>
+          <div class="info__profile">
+            <img class="info__profile-pfp" :src="currentUser.pfp" alt="">
+
+            <div class="info__profile-wrapper">
+              <div class="info__profile-nickname">{{ currentUser.username }}</div>
+
+              <div class="info__profile-balance">Balance: <span>${{ currentUser.balance }}</span></div>
+
+              <div class="info__profile-balance">Doit Points: {{ currentUser.coins }}</div>
+            </div>
+          </div>
+
           <div class="info__tabs">
             <h2
                 class="info__tabs-link"
@@ -61,19 +80,41 @@
         </div>
 
         <div class="payment" v-if="paymentPage !== 'History'">
-          <div class="payment__methods">
+          <div class="payment__methods" v-if="windowWidth > 425">
             <div
                 class="payment__methods-switch"
-                v-for="(method, index) in paymentMethods" :key="index"
-                :class="{ 'payment__methods-switch--active': paymentMethod === method }"
-                @click="paymentMethod = method"
+                v-for="method in paymentMethods" :key="method.id"
+                :class="{ 'payment__methods-switch--active': paymentMethod === method.name }"
+                @click="paymentMethod = method.name"
             >
-              {{ method }}
+              {{ method.name }}
             </div>
           </div>
+
           <div class="payment__inputs">
-            <!--    Payment inputs      -->
+            <BaseSelect
+                label="Payment method"
+                placeholder="Select payment method"
+                :options="paymentMethods"
+                v-model="paymentMethod"
+                :active="selectPayment"
+                @click="selectPayment = !selectPayment"
+            />
+
+            <BaseInput
+                label="Payment address"
+                placeholder="Payment address"
+                v-model="formData.address"
+            />
+
+            <BaseInput
+                type="Number"
+                label="Amount"
+                placeholder="Amount"
+                v-model="formData.amount"
+            />
           </div>
+
           <div class="payment__buttons">
             <button
                 class="payment__button"
@@ -151,28 +192,95 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref, watch } from 'vue'
+import { computed, onBeforeMount, ref, watch} from 'vue'
+import { useVuelidate } from '@vuelidate/core'
+import { between, helpers, maxValue, required } from '@vuelidate/validators'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
+import { useMainStore } from '@/stores/main'
 import { useRoute, useRouter } from 'vue-router'
+import BaseInput from '@/components/UI/BaseInput.vue'
+import BaseSelect from '@/components/UI/BaseSelect.vue'
 
 
+const mainStore = useMainStore()
 const authStore = useAuthStore()
 const { logout } = authStore
 const { currentUser } = storeToRefs(authStore)
+const { windowWidth } = storeToRefs(mainStore)
 
 
-const profilePages = ref(['User panel', 'My profile', 'My team', 'Deposit/Withdraw', 'Premium', 'Statistics', 'Support', 'Settings', 'Game profile'])
+const profilePages = ref([
+  {
+    id: 0,
+    name: 'User panel'
+  },
+  {
+    id: 1,
+    name: 'My profile'
+  },
+  {
+    id: 2,
+    name: 'My team'
+  },
+  {
+    id: 3,
+    name: 'Deposit/Withdraw'
+  },
+  {
+    id: 4,
+    name: 'Premium'
+  },
+  {
+    id: 5,
+    name: 'Statistics'
+  },
+  {
+    id: 6,
+    name: 'Support'
+  },
+  {
+    id: 7,
+    name: 'Settings'
+  },
+  {
+    id: 8,
+    name: 'Game profile'
+  }
+])
+const selectPage = ref(false)
 const currentPage = ref('User panel')
 const paymentPage = ref('Deposit')
 const paymentMethod = ref('Paypal')
 const paymentTabs = ref(['Withdraw', 'Deposit', 'History'])
-const paymentMethods = ref(['Paypal', 'BTC', 'QIWI', 'Card'])
+const paymentMethods = ref([
+    {
+      id: 0,
+      name: 'Paypal'
+    },
+    {
+      id: 1,
+      name: 'BTC'
+    },
+    {
+      id: 2,
+      name: 'QIWI'
+    },
+    {
+      id: 3,
+      name: 'Card'
+    }
+])
+const selectPayment = ref(false)
 const paymentDone = ref(true)
 const paymentsHistory = ref([])
 const userPanelButtons = ref(['My profile', 'My team', 'Deposit', 'Withdraw', 'Premium', 'Statistics', 'Support', 'Settings', 'Game profile', 'Logout'])
 const settingsButtons = ref(['Edit account details', 'Change email address', 'Change password', 'Manage preferences', 'Close account'])
 
+function closeSelect() {
+  selectPayment.value = false
+  selectPage.value = false
+}
 
 function isActive (page) {
   return page === currentPage.value
@@ -209,11 +317,14 @@ watch(() => currentPage.value, () => {
 })
 
 watch(() => paymentPage.value, () => {
+  formData.value.address = ''
+  formData.value.amount = null
   router.push({ query: { 'q': paymentPage.value } })
 })
 
 watch(() => route.query.q, () => {
   if (route.query.q) {
+    v$.value.$reset()
     if (currentPage.value !== route.query.q) {
       if (route.query.q === 'Deposit' || route.query.q === 'Withdraw' || route.query.q === 'History') {
         currentPage.value = 'Deposit/Withdraw'
@@ -239,27 +350,155 @@ function profileNavigation(goTo) {
   }
 }
 
+const username = helpers.regex(/^([a-z0-9]|[-._](?![-._])){4,20}$/)
+
+const formData = ref({
+  address: '',
+  amount: null,
+  email: '',
+  username: '',
+  currentPassword: '',
+  password: '',
+  fullName: '',
+  country: '',
+  mainTeam: '',
+  gender: '',
+  day: '',
+  month: '',
+  year: ''
+})
+
+const rules = computed(() => {
+  if (currentPage.value === 'Edit account details') {
+    return {
+      username: { required, username },
+      fullName: { required },
+      country: { required },
+      // mainTeam: {  },
+      // gender: { required },
+      day: { required, maxValue: maxValue(31) },
+      month: { required, maxValue: maxValue(12) },
+      year: { required, betweenValue: between(1900, 2010) }
+    }
+  } else if (currentPage.value === 'Deposit/Withdraw') {
+    if (paymentPage.value !== 'History') {
+      return {
+        address: { required },
+        amount: { required }
+      }
+    } else return ''
+  }
+  else return ''
+})
+
+const v$ = useVuelidate(rules, formData)
+
+const submitForm = async () => {
+  const results = await v$.value.$validate()
+  if (results) {
+    if (currentPage.value === 'Deposit/Withdraw') {
+      await handlePayment()
+    } else {
+      await changeDetails()
+    }
+  }
+}
+
+async function handlePayment() {
+  if (currentUser.value) {
+    paymentDone.value = false
+    if (paymentPage.value === 'Withdraw' && Number(formData.value.amount) <= Number(currentUser.value.balance)) {
+      currentUser.value.balance = Number(currentUser.value.balance) - Number(formData.value.amount)
+      currentUser.value.payments.push({
+        id: currentUser.value.payments.length,
+        type: paymentPage.value,
+        method: paymentMethod.value,
+        amount: formData.value.amount,
+        status: 'Completed'
+      })
+      formData.value.address = ''
+      formData.value.amount = null
+    } else if (paymentPage.value === 'Deposit') {
+      currentUser.value.balance = Number(currentUser.value.balance) + Number(formData.value.amount)
+      currentUser.value.payments.push({
+        id: currentUser.value.payments.length,
+        type: paymentPage.value,
+        method: paymentMethod.value,
+        amount: formData.value.amount,
+        status: 'Completed'
+      })
+      formData.value.address = ''
+      formData.value.amount = null
+    }
+    v$.value.$reset()
+    paymentDone.value = true
+  }
+}
+
+
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/scss/media-breakpoints.scss';
 
 .profile {
-  margin-top: 50px;
+  margin-top: 48px;
   margin-left: 6.313%;
+
+  @include media-breakpoint-down(md) {
+    margin-left: 23px;
+    margin-right: 23px;
+    margin-bottom: 48px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 23px;
+  }
 
   &__info {
     display: flex;
     margin-top: 65px;
-    // margin-right: 69px;
+    margin-right: 60px;
     padding-right: 70px;
     flex-direction: column;
     border-right: 1px solid #1A1F24;
 
+    @include media-breakpoint-down(md) {
+      margin-top: 0;
+      margin-right: 23px;
+      padding-right: 23px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-top: 0;
+      margin-right: 0;
+      padding-right: 0;
+      //justify-content: flex-end;
+      //flex-direction: row-reverse;
+      border-right: none;
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+
+      @include media-breakpoint-down(sm) {
+        flex-direction: row;
+      }
+    }
+
     &-pfp {
       width: 104px;
       height: 104px;
-      background: #0a68f5;
+
+      @include media-breakpoint-down(sm) {
+        width: 123px;
+        height: 120px;
+        margin-right: 42px;
+      }
     }
 
     &-name {
@@ -268,10 +507,15 @@ function profileNavigation(goTo) {
       line-height: 130%;
       margin-bottom: 5px;
       margin-top: 23px;
+
+      @include media-breakpoint-down(sm) {
+        margin-top: 0;
+      }
     }
 
     &-nickname {
       color: #F5F5F5;
+      font-size: 24px;
       line-height: 130%;
       margin-bottom: 7px;
     }
@@ -299,6 +543,11 @@ function profileNavigation(goTo) {
 
     &-nav {
       margin-top: 17px;
+
+      @include media-breakpoint-down(sm) {
+        margin-top: 0;
+        margin-right: 48px;
+      }
     }
 
     &-link {
@@ -363,12 +612,20 @@ function profileNavigation(goTo) {
     max-width: 989px;
     margin-right: auto;
 
+    @include media-breakpoint-down(md) {
+      margin-right: 0;
+    }
+
     &-title {
       color: #F5F5F5;
       font-size: 48px;
       text-align: center;
       line-height: 137.5%;
-      margin-bottom: 59px;
+      margin-bottom: 42px;
+
+      @include media-breakpoint-down(sm) {
+        margin-bottom: 20px;
+      }
     }
 
     &-controls {
@@ -462,10 +719,58 @@ function profileNavigation(goTo) {
     &-payments {
       width: 100%;
       max-width: 928px;
+      margin-left: 6px;
+
+      @include media-breakpoint-down(sm) {
+        max-width: unset;
+        margin-left: 0;
+      }
 
       & .info {
         background: #0D1D2C;
         margin-bottom: 37px;
+
+        @include media-breakpoint-down(xs) {
+          margin-bottom: 24px;
+        }
+
+        &__profile {
+          display: flex;
+          padding: 22px 31px 37px 31px;
+
+          @include media-breakpoint-down(xs) {
+            padding: 22px;
+          }
+
+          &-pfp {
+            width: 86px;
+            height: 83px;
+            border-radius: 4px;
+          }
+
+          &-wrapper {
+            margin-left: 20px;
+          }
+
+          &-nickname {
+            color: #F5F5F5;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 130%;
+            margin-bottom: 6px;
+          }
+
+          &-balance {
+            color: #37B7FA;
+            font-size: 16px;
+            line-height: 130%;
+            text-transform: uppercase;
+
+            & span {
+              margin-left: 4px;
+            }
+          }
+        }
 
         &__tabs {
           display: flex;
@@ -474,29 +779,45 @@ function profileNavigation(goTo) {
           &-link {
             color: #ABABAB;
             cursor: pointer;
+            font-size: 24px;
             line-height: 130%;
+            padding: 0 36px 6px;
             transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+
+            @include media-breakpoint-down(md) {
+              padding: 0 24px 6px;
+            }
+
+            @include media-breakpoint-down(xs) {
+              font-size: 16px;
+              padding: 0 12px 6px;
+            }
           }
 
           &-link--active,
           &-link:hover {
             color: #FFFFFF;
+            border-bottom: 3px solid #FFFFFF;
           }
         }
       }
 
       & .payment {
         display: flex;
-        padding: 19px 41px;
+        padding: 17px 39px;
         background: #0D1D2C;
         flex-direction: column;
         align-items: flex-start;
+
+        @include media-breakpoint-down(xs) {
+          padding: 22px;
+        }
 
         &__methods {
           padding: 1px;
           display: flex;
           border-radius: 2px;
-          background: #0F1215;
           margin-bottom: 34px;
           border: 1px solid #20252B;
 
@@ -507,13 +828,14 @@ function profileNavigation(goTo) {
             font-size: 14px;
             font-weight: 400;
             line-height: 100%;
-            padding: 8px 17px;
+            padding: 7px 17px;
             text-align: center;
-            //transition: all 0.3s ease;
+            background: #0F1215;
 
             &:hover,
             &--active {
               color: #F5F5F5;
+              margin: 1px 0 1px 1px;
               border-radius: 1px 0 0 1px;
               background: linear-gradient(180deg, #2788F6 0%, #0960E0 100%);
             }
@@ -523,10 +845,11 @@ function profileNavigation(goTo) {
         &__inputs {
           width: 100%;
           max-width: 512px;
-          margin-bottom: 103px;
-          //& .input {
-          //  background: #0F1215
-          //}
+          margin-bottom: 86px;
+
+          @include media-breakpoint-down(xs) {
+            margin-bottom: 0;
+          }
         }
 
         &__buttons {
@@ -561,6 +884,10 @@ function profileNavigation(goTo) {
         background: #0D1D2C;
         padding: 19px 41px;
 
+        @include media-breakpoint-down(xs) {
+          padding: 22px;
+        }
+
         &__table {
           width: 100%;
           color: #ABABAB;
@@ -592,6 +919,33 @@ function profileNavigation(goTo) {
       margin-left: 12px;
       margin-right: 12px;
     }
+  }
+}
+</style>
+
+<style lang="scss">
+.input {
+  background: #0F1215;
+  border: 2px solid #20252B;
+
+  &:hover {
+    border: 2px solid #627CA3;
+  }
+
+  &:focus {
+    border: 2px solid #185EC7;
+  }
+
+  &:disabled {
+    border: 2px solid #121F33;
+  }
+
+  &--error {
+    border: 2px solid #B83333;
+  }
+
+  &--success {
+    border: 2px solid #4CB725;
   }
 }
 </style>
