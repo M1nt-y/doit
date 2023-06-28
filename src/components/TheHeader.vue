@@ -26,7 +26,7 @@
       <div class="header__wrapper" v-if="displayProfile">
         <div v-if="currentUser" class="header__profile">
           <div class="header__profile-info">
-            <img class="header__profile-pfp" src="" alt="">
+            <img class="header__profile-pfp" :src="currentUser.pfp" alt="">
             <div class="header__profile-text">
               <p class="header__profile-name">{{ currentUser.username }}</p>
 
@@ -172,39 +172,33 @@ const background = computed(() => {
   right: 0;
   color: $white;
   background: $bg-main;
-  padding: 32px 0;
-  margin: 0 120px;
+  padding: 32px 120px;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
 
   @include media-breakpoint-down(lg) {
-    padding: 24px 0;
+    padding: 24px 120px;
   }
 
   @include media-breakpoint-down(md) {
-    margin: 0 23px;
+    padding: 24px 23px;
   }
 
   @include media-breakpoint-down(sm) {
-    padding: 15px 0;
-    margin: 0 23px;
+    padding: 15px 23px;
   }
 
   &--active {
     overflow-y: scroll;
-    height: 100%;
-
-    @include media-breakpoint-down(lg) {
-      margin: 0;
-      padding-left: 120px;
-      padding-right: 120px!important;
-    }
 
     @include media-breakpoint-down(md) {
-      padding-left: 23px;
-      padding-right: 23px!important;
+      height: calc(100% - 82px);
+    }
+
+    @include media-breakpoint-down(sm) {
+      height: calc(100% - 56px);
     }
   }
 
@@ -281,7 +275,6 @@ const background = computed(() => {
     &-pfp {
       width: 40px;
       height: 40px;
-      background: #0a68f5;
     }
 
     &-text {
@@ -457,6 +450,8 @@ const background = computed(() => {
     overflow-y: hidden;
 
     &-links {
+      display: flex;
+      flex-direction: column;
       text-align: center;
     }
 

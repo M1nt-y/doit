@@ -15,7 +15,14 @@ export const useMainStore = defineStore('main', () => {
         const scrollY = window.top.scrollY
         const body = document.body
         const header = document.getElementsByClassName('header')[0]
-        header.style.paddingRight = `${window.innerWidth - body.clientWidth}px`
+        const sidebar = document.getElementsByClassName('sidebar')[0]
+        if (windowWidth.value > 1025) {
+            header.style.paddingRight = `${120 + window.innerWidth - body.clientWidth}px`
+            sidebar.style.paddingRight = `${40 + window.innerWidth - body.clientWidth}px`
+        } else {
+            header.style.paddingRight = `${23 + window.innerWidth - body.clientWidth}px`
+            sidebar.style.paddingRight = `${16 + window.innerWidth - body.clientWidth}px`
+        }
         body.style.paddingRight = `${window.innerWidth - body.clientWidth}px`
         body.style.position = 'fixed'
         body.style.top = `-${scrollY}px`
@@ -26,8 +33,10 @@ export const useMainStore = defineStore('main', () => {
     const enableScroll = () => {
         const body = document.body
         const header = document.getElementsByClassName('header')[0]
+        const sidebar = document.getElementsByClassName('sidebar')[0]
         const scrollY = body.style.top
         header.style.paddingRight = ''
+        sidebar.style.paddingRight = ''
         body.style.paddingRight = ''
         body.style.overflow = ''
         body.style.position = ''
@@ -37,9 +46,6 @@ export const useMainStore = defineStore('main', () => {
             top: parseInt(scrollY || '0') * -1,
             behavior: "instant"
         });
-        // setTimeout(() => {
-        //     // body.style.overflow = ''
-        // },300)
     }
 
     function onWidthChange () {
