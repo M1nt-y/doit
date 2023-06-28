@@ -55,14 +55,19 @@ const routes = [
     component: () => import("@/pages/LeaguagesPage.vue")
   },
   {
-    name: 'Tournir Page',
+    name: 'LeageId Page',
     path: '/leage/:id',
-    component: () => import("@/pages/TournirPage.vue")
+    component: () => import("@/pages/LeagePageId.vue")
   },
   {
     name: 'Leage Page',
     path: '/leage/:id/:leageid',
     component: () => import("@/pages/LeagePage.vue")
+  },
+  {
+    name: 'Tournir Page',
+    path: '/tournir',
+    component: () => import("@/pages/TuornirPage.vue")
   },
   {
     name: 'Not Found',

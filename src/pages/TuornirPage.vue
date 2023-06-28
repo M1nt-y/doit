@@ -1,0 +1,454 @@
+<template>
+<main class="main tournir-page">
+  <div class="container">
+    <div class="tournir-page__header">
+      <div class="tournir-page__header-title">
+        <h2>DOTA II: TOURNAMNETS</h2>
+      </div>
+      <div class="tournir-page__header-img">
+        <picture>
+          <source type="image/webp" :srcset="DotaLogoWebp">
+          <source type="image/png" :srcset="DotaLogo">
+          <img class="card__img" :src="DotaLogoWebp" alt="">
+        </picture>
+      </div>
+    </div>
+    <div class="tournir-page__content">
+      <div class="tournir-page__content-array">
+        <div class="desctop">
+          <div class="item" v-for="item in filteredTournir">
+            <div class="img">
+              <picture>
+              <source type="image/webp" :srcset="item.photo">
+              <source type="image/png" :srcset="item.photos">
+              <img class="card__img" :src="item.photo" alt="">
+              </picture>
+              <p>{{ item.label }}</p>
+            </div>
+            <div class="text">
+              <div class="top">
+                <h4>{{ item.title }}</h4>
+              </div>
+              <div class="bottom">
+                <div class="block">
+                  <p>Prize</p>
+                  <h4>{{ item.prize }}</h4>
+                </div>
+                <div class="block">
+                  <p>Entry fee</p>
+                  <h4>{{ item.fee }}</h4>
+                </div>
+                <div class="block">
+                  <p>platform</p>
+                  <h4>{{ item.platform }}</h4>
+                </div>
+                <div class="block">
+                  <p>Slots</p>
+                  <h4>{{ item.slot }}</h4>
+                </div>
+                <div class="block">
+                  <p>Mode</p>
+                  <h4>{{ item.mode }}</h4>
+                </div>
+                <div class="block">
+                  <p>Server</p>
+                  <h4>{{ item.server }}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tournir-page__content-right">
+        <div class="info">
+          <div class="title">
+            <h4>Filters</h4>
+          </div>
+          <div class="mode">
+            <h3>Game mode</h3>
+            <div class="con">
+              <div class="item" 
+              v-for="(item, index) in mode"
+              :class="{ active: item.state }"
+              @click="toggleState(index)">
+                <TwoState v-if="item.state"/>
+                <OneState v-else/>
+                
+                <p>{{ item.title }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="status">
+            <h4>Status</h4>
+            <div class="con">
+              <div class="item" 
+              v-for="(item, index) in status"
+              :class="{ active: item.state }"
+              @click="toggleStateStatus(index)">
+                <TwoState v-if="item.state"/>
+                <OneState v-else/>
+                
+                <p>{{ item.title }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</template>
+
+<script setup>
+import DotaLogoWebp from '@/assets/images/dota_logo.png?w=366&h=198&format=webp'
+import DotaLogo from '@/assets/images/dota_logo.png'
+import DotaDesktop from '@/assets/images/tournir-one.png?w=366&h=198&format=webp'
+
+import {ref, computed} from 'vue'
+
+import OneState from '@/assets/icons/tournirs/OneState.vue'
+import TwoState from '@/assets/icons/tournirs/TwoState.vue'
+const tournir = ref([
+  {
+    id: 0,
+    photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    photo: DotaDesktop,
+    label: 'Ongoing',
+    title: 'Dota 2 5v5 #2 - Sunday',
+    prize: '$10',
+    fee: 'Free to enter',
+    platform: 'PS4',
+    slot: '2 / 8',
+    mode: 'Capitains mode',
+    server: 'US East',
+    gameMode: 1,
+    status: 1,
+  },
+  {
+    id: 1,
+    photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    photo: DotaDesktop,
+    label: 'Ongoing',
+    title: 'Dota 2 5v5 #2 - Sunday',
+    prize: '$10',
+    fee: 'Free to enter',
+    platform: 'PS4',
+    slot: '2 / 8',
+    mode: 'Capitains mode',
+    server: 'US East',
+    gameMode: 1,
+    status: 1,
+  },
+  {
+    id: 2,
+    photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    photo: DotaDesktop,
+    label: 'Ongoing',
+    title: 'Dota 2 5v5 #2 - Sunday',
+    prize: '$10',
+    fee: 'Free to enter',
+    platform: 'PS4',
+    slot: '2 / 8',
+    mode: 'Capitains mode',
+    server: 'US East',
+    gameMode: 3,
+    status: 1,
+  },
+  {
+    id: 3,
+    photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    photo: DotaDesktop,
+    label: 'Ongoing',
+    title: 'Dota 2 5v5 #2 - Sunday',
+    prize: '$10',
+    fee: 'Free to enter',
+    platform: 'PS4',
+    slot: '2 / 8',
+    mode: 'Capitains mode',
+    server: 'US East',
+    gameMode: 2,
+    status: 1,
+  },
+  {
+    id: 4,
+    photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    photo: DotaDesktop,
+    label: 'Ongoing',
+    title: 'Dota 2 5v5 #2 - Sunday',
+    prize: '$10',
+    fee: 'Free to enter',
+    platform: 'PS4',
+    slot: '2 / 8',
+    mode: 'Capitains mode',
+    server: 'US East',
+    gameMode: 2,
+    status: 2,
+  },
+])
+
+const mode = ref([
+  {
+    title: '1V1',
+    content: 1,
+    state: false,
+  },
+  {
+    title: '2V2',
+    content: 2,
+    state: false,
+  },
+  {
+    title: '5V5',
+    content: 3,
+    state: false,
+  },
+])
+
+function toggleState(index) {
+  mode.value[index].state = !mode.value[index].state;
+}
+
+const status = ref([
+  {
+    title: 'UPCOMING',
+    status: 1,
+    state: false,
+  },
+  {
+    title: 'PAST',
+    status: 2,
+    state: false,
+  },
+])
+function toggleStateStatus(index){
+  status.value[index].state = !status.value[index].state;
+}
+const filteredTournir = computed(() => {
+  const selectedModes = mode.value.filter((item) => item.state).map((item) => item.content);
+  const selectedStatus = status.value.filter((item) => item.state).map((item) => item.status);
+
+  if (selectedModes.length === 0 && selectedStatus.length === 0) {
+    return tournir.value;
+  } else if (selectedModes.length === 0) {
+    return tournir.value.filter((item) => selectedStatus.includes(item.status));
+  } else if (selectedStatus.length === 0) {
+    return tournir.value.filter((item) => selectedModes.includes(item.gameMode));
+  } else {
+    return tournir.value.filter((item) => selectedModes.includes(item.gameMode) && selectedStatus.includes(item.status));
+  }
+});
+
+
+</script>
+
+<style lang="scss" >
+@import '@/assets/scss/variables.scss';
+@import '@/assets/scss/media-breakpoints.scss';
+
+.tournir-page{
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 46px;
+    align-items: center;
+    @include media-breakpoint-down(sm){
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      margin-top: 6px;
+    }
+    &-title{
+      h2{
+        color: #F5F5F5;
+        font-size: 34px;
+        font-weight: 700;
+        @include media-breakpoint-down(sm){
+          color: #F5F5F5;
+          font-size: 28px;
+          font-weight: 700;
+          margin-top: 24px;
+        }
+      }
+    }
+    &-img{
+      @include media-breakpoint-down(sm){
+        width: 186px;
+        height: 33px;
+       img{
+        width: 100%;
+        height: 100%;
+       }
+      }
+    }
+  }
+  &__content{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    gap: 5px;
+    @include media-breakpoint-down(md){
+      flex-direction: column-reverse;
+    }
+    &-array{
+      max-width: 859px;
+      width: 100%;
+      @include media-breakpoint-down(md){
+        max-width: 100%;
+      }
+      .desctop{
+        margin-top: 19px;
+        .item{
+          display: flex;
+          border: 2px solid #20252B;
+          gap: 30px;
+          width: 100%;
+          margin-bottom: 16px;
+          .img{
+            position: relative;
+            p{
+              position: absolute;
+              left: 5px;
+              top: 5px;
+              color: #F5F5F5;
+              font-size: 16px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+              padding-left: 14px;
+              padding-right: 14px;
+              background: #0A68F5;
+            }
+          }
+          .text{
+            padding-top: 14px;
+            width: 80%;
+            .top{
+              h4{
+                color: #F5F5F5;
+                font-size: 24px;
+                font-weight: 500;
+              }
+            }
+            .bottom{
+              display: flex;
+              justify-content: space-between;
+              margin-top: 10px;
+              .block{
+                p{
+                  color: #67707A;
+                  font-size: 16px;
+                  line-height: 24px;
+                  text-transform: uppercase;
+                  @include media-breakpoint-down(lg){
+                    font-size: 10px;
+                  }
+                }
+                h4{
+                  color: #F5F5F5;
+                  font-size: 16px;
+                  font-weight: 500;
+                  @include media-breakpoint-down(lg){
+                    font-size: 10px;
+                  }
+                }
+              }
+              .block:nth-child(2){
+                transform: translateX(-15px);
+              }
+              .block:nth-child(3){
+                transform: translateX(-10px);
+              }
+              .block:nth-child(4){
+                transform: translateX(-6px);
+              }
+              .block:nth-child(5){
+                transform: translateX(-2px);
+              }
+              .block:nth-child(6){
+                transform: translateX(-6px);
+              }
+            }
+          }
+        }
+      }
+    }
+    &-right{
+      max-width: 281px;
+      width: 100%;
+     
+
+      .info{
+        margin-top: 19px;
+        border: 2px solid #20252B;
+        padding-top: 16px;
+        padding-left: 28px;
+        padding-right: 30px;
+        .title{
+          h4{
+            color: #F5F5F5;
+            font-size: 32px;
+            font-weight: 500;
+          }
+        }
+        .mode{
+          margin-top: 48px;
+          
+          h3{
+            color: #F5F5F5;
+            font-size: 24px;
+            font-weight: 500;
+            padding-left: 2px;
+          }
+          .con{
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            padding-left: 2px;
+            .item{
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              cursor: pointer;
+              p{
+                color: #67707A;
+                font-size: 16px;
+              }
+            }
+            .item.active{
+              p{
+                color: #0A68F5;
+              }
+            }
+          }
+        }
+        .status{
+          margin-top: 25px;
+          h4{
+            color: #F5F5F5;
+            font-size: 24px;
+            font-weight: 500;
+          }
+          .con{
+            margin-top: 10px;
+            display: flex;
+            gap: 30px;
+            .item{
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              cursor: pointer;
+              p{
+                color: #67707A;
+                font-size: 16px;
+              }
+            }
+            .item.active{
+              p{
+                color: #0A68F5;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
