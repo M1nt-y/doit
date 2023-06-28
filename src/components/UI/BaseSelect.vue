@@ -3,6 +3,7 @@
     <p class="select-wrapper__label">{{ label }}</p>
 
     <input
+        v-if="hasSearch"
         class="input"
         type="text"
         v-model="select.search"
@@ -10,6 +11,11 @@
         :class="{'input--error': hasError}"
         v-bind="$attrs"
     />
+
+    <div v-else class="input" :class="{'input--error': hasError}" @click="toggleSelect">
+      {{ select.selected }}
+      <img class="input__arrow" src="@/assets/images/arrow.svg" alt="">
+    </div>
 
     <transition name="dropdown">
       <div class="options-wrapper" v-if="active">
@@ -27,11 +33,6 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import { useMainStore } from '@/stores/main'
-import { storeToRefs } from 'pinia'
-
-const mainStore = useMainStore()
-const { customSelect } = storeToRefs(mainStore)
 
 const props = defineProps({
   label: {
@@ -50,6 +51,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  hasSearch: {
+    type: Boolean,
+    default: false
+  },
   hasError: {
     type: Boolean,
     default: false
@@ -57,18 +62,23 @@ const props = defineProps({
 })
 
 const optionsFound = computed(() => {
-  if (select.value.search) {
-    return props.options.filter(option => option.name.toLowerCase().includes(select.value.search.toLowerCase()))
-  }
-  else
+  if (props.hasSearch) {
+    if (select.value.search) {
+      return props.options.filter(option => option.name.toLowerCase().includes(select.value.search.toLowerCase()))
+    } else {
+      return props.options
+    }
+  } else {
     return props.options
+  }
+
 })
 
 const emits = defineEmits(['update:modelValue', 'click'])
 
 const select = ref({
   search: '',
-  selected: ''
+  selected: props.modelValue
 })
 
 function toggleSelect(e) {
@@ -85,6 +95,20 @@ function selectOption(option) {
 </script>
 
 <style scoped lang="scss">
+.input {
+  position: relative;
+
+  &__arrow {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    content: '';
+    width: 14px;
+    height: 7px;
+    background: url("/src/assets/images/arrow.svg") center;
+  }
+}
+
 .select-wrapper {
   position: relative;
   margin-bottom: 16px;
