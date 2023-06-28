@@ -56,12 +56,12 @@ const routes = [
   },
   {
     name: 'Tournir Page',
-    path: '/tournir/:id',
+    path: '/leage/:id',
     component: () => import("@/pages/TournirPage.vue")
   },
   {
     name: 'Leage Page',
-    path: '/tournir/:id/:leageid',
+    path: '/leage/:id/:leageid',
     component: () => import("@/pages/LeagePage.vue")
   },
   {

@@ -1,6 +1,6 @@
 <template>
   <div class="card" :class="{ 'card--white' : isWhite }">
-  <router-link :to="{ path: `/tournir/${$route.params.id}/${card.leage}` }">
+  <router-link :to="{ path: `/leage/${$route.params.id}/${card.leage}` }">
     <picture>
       <source type="image/webp" :srcset="card.image">
       <source type="image/png" :srcset="card.fallback">

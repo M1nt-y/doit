@@ -14,7 +14,7 @@
   
       <div class="games__content">
         <div class="card" v-for="game in resultGame" :key="game.id">
-          <router-link :to="{ path: `/tournir/${game.name}` }">
+          <router-link :to="{ path: `/leage/${game.name}` }">
           <div class="card__content">
             <picture>
               <source type="image/webp" :srcset="game.image">
