@@ -40,6 +40,11 @@ const routes = [
     component: () => import("@/pages/GamesPage.vue" /* webpackChunkName: "games" */)
   },
   {
+    name: 'News Page',
+    path: '/news',
+    component: () => import("@/pages/NewsPage.vue" /* webpackChunkName: "news" */)
+  },
+  {
     name: 'Top Page',
     path: '/top',
     component: () => import("@/pages/TopPage.vue")
@@ -68,6 +73,21 @@ const routes = [
     name: 'Tournir Page',
     path: '/tournir',
     component: () => import("@/pages/TuornirPage.vue")
+  },
+  {
+    name: 'Premium Page',
+    path: '/premium',
+    component: () => import("@/pages/PremiumPage.vue" /* webpackChunkName: "premium" */)
+  },
+  {
+    name: 'Sponsorship Page',
+    path: '/sponsorship',
+    component: () => import("@/pages/SoonPage.vue" /* webpackChunkName: "sponsorship" */)
+  },
+  {
+    name: 'Coming Soon',
+    path: '/soon',
+    component: () => import("@/pages/SoonPage.vue" /* webpackChunkName: "soon" */)
   },
   {
     name: 'Not Found',

@@ -100,7 +100,20 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useMainStore } from '@/stores/main'
 
+const mainStore = useMainStore()
+const { windowWidth } = storeToRefs(mainStore)
+
+const zIndex = computed(() => {
+  if (windowWidth.value > 1025) {
+    return 2
+  } else {
+    return 3
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -109,8 +122,9 @@
 
 .sidebar {
   position: fixed;
-  z-index: 2;
+  z-index: v-bind(zIndex);
   left: 0;
+  bottom: 0;
   height: 100vh;
   width: 114px;
   border-right: 2px solid $dark-grey;
@@ -120,7 +134,6 @@
   @include media-breakpoint-down(md) {
     height: auto;
     width: 100%;
-    bottom: 0;
     padding: 24px 16px;
     border-right: none;
     border-top: 2px solid $dark-grey;

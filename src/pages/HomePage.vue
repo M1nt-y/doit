@@ -345,7 +345,6 @@
           </swiper-slide>
         </swiper>
       </div>
-
     </div>
   </main>
 </template>
@@ -960,6 +959,13 @@ const games = [
 <style scoped lang="scss">
 @import '@/assets/scss/media-breakpoints.scss';
 
+.container {
+
+  @include media-breakpoint-down(xxs) {
+    padding: 0;
+  }
+}
+
 .first-screen {
   display: flex;
   position: relative;
@@ -971,6 +977,10 @@ const games = [
     padding: 0 5px;
     margin-top: -6px;
     height: calc(100vh - 134px);
+  }
+
+  @include media-breakpoint-down(xxs) {
+    padding: 0 28px;
   }
 
   &__triangles {
@@ -999,8 +1009,10 @@ const games = [
       padding-bottom: 10%;
     }
 
-    @include media-breakpoint-down(xs) {
+    @include media-breakpoint-down(xxs) {
       padding-bottom: 5%;
+      padding-left: 23px;
+      padding-right: 23px;
     }
   }
 
@@ -1065,7 +1077,7 @@ const games = [
     margin-bottom: 2px;
 
     @include media-breakpoint-down(xs) {
-      margin-left: -8px;
+      margin-left: 15px;
     }
   }
 
@@ -1099,6 +1111,10 @@ const games = [
 
   & .title {
     margin-bottom: 12px;
+
+    @include media-breakpoint-down(xxs) {
+      margin-left: 23px;
+    }
   }
 }
 
@@ -1107,6 +1123,10 @@ const games = [
 
   @include media-breakpoint-down(xs) {
     margin-top: 50px;
+  }
+
+  @include media-breakpoint-down(xxs) {
+    padding: 0 23px;
   }
 
   & .title {
@@ -1244,6 +1264,10 @@ const games = [
     margin-top: 50px;
   }
 
+  @include media-breakpoint-down(xxs) {
+    padding: 0 23px;
+  }
+
   &__content {
     flex-wrap: wrap;
     margin-top: 44px;
@@ -1337,6 +1361,10 @@ const games = [
     margin-top: 66px;
   }
 
+  @include media-breakpoint-down(xxs) {
+    padding: 0 23px;
+  }
+
   &__swiper {
     margin-top: 43px;
     padding-bottom: 60px;
@@ -1388,6 +1416,15 @@ const games = [
 
 <style lang="scss">
 @import '@/assets/scss/media-breakpoints.scss';
+
+.swipe-slide {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0,0,0);
+}
+
+.swiper-wrapper {
+  -webkit-transform-style: preserve-3d;
+}
 
 .tournaments,
 .news {

@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" @click="selectOptions.value = false">
+  <div class="modal" @click="selectOptions = false">
     <div class="modal__controls">
       <svg class="modal__controls-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M25.3334 16H6.66675" stroke="#1C2F4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -20,8 +20,9 @@
       <div class="modal__content">
         <div class="modal__inputs" v-if="showTitle">
           <BaseInput
+              class="modal__inputs-login"
               v-if="modalType === 'Login'"
-              :label="'Username or email'"
+              :label="'Username or Email'"
               :has-error="v$.login && v$.login.$errors.length > 0"
               placeholder="Username or email"
               v-model="formData.login"
@@ -32,6 +33,7 @@
           </p>
 
           <BaseInput
+              class="modal__inputs-email"
               v-if="modalType === 'Signup'"
               :label="'Email'"
               :has-error="v$.email && v$.email.$errors.length > 0"
@@ -56,6 +58,7 @@
           </p>
 
           <BaseInput
+              class="modal__inputs-username"
               v-if="modalType === 'Signup Next'"
               :label="'Username'"
               :has-error="v$.username && v$.username.$errors.length > 0"
@@ -68,6 +71,7 @@
           </p>
 
           <BaseInput
+              class="modal__inputs-password"
               v-if="showPass"
               :label="'Password'"
               :has-error="v$.password && v$.password.$errors.length > 0"
@@ -87,7 +91,8 @@
               :options="countries"
               placeholder="Select country"
               :active="selectOptions"
-              @click="selectOptions.value = !selectOptions.value"
+              has-search
+              @click="selectOptions = !selectOptions"
           />
 
           <p v-if="v$.country && v$.country.$errors.length > 0" class="modal__inputs-error">
@@ -119,6 +124,15 @@
 
             <p v-if="birthdateError" class="modal__inputs-error">
               {{ birthdateError }}
+            </p>
+          </div>
+
+          <div class="row" v-if="modalType === 'Signup Next'">
+            <BaseCheckbox />
+
+            <p class="modal__text">
+              I’m have at least 13 years of age
+              and agree to the <RouterLink to="/rules">terms of service</RouterLink>
             </p>
           </div>
 
@@ -191,6 +205,7 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, or, email, helpers, maxValue, between } from '@vuelidate/validators'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseSelect from '@/components/UI/BaseSelect.vue'
+import BaseCheckbox from '@/components/UI/BaseCheckbox.vue'
 
 const mainStore = useMainStore()
 const { modalType } = storeToRefs(mainStore)
@@ -264,7 +279,8 @@ const admin = ref({
     riot: '',
     battlenet: '',
     steam: ''
-  }
+  },
+  pfp: new URL('../assets/images/profile-icon.png', import.meta.url)
 })
 
 const user = ref({
@@ -287,7 +303,8 @@ const user = ref({
     riot: '',
     battlenet: '',
     steam: ''
-  }
+  },
+  pfp: new URL('../assets/images/profile-icon.png', import.meta.url)
 })
 
 const formData = ref({
@@ -414,7 +431,8 @@ const submitForm = async () => {
           riot: '',
           battlenet: '',
           steam: ''
-        }
+        },
+        pfp: new URL('../assets/images/profile-icon.png', import.meta.url)
       }
       localStorage.setItem('isAuthorised', 'true')
       showDone()
@@ -713,9 +731,19 @@ const countries = [
   padding: 16px;
   width: 100%;
   max-width: 698px;
-  //aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1;
   background: $bg-dark;
   transform: translate(-50%, -50%);
+
+  @include media-breakpoint-down(sm) {
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-width: unset;
+    transform: unset;
+    aspect-ratio: unset;
+    overflow-y: scroll;
+  }
 
   &__controls {
     width: 100%;
@@ -734,6 +762,11 @@ const countries = [
     align-items: center;
     flex-direction: column;
     margin-bottom: 46px;
+
+    @include media-breakpoint-down(xs) {
+      margin-top: 19px;
+      margin-bottom: 0;
+    }
   }
 
   &__content {
@@ -760,11 +793,16 @@ const countries = [
     @include media-breakpoint-down(sm) {
       margin-bottom: 22px;
     }
+
+    @include media-breakpoint-down(xs) {
+      font-size: 22px;
+      line-height: 100%;
+    }
   }
 
   &__inputs {
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 
     &-error {
       color: #B83333;
@@ -774,7 +812,7 @@ const countries = [
   }
 
   &__options {
-    margin-top: 31px;
+    margin-top: 30px;
 
     @include media-breakpoint-down(sm) {
       margin-top: 22px;
@@ -786,6 +824,10 @@ const countries = [
       line-height: 100%;
       text-align: center;
       margin-bottom: 16px;
+
+      @include media-breakpoint-down(xs) {
+        font-size: 14px;
+      }
     }
 
     &-icons {
@@ -807,18 +849,32 @@ const countries = [
     }
   }
 
+  &__text {
+    color: #627CA3;
+    font-size: 12px;
+    line-height: 16px;
+    margin-left: 8px;
+    max-width: 185px;
+
+    & a {
+      color: #0A68F5;
+    }
+  }
+
   &__alt {
     display: flex;
-    margin-top: 30px;
+    color: #627CA3;
+    margin-top: 26px;
     align-items: center;
     flex-direction: column;
 
     @include media-breakpoint-down(sm) {
-      margin-top: 22px;
+      margin-top: 18px;
     }
 
     &-forgot {
-      margin-bottom: 1px;
+      font-size: 16px;
+      margin-bottom: 8px;
     }
 
     &-link {
@@ -838,9 +894,11 @@ const countries = [
 }
 
 .birthdate {
-  //margin-bottom: 16px;
+  margin-bottom: 2px;
 
   &__label {
+    font-size: 14px;
+    line-height: 100%;
     margin-bottom: 6px;
   }
 
@@ -851,6 +909,33 @@ const countries = [
       margin-left: 12px;
       margin-right: 12px;
     }
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+</style>
+
+<style lang="scss">
+.modal__inputs-login,
+.modal__inputs-email,
+.modal__inputs-username {
+
+  & .input-wrapper__label {
+    margin-bottom: 5px;
+  }
+
+  & .input {
+    margin-bottom: 2px;
+  }
+}
+
+.modal__inputs-password {
+  & .input-wrapper__label {
+    margin-bottom: 5px;
   }
 }
 </style>
