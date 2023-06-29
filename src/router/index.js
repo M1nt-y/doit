@@ -50,6 +50,31 @@ const routes = [
     component: () => import("@/pages/TopPage.vue")
   },
   {
+    name: 'Faq Page',
+    path: '/faq',
+    component: () => import("@/pages/FaqPage.vue")
+  },
+  {
+    name: 'Leguages Page',
+    path: '/leage',
+    component: () => import("@/pages/LeaguagesPage.vue")
+  },
+  {
+    name: 'LeageId Page',
+    path: '/leage/:id',
+    component: () => import("@/pages/LeagePageId.vue")
+  },
+  {
+    name: 'Leage Page',
+    path: '/leage/:id/:leageid',
+    component: () => import("@/pages/LeagePage.vue")
+  },
+  {
+    name: 'Tournir Page',
+    path: '/tournir',
+    component: () => import("@/pages/TuornirPage.vue")
+  },
+  {
     name: 'Premium Page',
     path: '/premium',
     component: () => import("@/pages/PremiumPage.vue" /* webpackChunkName: "premium" */)
