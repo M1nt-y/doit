@@ -62,7 +62,7 @@
       <div class="tournir-page__content-right">
         <div class="info">
           <div class="title">
-            <h4>Filters</h4>
+            <h4>Filters <span @click="resetFilters" v-if="anyFilterSelected">clear</span></h4>
           </div>
           <div class="mode">
             <h3>Game mode</h3>
@@ -88,6 +88,32 @@
                 <TwoState v-if="item.state"/>
                 <OneState v-else/>
                 
+                <p>{{ item.title }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="platform">
+            <h4>Platform</h4>
+            <div class="con">
+              <div class="item" 
+              v-for="(item, index) in platform"
+              :class="{ active: item.state }"
+              @click="toggleStatePlatform(index)">
+                <TwoState v-if="item.state"/>
+                <OneState v-else/>
+                <p>{{ item.title }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="region">
+            <h4>Server region</h4>
+            <div class="con">
+              <div class="item" 
+              v-for="(item, index) in region"
+              :class="{ active: item.state }"
+              @click="toggleStateRegion(index)">
+                <TwoState v-if="item.state"/>
+                <OneState v-else/>
                 <p>{{ item.title }}</p>
               </div>
             </div>
@@ -123,6 +149,8 @@ const tournir = ref([
     server: 'US East',
     gameMode: 1,
     status: 1,
+    platformMode: 3,
+    region: 1,
   },
   {
     id: 1,
@@ -132,12 +160,14 @@ const tournir = ref([
     title: 'Dota 2 5v5 #2 - Sunday',
     prize: '$10',
     fee: 'Free to enter',
-    platform: 'PS4',
+    platform: 'PC',
     slot: '2 / 8',
     mode: 'Capitains mode',
     server: 'US East',
     gameMode: 1,
     status: 1,
+    platformMode: 1,
+    region: 2,
   },
   {
     id: 2,
@@ -147,12 +177,14 @@ const tournir = ref([
     title: 'Dota 2 5v5 #2 - Sunday',
     prize: '$10',
     fee: 'Free to enter',
-    platform: 'PS4',
+    platform: 'XBOX',
     slot: '2 / 8',
     mode: 'Capitains mode',
     server: 'US East',
     gameMode: 3,
     status: 1,
+    platformMode: 2,
+    region: 2,
   },
   {
     id: 3,
@@ -168,6 +200,8 @@ const tournir = ref([
     server: 'US East',
     gameMode: 2,
     status: 1,
+    platformMode: 3,
+    region: 3,
   },
   {
     id: 4,
@@ -183,6 +217,8 @@ const tournir = ref([
     server: 'US East',
     gameMode: 2,
     status: 2,
+    platformMode: 3,
+    region: 4,
   },
 ])
 
@@ -223,21 +259,108 @@ const status = ref([
 function toggleStateStatus(index){
   status.value[index].state = !status.value[index].state;
 }
-const filteredTournir = computed(() => {
-  const selectedModes = mode.value.filter((item) => item.state).map((item) => item.content);
-  const selectedStatus = status.value.filter((item) => item.state).map((item) => item.status);
 
-  if (selectedModes.length === 0 && selectedStatus.length === 0) {
+const platform = ref([
+  {
+    title: 'PC',
+    platform: 1,
+    state: false,
+  },
+  {
+    title: 'XBOX ONE',
+    platform: 2,
+    state: false,
+  },
+  {
+    title: 'PS4',
+    platform: 3,
+    state: false,
+  },
+  {
+    title: 'NINTENDO SWITCH',
+    platform: 4,
+    state: false,
+  },
+  {
+    title: 'PS5',
+    platform: 5,
+    state: false,
+  },
+  {
+    title: 'XBOX SERIES X',
+    platform: 6,
+    state: false,
+  },
+])
+const region = ref([
+  {
+    title: 'EUROPE',
+    region: 1,
+    state: false,
+  },
+  {
+    title: 'SINGAPORE',
+    region: 2,
+    state: false,
+  },
+  {
+    title: 'AUSTRALIA',
+    region: 3,
+    state: false,
+  },
+  {
+    title: 'BRAZIL',
+    region: 4,
+    state: false,
+  },
+  {
+    title: 'PERU',
+    region: 5,
+    state: false,
+  },
+  {
+    title: 'US EAST',
+    region: 6,
+    state: false,
+  },
+])
+
+function toggleStateRegion(index){
+  region.value[index].state = !region.value[index].state;
+}
+
+function toggleStatePlatform(index){
+  platform.value[index].state = !platform.value[index].state;
+}
+
+const filteredTournir = computed(() => {
+  const filters = [
+    { values: mode.value.filter((item) => item.state).map((item) => item.content), prop: 'gameMode' },
+    { values: status.value.filter((item) => item.state).map((item) => item.status), prop: 'status' },
+    { values: platform.value.filter((item) => item.state).map((item) => item.platform), prop: 'platformMode' },
+    { values: region.value.filter((item) => item.state).map((item) => item.region), prop: 'region' },
+  ];
+
+  if (filters.every((filter) => filter.values.length === 0)) {
     return tournir.value;
-  } else if (selectedModes.length === 0) {
-    return tournir.value.filter((item) => selectedStatus.includes(item.status));
-  } else if (selectedStatus.length === 0) {
-    return tournir.value.filter((item) => selectedModes.includes(item.gameMode));
-  } else {
-    return tournir.value.filter((item) => selectedModes.includes(item.gameMode) && selectedStatus.includes(item.status));
   }
+
+  return tournir.value.filter((item) => filters.every((filter) => filter.values.length === 0 || filter.values.includes(item[filter.prop])));
 });
 
+const anyFilterSelected = computed(() => {
+  const arrays = [mode, status, platform, region];
+  return arrays.some((array) => array.value.some((item) => item.state));
+});
+
+const resetFilters = () => {
+  const arrays = [mode, status, platform, region];
+  arrays.forEach((array) => {
+    array.value.forEach((item) => {
+      item.state = false;
+    });
+  });
+};
 
 </script>
 
@@ -296,6 +419,7 @@ const filteredTournir = computed(() => {
       }
       .desctop{
         margin-top: 19px;
+        height: 800px;
         .item{
           display: flex;
           border: 2px solid #20252B;
@@ -383,9 +507,20 @@ const filteredTournir = computed(() => {
         padding-right: 30px;
         .title{
           h4{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             color: #F5F5F5;
             font-size: 32px;
             font-weight: 500;
+            span{
+              margin-top: 9px;
+              display: block;
+              color: #B83333;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+            }
           }
         }
         .mode{
@@ -439,6 +574,73 @@ const filteredTournir = computed(() => {
                 color: #67707A;
                 font-size: 16px;
               }
+            }
+            .item.active{
+              p{
+                color: #0A68F5;
+              }
+            }
+          }
+        }
+        .platform{
+          margin-top: 25px;
+          transform: translateX(-2px);
+          h4{
+            color: #F5F5F5;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+          }
+          .con{
+            margin-top: 13px;
+            .item{
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              margin-bottom: 9px;
+              cursor: pointer;
+              p{
+                color: #67707A;
+                font-size: 16px;
+              }
+            }
+            .item:nth-child(6){
+              margin-top: 8px;
+              transform: translateX(-1px);
+            }
+            .item.active{
+              p{
+                color: #0A68F5;
+              }
+            }
+          }
+        }
+        .region{
+          margin-top: 27px;
+          transform: translateX(-2px);
+          margin-bottom: 20px;
+          h4{
+            color: #F5F5F5;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+          }
+          .con{
+            margin-top: 13px;
+            .item{
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              margin-bottom: 9px;
+              cursor: pointer;
+              p{
+                color: #67707A;
+                font-size: 16px;
+              }
+            }
+            .item:nth-child(6){
+              margin-top: 8px;
+              transform: translateX(-1px);
             }
             .item.active{
               p{
