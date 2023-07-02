@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="tournir-page__content-right">
-        <div class="info">
+        <div class="info" v-if="!isMobile">
           <div class="title">
             <h4>Filters <span @click="resetFilters" v-if="anyFilterSelected">clear</span></h4>
           </div>
@@ -119,6 +119,7 @@
             </div>
           </div>
         </div>
+        <FiltredTournir v-else/>
       </div>
     </div>
   </div>
@@ -130,6 +131,7 @@ import DotaLogoWebp from '@/assets/images/dota_logo.png?w=366&h=198&format=webp'
 import DotaLogo from '@/assets/images/dota_logo.png'
 import DotaDesktop from '@/assets/images/tournir-one.png?w=366&h=198&format=webp'
 
+import FiltredTournir from '@/components/Tournir/Filters.vue'
 import {ref, computed} from 'vue'
 
 import OneState from '@/assets/icons/tournirs/OneState.vue'
@@ -361,6 +363,13 @@ const resetFilters = () => {
     });
   });
 };
+
+const isMobile = ref(window.innerWidth < 576);
+window.addEventListener('resize', () => {
+  isMobile.value = window.innerWidth < 576;
+  console.log(isMobile.value)
+});
+
 
 </script>
 
