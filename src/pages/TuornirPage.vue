@@ -58,6 +58,10 @@
             </div>
           </div>
         </div>
+        <ElemetTournir
+        :array="filteredTournir"
+        @opened="opened"
+        v-else/>
       </div>
       <div class="tournir-page__content-right">
         <div class="info" v-if="!isMobile">
@@ -140,8 +144,10 @@
 import DotaLogoWebp from '@/assets/images/dota_logo.png?w=366&h=198&format=webp'
 import DotaLogo from '@/assets/images/dota_logo.png'
 import DotaDesktop from '@/assets/images/tournir-one.png?w=366&h=198&format=webp'
-
+import DotaMiblieebp from '@/assets/images/dota-mobile.png?w=366&h=198&format=webp'
+import DotaOpenedMiblieebp from '@/assets/images/dota-opened.png?w=366&h=198&format=webp'
 import FiltredTournir from '@/components/Tournir/Filters.vue'
+import ElemetTournir from '@/components/Tournir/Element.vue'
 import {ref, computed} from 'vue'
 
 import OneState from '@/assets/icons/tournirs/OneState.vue'
@@ -150,6 +156,10 @@ const tournir = ref([
   {
     id: 0,
     photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    dotaMobileFalseWebp: DotaMiblieebp,
+    dotaMobileFalsePng: new URL('../assets/images/dota-mobile.png', import.meta.url),
+    dotaMobileTrueWebp: DotaOpenedMiblieebp,
+    dotaMobileTruePng: new URL('../assets/images/dota-opened.png', import.meta.url),
     photo: DotaDesktop,
     label: 'Ongoing',
     title: 'Dota 2 5v5 #2 - Sunday',
@@ -163,10 +173,15 @@ const tournir = ref([
     status: 1,
     platformMode: 3,
     region: 1,
+    opened: true,
   },
   {
     id: 1,
     photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    dotaMobileFalseWebp: DotaMiblieebp,
+    dotaMobileFalsePng: new URL('../assets/images/dota-mobile.png', import.meta.url),
+    dotaMobileTrueWebp: DotaOpenedMiblieebp,
+    dotaMobileTruePng: new URL('../assets/images/dota-opened.png', import.meta.url),
     photo: DotaDesktop,
     label: 'Ongoing',
     title: 'Dota 2 5v5 #2 - Sunday',
@@ -180,10 +195,15 @@ const tournir = ref([
     status: 1,
     platformMode: 1,
     region: 2,
+    opened: false,
   },
   {
     id: 2,
     photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    dotaMobileFalseWebp: DotaMiblieebp,
+    dotaMobileFalsePng: new URL('../assets/images/dota-mobile.png', import.meta.url),
+    dotaMobileTrueWebp: DotaOpenedMiblieebp,
+    dotaMobileTruePng: new URL('../assets/images/dota-opened.png', import.meta.url),
     photo: DotaDesktop,
     label: 'Ongoing',
     title: 'Dota 2 5v5 #2 - Sunday',
@@ -197,10 +217,15 @@ const tournir = ref([
     status: 1,
     platformMode: 2,
     region: 2,
+    opened: false,
   },
   {
     id: 3,
     photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    dotaMobileFalseWebp: DotaMiblieebp,
+    dotaMobileFalsePng: new URL('../assets/images/dota-mobile.png', import.meta.url),
+    dotaMobileTrueWebp: DotaOpenedMiblieebp,
+    dotaMobileTruePng: new URL('../assets/images/dota-opened.png', import.meta.url),
     photo: DotaDesktop,
     label: 'Ongoing',
     title: 'Dota 2 5v5 #2 - Sunday',
@@ -214,10 +239,15 @@ const tournir = ref([
     status: 1,
     platformMode: 3,
     region: 3,
+    opened: false,
   },
   {
     id: 4,
     photos: new URL('../assets/images/tournir-one.png', import.meta.url),
+    dotaMobileFalseWebp: DotaMiblieebp,
+    dotaMobileFalsePng: new URL('../assets/images/dota-mobile.png', import.meta.url),
+    dotaMobileTrueWebp: DotaOpenedMiblieebp,
+    dotaMobileTruePng: new URL('../assets/images/dota-opened.png', import.meta.url),
     photo: DotaDesktop,
     label: 'Ongoing',
     title: 'Dota 2 5v5 #2 - Sunday',
@@ -231,6 +261,7 @@ const tournir = ref([
     status: 2,
     platformMode: 3,
     region: 4,
+    opened: false,
   },
 ])
 
@@ -434,6 +465,9 @@ function deleteElem(index, arrayName) {
   }
 }
 
+function opened(index){
+  tournir.value[index].opened = !tournir.value[index].opened
+}
 </script>
 
 <style lang="scss" >
