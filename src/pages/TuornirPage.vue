@@ -15,7 +15,7 @@
     </div>
     <div class="tournir-page__content">
       <div class="tournir-page__content-array">
-        <div class="desctop">
+        <div class="desctop" v-if="!isMobile">
           <div class="item" v-for="item in filteredTournir">
             <div class="img">
               <picture>
@@ -119,7 +119,17 @@
             </div>
           </div>
         </div>
-        <FiltredTournir v-else/>
+        <FiltredTournir v-else
+        :mode="mode"
+        :region="region"
+        :status="status"
+        :clone="clone"
+        :anyFilterSelected="anyFilterSelected"
+        @toggleStateStatus="toggleStateStatus"
+        @toggleStateRegion="toggleStateRegion"
+        @toggleState="toggleState"
+        @deleteElem="deleteElem"
+        @resetFilters="resetFilters"/>
       </div>
     </div>
   </div>
@@ -243,7 +253,18 @@ const mode = ref([
 ])
 
 function toggleState(index) {
-  mode.value[index].state = !mode.value[index].state;
+  const selectedItem = mode.value[index];
+  selectedItem.state = !selectedItem.state;
+  
+  if (selectedItem.state) {
+    clone.value.push(selectedItem);
+  } else {
+    const itemIndex = clone.value.findIndex(item => item.content === selectedItem.content);
+    if (itemIndex !== -1) {
+      clone.value.splice(itemIndex, 1);
+    }
+  }
+
 }
 
 const status = ref([
@@ -259,7 +280,17 @@ const status = ref([
   },
 ])
 function toggleStateStatus(index){
-  status.value[index].state = !status.value[index].state;
+  const selectedItem = status.value[index];
+  selectedItem.state = !selectedItem.state;
+  
+  if (selectedItem.state) {
+    clone.value.push(selectedItem);
+  } else {
+    const itemIndex = clone.value.findIndex(item => item.content === selectedItem.content);
+    if (itemIndex !== -1) {
+      clone.value.splice(itemIndex, 1);
+    }
+  }
 }
 
 const platform = ref([
@@ -328,7 +359,17 @@ const region = ref([
 ])
 
 function toggleStateRegion(index){
-  region.value[index].state = !region.value[index].state;
+  const selectedItem = region.value[index];
+  selectedItem.state = !selectedItem.state;
+  
+  if (selectedItem.state) {
+    clone.value.push(selectedItem);
+  } else {
+    const itemIndex = clone.value.findIndex(item => item.content === selectedItem.content);
+    if (itemIndex !== -1) {
+      clone.value.splice(itemIndex, 1);
+    }
+  }
 }
 
 function toggleStatePlatform(index){
@@ -362,6 +403,7 @@ const resetFilters = () => {
       item.state = false;
     });
   });
+  clone.value = []
 };
 
 const isMobile = ref(window.innerWidth < 576);
@@ -369,7 +411,28 @@ window.addEventListener('resize', () => {
   isMobile.value = window.innerWidth < 576;
   console.log(isMobile.value)
 });
+const clone = ref([])
+function deleteElem(index, arrayName) {
+  const deletedItem = clone.value[index];
+  clone.value.splice(index, 1);
 
+  if (arrayName === 'mode') {
+    const modeItem = mode.value.find((item) => item.title === deletedItem.title);
+    if (modeItem) {
+      modeItem.state = false;
+    }
+  } else if (arrayName === 'status') {
+    const statusItem = status.value.find((item) => item.title === deletedItem.title);
+    if (statusItem) {
+      statusItem.state = false;
+    }
+  } else if (arrayName === 'region') {
+    const regionItem = region.value.find((item) => item.title === deletedItem.title);
+    if (regionItem) {
+      regionItem.state = false;
+    }
+  }
+}
 
 </script>
 
