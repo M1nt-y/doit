@@ -90,6 +90,14 @@ const routes = [
     component: () => import("@/pages/SoonPage.vue" /* webpackChunkName: "soon" */)
   },
   {
+    name: 'Admin Table',
+    path: '/table',
+    component: () => import("@/pages/admins/PageTable.vue" /* webpackChunkName: "soon" */),
+    props: (route) => ({
+      queryParam: route.query.param
+    }),
+  },
+  {
     name: 'Not Found',
     path: '/:pathMatch(.*)*',
     component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)
