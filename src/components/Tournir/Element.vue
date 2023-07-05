@@ -1,6 +1,7 @@
 <template>
   <div class="elements">
     <div class="elements__content" v-for="(item, index) in array">
+      <router-link :to="{ path: `/tournir/${item.id}` }">
       <div class="elements__content-block" v-if="item.opened">
         <div class="img">
           <picture>
@@ -57,6 +58,7 @@
           <IconArrow/>
         </div>
       </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -219,13 +221,13 @@ function opened(index) {
     margin-top: 20px;
   }
   &__content:nth-child(3){
-    margin-top: 16px;
+    margin-top: 9px;
   }
   &__content:nth-child(4){
-    margin-top: 16px;
+    margin-top: 13px;
   }
   &__content:nth-child(5){
-    margin-top: 16px;
+    margin-top: 10px;
   }
 }
 </style>

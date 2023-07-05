@@ -75,6 +75,11 @@ const routes = [
     component: () => import("@/pages/TuornirPage.vue")
   },
   {
+    name: 'Tournir Id',
+    path: '/tournir/:id',
+    component: () => import("@/pages/TournirIdPage.vue" /* webpackChunkName: "soon" */)
+  },
+  {
     name: 'Premium Page',
     path: '/premium',
     component: () => import("@/pages/PremiumPage.vue" /* webpackChunkName: "premium" */)
@@ -89,6 +94,7 @@ const routes = [
     path: '/soon',
     component: () => import("@/pages/SoonPage.vue" /* webpackChunkName: "soon" */)
   },
+ 
   {
     name: 'Admin Table',
     path: '/table',

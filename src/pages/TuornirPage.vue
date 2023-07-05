@@ -17,6 +17,7 @@
       <div class="tournir-page__content-array">
         <div class="desctop" v-if="!isMobile">
           <div class="item" v-for="item in filteredTournir">
+            <router-link :to="{ path: `/tournir/${item.id}` }">
             <div class="img">
               <picture>
               <source type="image/webp" :srcset="item.photo">
@@ -56,10 +57,12 @@
                 </div>
               </div>
             </div>
+            </router-link>
           </div>
+            
         </div>
         <ElemetTournir
-        :array="filteredTournir"
+        :array="tournir"
         @opened="opened"
         v-else/>
       </div>
@@ -527,11 +530,13 @@ function opened(index){
         margin-top: 19px;
         height: 800px;
         .item{
-          display: flex;
-          border: 2px solid #20252B;
-          gap: 30px;
-          width: 100%;
-          margin-bottom: 16px;
+          a{
+            display: flex;
+            border: 2px solid #20252B;
+            gap: 30px;
+            width: 100%;
+            margin-bottom: 16px;
+          }
           .img{
             position: relative;
             p{
