@@ -8,6 +8,7 @@
     </div>
     <div class="table__content">
       <PlayersTabs v-if="activeIdx == 'players'"/>
+      <PlayersTourchment v-if="activeIdx == 'tournaments'"/>
     </div>
   </div>
 </main>
@@ -18,6 +19,7 @@
 import { useRouter } from 'vue-router';
 import ElemenTabs from '@/components/Table/Tabs.vue'
 import PlayersTabs from '@/components/Table/TabsPlayers.vue'
+import PlayersTourchment from '@/components/Table/TabsTouchment.vue'
 import { ref, watch } from 'vue';
 const router = useRouter();
 const activeIdx = ref('players');
