@@ -234,7 +234,9 @@
         margin-right: 21px;
         margin-bottom: 21px;
         width: calc(100% / 3 - 7px);
-  
+        a{
+          width: 100%;
+        }
         &:nth-child(1),
         &:nth-child(4),
         &:nth-child(7) {
