@@ -129,7 +129,11 @@ const sortBy = () => {
 </script>
 
 <style lang="scss">
+@import '@/assets/scss/media-breakpoints.scss';
 .players{
   margin-bottom: 50px;
+  @include media-breakpoint-down(sm) {
+    overflow: scroll;
+  }
 }
 </style>

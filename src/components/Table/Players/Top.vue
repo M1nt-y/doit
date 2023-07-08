@@ -30,12 +30,17 @@ const iconArray = [IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft, I
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import '@/assets/scss/media-breakpoints.scss';
 .top{
   margin-top: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include media-breakpoint-down(xs) {
+         flex-direction: column;
+         gap: 20px;
+      }
   &__input{
     position: relative;
     input{
@@ -81,6 +86,7 @@ const iconArray = [IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft, I
     &-edit{ 
       padding: 14px 0px;
       width: 168px;
+      max-width: 100%;
       background: #1A222D;
       p{
         
@@ -89,11 +95,16 @@ const iconArray = [IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft, I
         font-size: 16px;
         font-style: normal;
         font-weight: 700;
+        @include media-breakpoint-down(md) {
+          font-size: 12px;
+        }
       }
+      
     }
     &-last{
       padding: 14px 0px;
       width: 189px;
+      max-width: 100%;
       background: #1A222D;
       p{
         span{
@@ -105,6 +116,9 @@ const iconArray = [IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft, I
         font-size: 16px;
         font-style: normal;
         font-weight: 700;
+        @include media-breakpoint-down(md) {
+          font-size: 12px;
+        }
       }
     }
   }

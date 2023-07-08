@@ -9,6 +9,7 @@
     <div class="table__content">
       <PlayersTabs v-if="activeIdx == 'players'"/>
       <PlayersTourchment v-if="activeIdx == 'tournaments'"/>
+      <PlayersTeams v-if="activeIdx == 'teams'"/>
     </div>
   </div>
 </main>
@@ -20,6 +21,7 @@ import { useRouter } from 'vue-router';
 import ElemenTabs from '@/components/Table/Tabs.vue'
 import PlayersTabs from '@/components/Table/TabsPlayers.vue'
 import PlayersTourchment from '@/components/Table/TabsTouchment.vue'
+import PlayersTeams from '@/components/Table/TabsTeam.vue'
 import { ref, watch } from 'vue';
 const router = useRouter();
 const activeIdx = ref('players');
@@ -66,3 +68,9 @@ function newActive(queryParam) {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/scss/media-breakpoints.scss';
+
+
+</style>
