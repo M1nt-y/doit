@@ -169,7 +169,7 @@ window.addEventListener('resize', () => {
 
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
 @import '@/assets/scss/media-breakpoints.scss';
 .tournir-id{
@@ -360,7 +360,7 @@ window.addEventListener('resize', () => {
         border: 2px solid #20252B;
         padding-top: 42px;
         padding-left: 39px;
-        padding-right: 23px;
+        // padding-right: 23px;
         display: flex;
         gap: 40px;
         padding-bottom: 14px;
