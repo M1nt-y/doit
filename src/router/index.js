@@ -112,6 +112,11 @@ const routes = [
     }),
   },
   {
+    name: 'Comand Page',
+    path: '/comand',
+    component: () => import("@/pages/CommandPage.vue" /* webpackChunkName: "soon" */)
+  },
+  {
     name: 'Not Found',
     path: '/:pathMatch(.*)*',
     component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)
