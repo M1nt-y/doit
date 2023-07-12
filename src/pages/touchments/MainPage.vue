@@ -108,6 +108,10 @@
           <div class="brackets" v-if="activeTab == 'bracket'">
             <BracketComponents/>
           </div>
+          <div class="players" v-if="activeTab == 'players'">
+            <PlayersComponents/>
+            <span>Дизайнер накосячил, поставить margin-top 50px на табы</span>
+          </div>
         </div>
         <div class="tournir-id__content-right">
           <div class="content">
@@ -161,6 +165,7 @@
 
   // компоненты
   import BracketComponents from '@/components/Tournir/Bracket.vue'
+  import PlayersComponents from '@/components/Tournir/Players.vue'
   import {ref} from 'vue'
   
   const tabs = ref([
