@@ -94,14 +94,18 @@ const routes = [
     path: '/soon',
     component: () => import("@/pages/SoonPage.vue" /* webpackChunkName: "soon" */)
   },
- 
   {
     name: 'Admin Table',
     path: '/table',
-    component: () => import("@/pages/admins/PageTable.vue" /* webpackChunkName: "soon" */),
+    component: () => import("@/pages/admins/PageTable.vue" /* webpackChunkName: "table" */),
     props: (route) => ({
       queryParam: route.query.param
     }),
+  },
+  {
+    name: 'New Entry',
+    path: '/table/new-:entry',
+    component: () => import("@/pages/admins/NewEntryPage.vue" /* webpackChunkName: "entry" */)
   },
   {
     name: 'Touchment Main',
