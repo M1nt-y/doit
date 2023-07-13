@@ -30,8 +30,8 @@
         <td>
           <p>{{ item.name }}</p>
         </td>
-        <td>
-          <p>{{ item.created }}</p>
+        <td class="none">
+          <p >{{ item.created }}</p>
         </td>
         <td>
           <p>{{ item.age }}</p>
@@ -84,10 +84,14 @@ function sortBy(field) {
 </script>
 
 <style lang="scss">
+@import '@/assets/scss/media-breakpoints.scss';
 .players-table{
   margin-top: 30px;
   width: 100%;
   border-collapse: collapse;
+  @include media-breakpoint-down(sm) {
+    width: 700px;
+  }
   thead{
    
    
@@ -108,11 +112,20 @@ function sortBy(field) {
             font-style: normal;
             font-weight: 700;
             text-transform: uppercase;
+            @include media-breakpoint-down(md) {
+              font-size: 12px;
+            }
           }
           .sort{
             transform: translateX(10px);
             svg:nth-child(2){
               transform: rotate(180deg);
+            }
+            svg{
+              @include media-breakpoint-down(md) {
+                width: 10px;
+                height: 10px;
+              }
             }
           }
         }
@@ -120,26 +133,50 @@ function sortBy(field) {
       td:nth-child(1){
         border-left: 2px solid #20252B;
         width: 200px;
+        @include media-breakpoint-down(lg) {
+          width: auto;
+        }
       }
       td:nth-child(2){
         width: 170px;
+        @include media-breakpoint-down(lg) {
+          width: auto;
+        }
       }
       td:nth-child(3){
         width: 195px;
+        @include media-breakpoint-down(lg) {
+          width: auto;
+        }
       }
       td:nth-child(4){
         width: 120px;
+        @include media-breakpoint-down(lg) {
+          width: auto;
+        }
       }
       td:nth-child(5){
         width: 165px;
+        @include media-breakpoint-down(lg) {
+          width: auto;
+        }
       }
       td:nth-child(6){
         width: 155px;
+        @include media-breakpoint-down(lg) {
+          display: none;
+        }
       }
       td:nth-child(7){
         border-right: 2px solid #20252B;
         .flex{
           transform: translateX(-8px);
+        }
+        @include media-breakpoint-down(lg) {
+          width: auto;
+          .flex{
+            transform: none;
+          }
         }
       }
     }
@@ -152,36 +189,72 @@ function sortBy(field) {
           font-size: 16px;
           font-style: normal;
           font-weight: 400;
+          @include media-breakpoint-down(md) {
+            font-size: 12px;
+          }
         }
       }
+      .none{
+          @include media-breakpoint-down(lg) {
+            display: none;
+          }
+        }
       td:nth-child(1){
         padding-left: 42px;
         border-left: 2px solid #20252B;
+        @include media-breakpoint-down(lg) {
+          padding-left: 0;
+          text-align: center;
+        }
         
       }
       td:nth-child(2){
         padding-left: 42px;
+        @include media-breakpoint-down(lg) {
+          padding-left: 0;
+          text-align: center;
+        }
         
       }
       td:nth-child(3){
         padding-left: 42px;
+        @include media-breakpoint-down(lg) {
+          padding-left: 0;
+          text-align: center;
+        }
         
       }
       td:nth-child(4){
         padding-left: 22px;
+        @include media-breakpoint-down(lg) {
+          padding-left: 0;
+          text-align: center;
+        }
         
       }
       td:nth-child(5){
         padding-left: 45px;
+        @include media-breakpoint-down(lg) {
+          padding-left: 0;
+          text-align: center;
+        }
         
       }
       td:nth-child(6){
         padding-left: 22px;
+        @include media-breakpoint-down(lg) {
+          padding-left: 0;
+          text-align: center;
+        }
         
       }
       td:nth-child(7){
         padding-left: 54px;
         border-right: 2px solid #20252B;
+        @include media-breakpoint-down(lg) {
+          padding-left: 0;
+          text-align: center;
+        }
         
       }
     }

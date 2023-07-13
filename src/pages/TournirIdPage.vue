@@ -27,10 +27,13 @@
             <p>52 players signed up</p>
           </div>
         </div>
-        <div class="tabs">
+        <div class="tabs" v-if="!isMobile">
           <div class="item" v-for="(item, idx) in tabs" :class="{'active': activeTab == idx}" @click="selectTab(idx)">
             <p>{{ item }}</p>
           </div>
+        </div>
+        <div class="tab-mobile" v-else>
+          <TabsElement class="tab-element"/>
         </div>
         <div class="content">
           <div class="block">
@@ -147,6 +150,7 @@ import IconDollar from '@/assets/icons/tournirs/ics/Dollar.vue'
 import IconWarning from '@/assets/icons/tournirs/ics/Warning.vue'
 import DotaLogoWebp from '@/assets/images/dota_logo.png?w=366&h=198&format=webp'
 import DotaLogo from '@/assets/images/dota_logo.png'
+import TabsElement from '@/components/Tournir/Tabs.vue'
 import {ref} from 'vue'
 
 const tabs = ['Info', 'Bracket', 'Players', 'Rules', 'Support']
@@ -156,17 +160,28 @@ function selectTab(idx){
   activeTab.value = idx;
 }
 
+const isMobile = ref(window.innerWidth < 768);
+
+window.addEventListener('resize', () => {
+  isMobile.value = window.innerWidth < 400;
+});
+
+
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
 @import '@/assets/scss/media-breakpoints.scss';
 .tournir-id{
   margin-bottom: 50px;
+  .container{
+    padding-right: 0;
+  }
   &__header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-right: 23px;
     margin-top: 58px;
     @include media-breakpoint-down(md){
       margin-top: -12px;
@@ -213,6 +228,7 @@ function selectTab(idx){
         padding-bottom: 42px;
         width: 100%;
         border: 2px solid #20252B;
+        padding-right: 23px;
         gap: 15px;
         .text{
           h4{
@@ -254,6 +270,7 @@ function selectTab(idx){
       }
       .tabs{
         display: flex;
+        padding-right: 23px;
         margin-top: 30px;
         @include media-breakpoint-down(md){
           margin-top: 24px;
@@ -343,6 +360,7 @@ function selectTab(idx){
         border: 2px solid #20252B;
         padding-top: 42px;
         padding-left: 39px;
+        // padding-right: 23px;
         display: flex;
         gap: 40px;
         padding-bottom: 14px;
@@ -351,7 +369,7 @@ function selectTab(idx){
           border: none;
           padding-left: 0;
           gap: 0px;
-
+          padding-top: 30px;
         }
         .block{
           .element{
@@ -461,6 +479,7 @@ function selectTab(idx){
       }
     }
     &-right{
+      padding-right: 23px;
       max-width: 328px;
       @include media-breakpoint-down(md) {
         max-width: 100%;

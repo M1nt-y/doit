@@ -9,7 +9,7 @@
         <p>Edit mode</p>
       </div>
       <div class="top__btn-last">
-        <p> <span> + </span> Add tournament</p>
+        <p>Add Team</p>
       </div>
     </div>
   </div>
@@ -33,14 +33,14 @@
   <style lang="scss" scoped>
   @import '@/assets/scss/media-breakpoints.scss';
   .top{
-    margin-top: 50px;
+    margin-top: 58px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     @include media-breakpoint-down(xs) {
-         flex-direction: column;
-         gap: 20px;
-      }
+           flex-direction: column;
+           gap: 20px;
+        }
     &__input{
       position: relative;
       input{
@@ -85,12 +85,9 @@
       gap: 15px;
       &-edit{ 
         padding: 14px 0px;
-        width: 168px;
+        width: 200px;
         max-width: 100%;
         background: #1A222D;
-        @include media-breakpoint-down(md) {
-          width: 100px;
-        }
         p{
           
           color: var(--white-96, #F5F5F5);
@@ -102,15 +99,13 @@
             font-size: 12px;
           }
         }
+        
       }
       &-last{
         padding: 14px 0px;
-        width: 235px;
+        width: 189px;
         max-width: 100%;
         background: #1A222D;
-        @include media-breakpoint-down(md) {
-          width: 140px;
-        }
         p{
           span{
             margin-right: 5px;

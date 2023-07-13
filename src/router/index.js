@@ -104,6 +104,19 @@ const routes = [
     }),
   },
   {
+    name: 'Touchment Main',
+    path: '/touchment-main',
+    component: () => import("@/pages/touchments/MainPage.vue" /* webpackChunkName: "soon" */),
+    props: (route) => ({
+      queryParam: route.query.param
+    }),
+  },
+  {
+    name: 'Comand Page',
+    path: '/comand',
+    component: () => import("@/pages/CommandPage.vue" /* webpackChunkName: "soon" */)
+  },
+  {
     name: 'Not Found',
     path: '/:pathMatch(.*)*',
     component: () => import("@/pages/NotFound.vue" /* webpackChunkName: "not-found" */)

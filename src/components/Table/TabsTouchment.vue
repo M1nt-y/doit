@@ -88,7 +88,11 @@ const touchments = ref([
 </script>
 
 <style lang="scss">
+@import '@/assets/scss/media-breakpoints.scss';
 .tournaments{
   margin-bottom: 50px;
+  @include media-breakpoint-down(sm) {
+    overflow: scroll;
+  }
 }
 </style>
