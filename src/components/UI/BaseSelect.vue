@@ -96,6 +96,7 @@ function selectOption(option) {
 
 <style scoped lang="scss">
 .input {
+  height: 40px;
   position: relative;
 
   &__arrow {

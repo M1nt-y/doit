@@ -179,12 +179,7 @@ const getModules = computed(() => {
     }
 
     & .button {
-      margin-top: 46px;
       background: linear-gradient(180deg, #FFD321 0%, #9C6C0D 100%);
-
-      @include media-breakpoint-down(xs) {
-        margin-top: 72px;
-      }
     }
   }
   &--org {
@@ -202,12 +197,12 @@ const getModules = computed(() => {
 }
 
 .button {
-  margin-top: 60px;
+  margin-top: auto;
   padding: 14px 38px;
 
   @include media-breakpoint-down(xs) {
     width: 289px;
-    margin-top: 42px;
+    //margin-top: 42px;
   }
 }
 </style>

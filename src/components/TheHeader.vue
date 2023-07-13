@@ -191,7 +191,10 @@ const background = computed(() => {
   }
 
   &--active {
-    overflow-y: scroll;
+
+    @media screen and (max-height: 420px) {
+      overflow-y: scroll;
+    }
 
     @include media-breakpoint-down(md) {
       height: calc(100% - 82px);
