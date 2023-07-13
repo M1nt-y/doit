@@ -42,8 +42,110 @@
         <div class="profile__main-button" v-for="(button, index) in userPanelButtons" :key="index" @click="profileNavigation(button)">{{ button }}</div>
       </div>
 
-      <div class="" v-else-if="currentPage === 'My profile'">
-        <!--   Profile info (grid/table)     -->
+      <div class="profile__main-wrapper" v-else-if="currentPage === 'My profile'">
+        <table class="profile__main-table">
+          <tr>
+            <td class="profile__main-name">ID</td>
+            <td>{{ currentUser.id }}</td>
+          </tr>
+
+          <tr>
+            <td class="profile__main-name">Name</td>
+            <td>{{ currentUser.fullName }}</td>
+          </tr>
+
+          <tr>
+            <td class="profile__main-name">Username</td>
+            <td>{{ currentUser.username }}</td>
+          </tr>
+
+<!--          <tr>-->
+<!--            <td class="profile__main-name">With us from</td>-->
+<!--            <td>{{ registrationDate() }}</td>-->
+<!--          </tr>-->
+
+          <tr>
+            <td class="profile__main-name">Gender / Age</td>
+            <td>{{ currentUser.gender }} / Age</td>
+          </tr>
+
+<!--          <tr>-->
+<!--            <td class="profile__main-name">Nationality</td>-->
+<!--            <td>Person 2</td>-->
+<!--          </tr>-->
+
+          <tr>
+            <td class="profile__main-name">Country</td>
+            <td>{{ currentUser.country }}</td>
+          </tr>
+
+<!--          <tr>-->
+<!--            <td class="profile__main-name">Web-site</td>-->
+<!--            <td>Person 2</td>-->
+<!--          </tr>-->
+        </table>
+
+        <div class="profile__main-achievements">
+          <div class="profile__main-column">
+            <div class="profile__main-lvl profile__main-lvl--blue">
+              <div class="profile__main-row">
+                <p>Starcraft II</p>
+
+                <p>15</p>
+              </div>
+
+              <div class="profile__main-progress" />
+            </div>
+
+            <div class="profile__main-lvl profile__main-lvl--green">
+              <div class="profile__main-row">
+                <p>League of legends</p>
+
+                <p>3</p>
+              </div>
+
+              <div class="profile__main-progress" />
+            </div>
+
+            <div class="profile__main-lvl profile__main-lvl--purple">
+              <div class="profile__main-row">
+                <p>Hearthstone</p>
+
+                <p>2</p>
+              </div>
+
+              <div class="profile__main-progress" />
+            </div>
+
+            <div class="profile__main-lvl profile__main-lvl--orange">
+              <div class="profile__main-row">
+                <p>World of Tanks</p>
+
+                <p>1</p>
+              </div>
+
+              <div class="profile__main-progress" />
+            </div>
+
+            <div class="profile__main-lvl profile__main-lvl--red">
+              <div class="profile__main-row">
+                <p>S.K.I.L.L. – Special Force II</p>
+
+                <p>15</p>
+              </div>
+
+              <div class="profile__main-progress" />
+            </div>
+          </div>
+
+          <div class="profile__main-rewards">
+            <div class="profile__main-award profile__main-award--blue" />
+
+            <div class="profile__main-award profile__main-award--purple" />
+
+            <div class="profile__main-award profile__main-award--red" />
+          </div>
+        </div>
       </div>
 
       <div class="profile__main-controls" v-else-if="currentPage === 'My team'">
@@ -126,12 +228,20 @@
           <p v-if="v$.teamWebsite && v$.teamWebsite.$errors.length > 0" class="profile__main-error">
             {{ v$.teamWebsite.$errors[0].$message }}
           </p>
+
+          <p class="profile__main-form-label">URL</p>
+
+          <div class="profile__main-form-wrapper">
+            <div class="profile__main-form-link">doit.gg/team</div>
+
+            <input class="profile__main-form-input" v-model="formData.teamUrl" />
+          </div>
         </div>
 
-        <div class="profile__main-form">
-          <div class="profile__main-form-title">Advanced</div>
+<!--        <div class="profile__main-form">-->
+<!--          <div class="profile__main-form-title">Advanced</div>-->
 
-        </div>
+<!--        </div>-->
 
         <div class="profile__main-buttons">
           <button class="profile__main-save" @click="deleteTeam">Delete team</button>
@@ -1193,8 +1303,6 @@ async function changeDetails() {
       margin-top: 0;
       margin-right: 0;
       padding-right: 0;
-      //justify-content: flex-end;
-      //flex-direction: row-reverse;
       border-right: none;
     }
 
@@ -1215,6 +1323,12 @@ async function changeDetails() {
         width: 123px;
         height: 120px;
         margin-right: 42px;
+      }
+
+      @media screen and (max-width: 374px) {
+        width: 80px;
+        height: 80px;
+        margin-right: 24px;
       }
     }
 
@@ -1392,15 +1506,129 @@ async function changeDetails() {
       }
     }
 
+    &-wrapper {
+      display: flex;
+      align-items: flex-start;
+
+      @include media-breakpoint-down(lg) {
+        flex-direction: column;
+      }
+    }
+
+    &-column {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20%;
+
+      &:nth-child(1) {
+
+        @include media-breakpoint-down(lg) {
+          margin-left: 0;
+        }
+      }
+    }
+
     &-table {
+      margin-right: 3.722%;
       font-family: 'Rubik', sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
       line-height: 100%;
       color: #FFFFFF;
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+        margin-right: 0;
+      }
+
       & td {
         padding-bottom: 18px;
+      }
+    }
+
+    &-achievements {
+      display: flex;
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+        flex-direction: column;
+      }
+    }
+
+    &-rewards {
+      display: flex;
+      flex-direction: column;
+
+      @include media-breakpoint-down(sm) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    &-lvl {
+      width: 270px;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 100%;
+      margin-bottom: 26px;
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+      }
+
+      &--blue {
+        color: #5AF;
+      }
+
+      &--green {
+        color: #55FF8F;
+      }
+
+      &--purple {
+        color: #B455FF;
+      }
+
+      &--orange {
+        color: #FF9255;
+      }
+
+      &--red {
+        color: #F55;
+      }
+    }
+
+    &-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 9px;
+    }
+
+    &-progress {
+      width: 100%;
+      height: 2px;
+      position: relative;
+      border-radius: 2px;
+      background: #2B353F;
+    }
+
+    &-award {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin-bottom: 19px;
+
+      &--blue {
+        border: 1px solid #5AF;
+      }
+
+      &--purple {
+        border: 1px solid #B455FF;
+      }
+
+      &--red {
+        border: 1px solid #F55;
       }
     }
 
@@ -1434,6 +1662,45 @@ async function changeDetails() {
       font-weight: 500;
       line-height: 100%;
       margin-bottom: 35px;
+    }
+
+    &-form-label {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 100%;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    &-form-wrapper {
+      display: flex;
+      height: 40px;
+      border-radius: 4px;
+      border: 2px solid #20252B;
+      background: #0F1215;
+    }
+
+    &-form-link {
+      background: #20252B;
+      padding: 12px 10px 12px 12px;
+      color: #78828F;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 80%;
+    }
+
+    &-form-input {
+      background: none;
+      outline: none;
+      border: none;
+      color: #CCCDCD;
+      font-family: Rubik, sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 100%;
+      padding-left: 9px;
     }
 
     &-error {
@@ -1483,6 +1750,10 @@ async function changeDetails() {
       &--success {
         border: 2px solid #4CB725;
       }
+    }
+
+    &-buttons {
+      display: flex;
     }
 
     &-save {
