@@ -47,6 +47,10 @@ defineProps({
     width: 329px;
   }
 
+  @media screen and (max-width: 340px) {
+    width: 300px
+  }
+
   &__img {
     width: 100%;
     height: 200px;

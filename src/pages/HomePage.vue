@@ -961,7 +961,7 @@ const games = [
 
 .container {
 
-  @include media-breakpoint-down(xxs) {
+  @include media-breakpoint-down(xs) {
     padding: 0;
   }
 }
@@ -974,13 +974,9 @@ const games = [
   margin-top: 15px;
 
   @include media-breakpoint-down(xs) {
-    padding: 0 5px;
+    padding: 0 28px;
     margin-top: -6px;
     height: calc(100vh - 134px);
-  }
-
-  @include media-breakpoint-down(xxs) {
-    padding: 0 28px;
   }
 
   &__triangles {
@@ -1007,12 +1003,12 @@ const games = [
 
     @include media-breakpoint-down(sm) {
       padding-bottom: 10%;
+      padding-left: 23px;
+      padding-right: 23px;
     }
 
     @include media-breakpoint-down(xxs) {
       padding-bottom: 5%;
-      padding-left: 23px;
-      padding-right: 23px;
     }
   }
 
@@ -1112,7 +1108,7 @@ const games = [
   & .title {
     margin-bottom: 12px;
 
-    @include media-breakpoint-down(xxs) {
+    @include media-breakpoint-down(xs) {
       margin-left: 23px;
     }
   }
@@ -1123,10 +1119,11 @@ const games = [
 
   @include media-breakpoint-down(xs) {
     margin-top: 50px;
+    padding: 0 23px;
   }
 
-  @include media-breakpoint-down(xxs) {
-    padding: 0 23px;
+  @media screen and (max-width: 374px) {
+    padding: 0;
   }
 
   & .title {
@@ -1134,6 +1131,10 @@ const games = [
 
     @include media-breakpoint-down(xs) {
       margin-top: 0;
+    }
+
+    @media screen and (max-width: 374px) {
+      margin-left: 23px;
     }
   }
 
@@ -1184,6 +1185,14 @@ const games = [
       margin-top: 32px;
       padding-bottom: 26px;
     }
+
+    @media screen and (max-width: 374px) {
+      margin-left: 23px;
+    }
+
+    @media screen and (max-width: 340px) {
+      margin-left: 14px;
+    }
   }
 
   &__wrapper {
@@ -1212,6 +1221,10 @@ const games = [
 .stream {
   width: 329px;
   cursor: pointer;
+
+  @media screen and (max-width: 340px) {
+    width: 300px
+  }
 
   &-wrapper {
     position: relative;
@@ -1262,9 +1275,6 @@ const games = [
 
   @include media-breakpoint-down(xs) {
     margin-top: 50px;
-  }
-
-  @include media-breakpoint-down(xxs) {
     padding: 0 23px;
   }
 
@@ -1359,9 +1369,6 @@ const games = [
 
   @include media-breakpoint-down(xs) {
     margin-top: 66px;
-  }
-
-  @include media-breakpoint-down(xxs) {
     padding: 0 23px;
   }
 
@@ -1435,6 +1442,10 @@ const games = [
     @include media-breakpoint-down(xxs) {
       width: 329px!important;
     }
+
+    @media screen and (max-width: 340px) {
+      width: 300px!important;
+    }
   }
 }
 
@@ -1479,6 +1490,21 @@ const games = [
 
   & .swiper-slide {
     width: 329px;
+
+    @media screen and (max-width: 340px) {
+      width: 300px;
+    }
+
+    &:nth-last-child(1) {
+
+      @media screen and (max-width: 374px) {
+        margin-right: 23px;
+      }
+
+      @media screen and (max-width: 340px) {
+        margin-right: 14px;
+      }
+    }
   }
 
   & .swiper-pagination-bullet {
