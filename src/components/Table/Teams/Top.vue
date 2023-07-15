@@ -8,28 +8,28 @@
       <div class="top__btn-edit">
         <p>Edit mode</p>
       </div>
-      <div class="top__btn-last">
+      <RouterLink to="/table/new-team" class="top__btn-last">
         <p>Add Team</p>
-      </div>
+      </RouterLink>
     </div>
   </div>
-  
+
   </template>
-  
+
   <script setup>
   import IconSearch from '@/assets/icons/table/Search.vue'
   import IconStarCraft from '@/assets/icons/table/StarCraft.vue'
-  
-  
-  
+
+
+
   const iconArray = [IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft]
-  
-  
-  
-  
-  
+
+
+
+
+
   </script>
-  
+
   <style lang="scss" scoped>
   @import '@/assets/scss/media-breakpoints.scss';
   .top{
@@ -65,7 +65,7 @@
     &__icons{
       display: flex;
       margin-left: 30px;
-      
+
       .block{
         padding: 2px;
         padding-top: 4px;
@@ -78,18 +78,18 @@
       .block:nth-child(2){
         margin-left: 20px;
       }
-      
+
     }
     &__btn{
       display: flex;
       gap: 15px;
-      &-edit{ 
+      &-edit{
         padding: 14px 0px;
         width: 200px;
         max-width: 100%;
         background: #1A222D;
         p{
-          
+
           color: var(--white-96, #F5F5F5);
           text-align: center;
           font-size: 16px;
@@ -99,7 +99,7 @@
             font-size: 12px;
           }
         }
-        
+
       }
       &-last{
         padding: 14px 0px;
