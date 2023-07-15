@@ -1,12 +1,14 @@
 <template>
-  <div class="accordion" :class="{ 'accordion--active': isActive }" @click="$emit('open')">
+  <div class="accordion" @click="$emit('open')">
     <div class="accordion__title">
       <p>{{ title }}</p>
     </div>
 
-    <div class="accordion__content" v-if="isActive" @click.stop>
-      <slot />
-    </div>
+    <transition name="accordion">
+      <div class="accordion__content" v-if="isActive" @click.stop>
+        <slot />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -51,14 +53,18 @@ const props = defineProps({
     display: grid;
     cursor: default;
     overflow: hidden;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s;
-  }
-
-  &--active {
-    .accordion__content {
-      grid-template-rows: 1fr;
-    }
   }
 }
+
+.accordion-enter-from { max-height: 0 }
+
+.accordion-enter-to { max-height: 1200px }
+
+.accordion-enter-active { transition: max-height .4s }
+
+.accordion-leave-from { max-height: 1200px }
+
+.accordion-leave-to { max-height: 0 }
+
+.accordion-leave-active { transition: max-height .4s }
 </style>
