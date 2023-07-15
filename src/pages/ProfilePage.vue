@@ -244,9 +244,9 @@
 <!--        </div>-->
 
         <div class="profile__main-buttons">
-          <button class="profile__main-save" @click="deleteTeam">Delete team</button>
+          <button class="profile__main-save">Delete team</button>
 
-          <button class="profile__main-save" @click="submitForm">Save team</button>
+          <button class="profile__main-save">Save team</button>
         </div>
       </div>
 

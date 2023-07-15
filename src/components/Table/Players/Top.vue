@@ -8,9 +8,9 @@
     <div class="top__btn-edit">
       <p>Edit mode</p>
     </div>
-    <div class="top__btn-last">
+    <RouterLink to="/table/new-player" class="top__btn-last">
       <p> <span> + </span> Add player</p>
-    </div>
+    </RouterLink>
   </div>
 </div>
 
@@ -65,7 +65,7 @@ const iconArray = [IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft, I
   &__icons{
     display: flex;
     margin-left: 30px;
-    
+
     .block{
       padding: 2px;
       padding-top: 4px;
@@ -78,18 +78,18 @@ const iconArray = [IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft, I
     .block:nth-child(2){
       margin-left: 20px;
     }
-    
+
   }
   &__btn{
     display: flex;
     gap: 15px;
-    &-edit{ 
+    &-edit{
       padding: 14px 0px;
       width: 168px;
       max-width: 100%;
       background: #1A222D;
       p{
-        
+
         color: var(--white-96, #F5F5F5);
         text-align: center;
         font-size: 16px;
@@ -99,7 +99,7 @@ const iconArray = [IconStarCraft, IconStarCraft, IconStarCraft, IconStarCraft, I
           font-size: 12px;
         }
       }
-      
+
     }
     &-last{
       padding: 14px 0px;

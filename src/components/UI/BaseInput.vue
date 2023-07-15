@@ -37,16 +37,8 @@ function emitInput(event) {
 </script>
 
 <style scoped lang="scss">
-.input-wrapper {
-  margin-bottom: 16px;
-
-  &__label {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 100%;
-    color: #FFFFFF;
-    margin-bottom: 6px;
-  }
+.input {
+  height: 40px;
 }
 
 /* Chrome, Safari, Edge, Opera */

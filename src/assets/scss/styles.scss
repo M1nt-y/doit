@@ -225,7 +225,6 @@ h3 {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 100%;
   color: #627CA3;
   transition: all .4s;
 
@@ -252,5 +251,35 @@ h3 {
 
   &--success {
     border: 1px solid #4CB725;
+  }
+}
+
+.input-wrapper {
+  margin-bottom: 16px;
+
+  &__label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    color: #FFFFFF;
+    margin-bottom: 6px;
+  }
+}
+
+.select-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+
+  &__label {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 100%;
+    margin-bottom: 6px;
+  }
+
+  &__error-message {
+    color: #B83333;
+    margin-top: 4px;
   }
 }
