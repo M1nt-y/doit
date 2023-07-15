@@ -1,9 +1,9 @@
 <template>
-  <main class="main new-entry">
+  <main class="main new-entry" @click="closeSelect">
     <div class="container">
       <div class="new-entry__title">New/Edit {{ title }}</div>
 
-      <TheAccordion title="Basic info" :is-active="infoOpened" @open="infoOpened = !infoOpened">
+      <TheAccordion v-if="title === 'Player'" title="Basic info" :is-active="playerInfo" @open="playerInfo = !playerInfo">
         <div class="new-entry__form">
           <BaseInput
               label="Full name"
@@ -64,7 +64,185 @@
         </div>
       </TheAccordion>
 
-      <TheAccordion title="Advanced" />
+      <TheAccordion v-else-if="title === 'Team'" title="Basic info" :is-active="teamInfo" @open="teamInfo = !teamInfo">
+        <div class="new-entry__form">
+          <BaseInput
+              label="Team name"
+              placeholder="Team name"
+              v-model="formData.teamName"
+          />
+
+          <BaseInput
+              label="ID"
+              placeholder="ID"
+              v-model="formData.teamId"
+          />
+
+          <BaseSelect
+              label="Game"
+              v-model="formData.teamGame"
+              :options="games"
+              placeholder="Select game"
+              :active="selectGame"
+              @click="selectGame = !selectGame"
+          />
+
+          <BaseInput
+              label="Team leader"
+              placeholder="Team leader"
+              v-model="formData.teamLeader"
+          />
+
+          <BaseSelect
+              label="Country"
+              v-model="formData.teamCountry"
+              :options="countries"
+              placeholder="Select country"
+              :active="selectCountry"
+              has-search
+              @click="selectCountry = !selectCountry"
+          />
+
+          <BaseInput
+              label="Web-site"
+              placeholder="Web-site"
+              v-model="formData.teamWebsite"
+          />
+
+          <p class="new-entry__form-label">URL</p>
+
+          <div class="new-entry__form-wrapper">
+            <div class="new-entry__form-link">doit.gg/team</div>
+
+            <input class="new-entry__form-input" v-model="formData.teamUrl" />
+          </div>
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-else-if="title === 'Tournament'" title="Basic info" :is-active="tournamentInfo" @open="tournamentInfo = !tournamentInfo">
+        <div class="new-entry__form">
+          <BaseInput
+              label="Host"
+              placeholder="Host"
+              v-model="formData.tournamentHost"
+          />
+
+          <BaseInput
+              label="Tournament name"
+              placeholder="Tournament name"
+              v-model="formData.tournamentName"
+          />
+
+          <p class="new-entry__form-label">URL</p>
+
+          <div class="new-entry__form-wrapper">
+            <div class="new-entry__form-link">doit.gg/</div>
+
+            <input class="new-entry__form-input" v-model="formData.tournamentUrl" />
+          </div>
+
+          <p class="new-entry__form-label">Quick Rules</p>
+
+          <textarea class="new-entry__form-textarea" />
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="GAME INFO" :is-active="tournamentGame" @open="tournamentGame = !tournamentGame">
+        <div class="new-entry__form">
+          <BaseSelect
+              label="Game"
+              v-model="formData.tournamentGame"
+              :options="games"
+              placeholder="Select game"
+              :active="selectGame"
+              @click="selectGame = !selectGame"
+          />
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="REGISTRATION" :is-active="tournamentRegistration" @open="tournamentRegistration = !tournamentRegistration">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="if Paid" :is-active="tournamentPaid" @open="tournamentPaid = !tournamentPaid">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="Player list" :is-active="tournamentPlayers" @open="tournamentPlayers = !tournamentPlayers">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="Leagues" :is-active="tournamentLeagues" @open="tournamentLeagues = !tournamentLeagues">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="Prize pool" :is-active="tournamentPrize" @open="tournamentPrize = !tournamentPrize">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="VOTING" :is-active="tournamentVoting" @open="tournamentVoting = !tournamentVoting">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="Additional requirements" :is-active="tournamentAdditional" @open="tournamentAdditional = !tournamentAdditional">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="Extra" :is-active="tournamentExtra" @open="tournamentExtra = !tournamentExtra">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="Streams" :is-active="tournamentStreams" @open="tournamentStreams = !tournamentStreams">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="Sponsors" :is-active="tournamentSponsors" @open="tournamentSponsors = !tournamentSponsors">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Tournament'" title="Rules" :is-active="tournamentRules" @open="tournamentRules = !tournamentRules">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-else-if="title === 'Team'" title="Players" :is-active="teamPlayers" @open="teamPlayers = !teamPlayers">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-if="title === 'Player'" title="Advanced" :is-active="playerAdvanced" @open="playerAdvanced = !playerAdvanced">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
+
+      <TheAccordion v-else-if="title === 'Team'" title="Advanced" :is-active="teamAdvanced" @open="teamAdvanced = !teamAdvanced">
+        <div class="new-entry__form">
+
+        </div>
+      </TheAccordion>
     </div>
   </main>
 </template>
@@ -89,7 +267,7 @@ onBeforeMount(async () => {
     if (isValid) {
       return
     }
-    isValid = route.params.entry === entry;
+    isValid = route.params.entry.toLowerCase() === entry;
   })
   if (!isValid) {
     await router.push('/table')
@@ -97,14 +275,33 @@ onBeforeMount(async () => {
 })
 
 const title = computed(() => {
-  return route.params.entry
+  return route.params.entry.charAt(0).toUpperCase() + route.params.entry.slice(1)
 })
 
-const infoOpened = ref(false)
+const playerInfo = ref(false)
+const playerAdvanced = ref(false)
 
+const teamInfo = ref(false)
+const teamPlayers = ref(false)
+const teamAdvanced = ref(false)
+
+const tournamentInfo = ref(false)
+const tournamentGame = ref(false)
+const tournamentRegistration = ref(false)
+const tournamentPaid = ref(false)
+const tournamentPlayers = ref(false)
+const tournamentLeagues = ref(false)
+const tournamentPrize = ref(false)
+const tournamentVoting = ref(false)
+const tournamentAdditional = ref(false)
+const tournamentExtra = ref(false)
+const tournamentStreams = ref(false)
+const tournamentSponsors = ref(false)
+const tournamentRules = ref(false)
 
 const selectCountry = ref(false)
 const selectGender = ref(false)
+const selectGame = ref(false)
 
 const countries = [
   {name: 'Afghanistan', code: 'AF'},
@@ -365,10 +562,41 @@ const genders = [
     name: 'Other'
   },
 ]
+const games = [
+  {
+    id: 0,
+    name: 'Dota ll'
+  },
+  {
+    id: 1,
+    name: 'CS:GO'
+  },
+  {
+    id: 2,
+    name: 'StarCraft ll'
+  },
+  {
+    id: 3,
+    name: 'WarCraft lll'
+  },
+  {
+    id: 4,
+    name: 'FIFA 2020'
+  },
+  {
+    id: 5,
+    name: 'Valorant'
+  },
+  {
+    id: 6,
+    name: 'BrawlStars'
+  }
+]
 
 function closeSelect() {
   selectCountry.value = false
   selectGender.value = false
+  selectGame.value = false
 }
 
 const formData = ref({
@@ -379,7 +607,19 @@ const formData = ref({
   userCountry: '',
   userNationality: '',
   userWebsite: '',
-  userUrl: ''
+  userUrl: '',
+  teamName: '',
+  teamId: '',
+  teamGame: '',
+  teamLeader: '',
+  teamCountry: '',
+  teamWebsite: '',
+  teamUrl: '',
+  tournamentHost: '',
+  tournamentName: '',
+  tournamentUrl: '',
+  tournamentRules: '',
+  tournamentGame: ''
 })
 
 </script>
@@ -414,11 +654,11 @@ const formData = ref({
     margin-top: 30px;
 
     &-label {
-      font-weight: 400;
-      font-size: 14px;
+      color: #CCCDCD;
+      font-size: 16px;
+      font-weight: 700;
       line-height: 100%;
-      color: #FFFFFF;
-      margin-bottom: 6px;
+      margin-bottom: 12px;
     }
 
     &-wrapper {
@@ -427,6 +667,7 @@ const formData = ref({
       border-radius: 4px;
       border: 2px solid #20252B;
       background: #0F1215;
+      margin-bottom: 22px;
     }
 
     &-link {
@@ -448,9 +689,36 @@ const formData = ref({
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
-      line-height: 100%;
       padding-left: 9px;
     }
+
+    &-textarea {
+      width: 100%;
+      resize: none;
+      border-radius: 4px;
+      padding: 12px 16px;
+      border: 2px solid #20252B;
+      background: #0F1215;
+      aspect-ratio: 1 / 0.36;
+      color: #CCCDCD;
+      font-family: Rubik, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+    }
   }
+}
+</style>
+
+<style>
+.input-wrapper {
+  margin-bottom: 22px;
+}
+.select-wrapper__label,
+.input-wrapper__label {
+  color: #CCCDCD;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: 12px;
 }
 </style>
