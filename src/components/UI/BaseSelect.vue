@@ -26,8 +26,6 @@
         </ul>
       </div>
     </transition>
-
-    <!--  Errors?  -->
   </div>
 </template>
 
@@ -101,30 +99,12 @@ function selectOption(option) {
 
   &__arrow {
     position: absolute;
-    top: 14px;
+    top: 16px;
     right: 16px;
     content: '';
     width: 14px;
     height: 7px;
     background: url("/src/assets/images/arrow.svg") center;
-  }
-}
-
-.select-wrapper {
-  position: relative;
-  margin-bottom: 16px;
-
-  &__label {
-    color: #FFFFFF;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 100%;
-    margin-bottom: 6px;
-  }
-
-  &__error-message {
-    color: #B83333;
-    margin-top: 4px;
   }
 }
 
