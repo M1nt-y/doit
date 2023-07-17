@@ -157,78 +157,385 @@
               :active="selectGame"
               @click="selectGame = !selectGame"
           />
+          <div class="new-entry__form-type" style="margin-top: 9px; margin-bottom: 15px;">
+            <h5>Type</h5>
+            <BaseRadio v-for="(item, index) in inputText" :text="item.text" :state="item.state" @click="updateStateInputText(index)" style="margin-top: 12px;"/>
+          </div>
+          <BaseSelect
+              label="Format*"
+              v-model="formData.tournamentGame"
+              :options="games"
+              placeholder="Select game"
+              :active="selectGameTWO"
+              @click="selectGameTWO = !selectGameTWO"
+          />
+          <div class="new-entry__form-chck" style="display: flex; gap: 8px; align-items: center;">
+            <BaseCheckbox/>
+            <h5 style="color: #CCCDCD; font-size: 16px; font-weight: 400;">Include a match for 3rd place</h5>
+          </div>
+          <div class="new-entry__form-mode" style="display: flex; justify-content: space-between; margin-top: 13px;">
+            <div class="one" style="width: 108px;">
+              <BaseSelect
+              label="Mode*"
+              v-model="formData.tournamentGame"
+              :options="mode"
+              placeholder="Select game"
+              :active="selectMode"
+              @click="selectMode = !selectMode"
+              />
+            </div>
+            <div class="two" style="width: 276px;">
+              <BaseSelect
+              label="Map voting system"
+              v-model="formData.tournamentGame"
+              :options="games"
+              placeholder="Select game"
+              :active="selectMap"
+              @click="selectMap = !selectMap"
+              />
+            </div>
+          </div>
+          <div class="new-entry__form-inp">
+            <CompInput :title="'Main Banner 370x200*'"/>
+            <CompInput style="margin-top: 19px;" :title="'Torunamnet background min 2000 x 3000'"/>
+          </div>
         </div>
       </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="REGISTRATION" :is-active="tournamentRegistration" @open="tournamentRegistration = !tournamentRegistration">
         <div class="new-entry__form">
-
+          <div class="new-entry__form-btn">
+            <BTNform/>
+          </div>
+          <div class="new-entry__form-timer" style="margin-top: 30px;">
+            <Timerform :title="'Start time*'"/>
+            <Timerform :title="'Estimated end*'" style="margin-top: 21px;"/>
+          </div>
+          <div class="new-entry__form-chck" style="display: flex; gap: 8px; align-items: center;">
+            <BaseCheckbox/>
+            <h5 style="color: #CCCDCD; font-size: 16px; font-weight: 400;">Checkin Time</h5>
+          </div>
+          <div class="new-entry__form-min">
+            <BaseSelect
+              :options="minutes"
+              placeholder="Select game"
+              :active="selectMituntes"
+              @click="selectMituntes = !selectMituntes"
+              style="width: 160px"
+            />
+          </div>
+          <h6 style="font-size: 16px; color: #3C434D; margin-top: 30px; font-weight: 400;">(GMT -05:00) Eastern time — set the time zone from your <span style="color: #2281F2;">settings</span> </h6>
         </div>
       </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="if Paid" :is-active="tournamentPaid" @open="tournamentPaid = !tournamentPaid">
         <div class="new-entry__form">
-
+          <div class="new-entry__form-if" style="display: flex; align-items: center; gap: 20px">
+            <p>Register cost</p>
+            <BaseInput style="margin: 0;"/>
+          </div>
         </div>
       </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="Player list" :is-active="tournamentPlayers" @open="tournamentPlayers = !tournamentPlayers">
         <div class="new-entry__form">
-
+          <div class="new-entry__form-btn-block" style="display: flex; gap: 19px">
+            <button class="btn-block-exponsive">List of players</button>
+            <button class="btn-block-exponsive">Edit list of players</button>
+          </div>
+          <div class="new-entry__form-chck" style="display: flex; gap: 8px; align-items: center; margin-top: 30px;">
+            <BaseCheckbox/>
+            <h5 style="color: #CCCDCD; font-size: 16px; font-weight: 400;">Don’t show tournamnet on website</h5>
+          </div>
         </div>
       </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="Leagues" :is-active="tournamentLeagues" @open="tournamentLeagues = !tournamentLeagues">
         <div class="new-entry__form">
-
+          <div class="new-entry__form-top-info" style="display: flex; align-items: center; gap: 25px">
+            <p>Connect tournament with league</p>
+            <button class="btn-block-exponsive">Choose League</button>
+          </div>
+          <div class="new-entry__form-chck" style="display: flex; gap: 8px; align-items: center; margin-top: 30px;">
+            <BaseCheckbox/>
+            <h5 style="color: #CCCDCD; font-size: 16px; font-weight: 400;">Only League System</h5>
+          </div>
         </div>
       </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="Prize pool" :is-active="tournamentPrize" @open="tournamentPrize = !tournamentPrize">
         <div class="new-entry__form">
-
+          <div class="new-entry__form-inp-top" style="display: flex; gap: 20px; flex-direction: column;" >
+            <div class="one" style="display: flex; align-items: center; gap: 8px">
+              <p style="color: #CCCDCD; font-weight: 700;">Prize pool</p>
+              <BaseInput style="margin: 0;"/>
+            </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px">
+              <p style="color: #CCCDCD; font-weight: 700;">MAX players/teams number:</p>
+              <BaseInput style="margin: 0;"/>
+            </div>
+          </div>
+          <div class="new-entry__form-chck" style="display: flex; gap: 8px; align-items: center; margin-top: 30px;">
+            <BaseCheckbox/>
+            <h5 style="color: #CCCDCD; font-size: 16px; font-weight: 400;">3rd place turn on?</h5>
+          </div>
+          <div class="new-entry__form-typed" style="display: flex; justify-content: space-between;">
+            <div class="block" style="width: 250px;">
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">1st   place:</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+              </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px;  margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">2st   place:</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px;  margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">3st   place:</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px;  margin-top: 10px; margin-bottom: 40px;">
+              <p style="color: #CCCDCD; font-weight: 700;">4st   place:</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <BaseRadio v-for="(item, index) in typeText" :text="item.text" :state="item.state" @click="updateStateTypeText(index)" style="margin-top: 12px;"/>
+            </div>
+            <div class="block" style="width: 250px;">
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">Ro8</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px;  margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">Ro16</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px;  margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">Ro32</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px;  margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">Ro64</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px;  margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">Ro128</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px;  margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">Ro256</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <div class="one" style="display: flex; align-items: center; gap: 8px;  margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">Ro512</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+            </div>
+            <BaseRadio v-for="(item, index) in typeSelect" :text="item.text" :state="item.state" @click="updateStateSelectText(index)" style="margin-top: 12px;"/>
+            </div>
+          </div>
+          <!-- <div class="new-entry__form-chsd">
+            <BaseRadio v-for="(item, index) in typeText" :text="item.text" :state="item.state" @click="updateStateTypeText(index)" style="margin-top: 12px;"/>
+          </div> -->
         </div>
       </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="VOTING" :is-active="tournamentVoting" @open="tournamentVoting = !tournamentVoting">
         <div class="new-entry__form">
-
+          <div class="new-entry__form-chck" style="display: flex; gap: 8px; align-items: center; margin-top: 10px;">
+            <BaseCheckbox/>
+            <h5 style="color: #CCCDCD; font-size: 16px; font-weight: 400;">Allow registred users in tournamnet to provide scores for every match</h5>
+          </div>
+          <div class="new-entry__form-chck" style="display: flex; gap: 8px; align-items: center; margin-top: 30px;">
+            <BaseCheckbox/>
+            <h5 style="color: #CCCDCD; font-size: 16px; font-weight: 400;">Allow regsitred users only in their match to provide scores</h5>
+          </div>
         </div>
       </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="Additional requirements" :is-active="tournamentAdditional" @open="tournamentAdditional = !tournamentAdditional">
         <div class="new-entry__form">
-
+          <div class="new-entry__form-flex" style="display: flex; justify-content: space-between;">
+            <div class="block">
+              <div class="one" style="display: flex; gap: 8px; align-items: center;">
+                <BaseCheckbox/>
+                <p style="color: #CCCDCD;  font-weight: 400;">PSN Account</p>
+              </div>
+              <div class="one" style="display: flex; gap: 8px; align-items: center; margin-top: 17px;">
+                <BaseCheckbox/>
+                <p style="color: #CCCDCD;  font-weight: 400;">Xbox Account</p>
+              </div>
+              <div class="one" style="display: flex; gap: 8px; align-items: center; margin-top: 17px;">
+                <BaseCheckbox/>
+                <p style="color: #CCCDCD;  font-weight: 400;">Steam Account</p>
+              </div>
+              <div class="one" style="display: flex; gap: 8px; align-items: center; margin-top: 17px;">
+                <BaseCheckbox/>
+                <p style="color: #CCCDCD;  font-weight: 400;">League of Legends Account</p>
+              </div>
+              <div class="one" style="display: flex; gap: 8px; align-items: center; margin-top: 17px;">
+                <BaseCheckbox/>
+                <p style="color: #CCCDCD;  font-weight: 400;">Blizzard Account</p>
+              </div>
+              <div class="one" style="display: flex; gap: 8px; align-items: center; margin-top: 17px;">
+                <BaseCheckbox/>
+                <p style="color: #CCCDCD;  font-weight: 400;">Steam Account</p>
+              </div>
+            </div>
+            <div class="block" style="width: 260px;">
+              <div class="one" style="display: flex; align-items: center; gap: 8px">
+                <p>Country:</p>
+                <button class="btn-block-exponsive">Choose country</button>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+              <p style="color: #CCCDCD; font-weight: 700;">Min Age:</p>
+              <BaseInput style="margin: 0; width: 140px"/>
+              </div>
+            </div>
+          </div>
         </div>
       </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="Extra" :is-active="tournamentExtra" @open="tournamentExtra = !tournamentExtra">
         <div class="new-entry__form">
-
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px;">Lobby</p>
+            <BaseInput/>
+          </div>
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px;">Mode</p>
+            <BaseInput/>
+          </div>
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px;">VETO</p>
+            <BaseInput/>
+          </div>
+          <div class="flex-item" style="display: flex; justify-content: space-between;">
+            <div class="flex">
+              <h4 style="color: #F5F5F5; font-size: 24px;">Server region</h4>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">europe nordic & east </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">Europe West </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">Australia & Oceania </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">china </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">Asia </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">Amercia </p>
+              </div>
+              
+            </div>
+            <div class="flex">
+              <h4 style="color: #F5F5F5; font-size: 24px;">Platform</h4>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">PC </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">Xbox one </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">ps4 </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">nintendo switch </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">PS5 </p>
+              </div>
+              <div class="one" style="display: flex; align-items: center; gap: 8px; margin-top: 12px;">
+                <BaseCheckbox/>
+                <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">Xbox Series X </p>
+              </div>
+              
+            </div>
+          </div>
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px; margin-top: 30px;">Discord URL</p>
+            <BaseInput/>
+          </div>
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px; margin-top: 30px;">Facebook URL</p>
+            <BaseInput/>
+          </div>
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px; margin-top: 30px;">Twitter URL</p>
+            <BaseInput/>
+          </div>
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px; margin-top: 30px;">VK URL</p>
+            <BaseInput/>
+          </div>
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px; margin-top: 30px;">Twitch URL</p>
+            <BaseInput/>
+          </div>
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px; margin-top: 30px;">Youtube URL</p>
+            <BaseInput/>
+          </div>
         </div>
       </TheAccordion>
 
-      <TheAccordion v-if="title === 'Tournament'" title="Streams" :is-active="tournamentStreams" @open="tournamentStreams = !tournamentStreams">
-        <div class="new-entry__form">
-
-        </div>
-      </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="Sponsors" :is-active="tournamentSponsors" @open="tournamentSponsors = !tournamentSponsors">
         <div class="new-entry__form">
-
+          <div class="block">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px;">Sponsor logo #1</p>
+            <div class="info" style="display: flex;  justify-content: space-between;">
+              <BaseInput
+              placeholder="banner url" style="margin: 0; width: 339px;"/>
+              <button style="color: var(--white-96, #F5F5F5); text-align: center; font-size: 10px; background: #1A222D; width: 157px;">UPLOAD</button>
+            </div>
+            
+          </div>
+          <div class="block" style="margin-top: 10px;">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px;">Sponsor logo #2</p>
+            <div class="info" style="display: flex;  justify-content: space-between;">
+              <BaseInput
+              placeholder="banner url" style="margin: 0; width: 339px;"/>
+              <button style="color: var(--white-96, #F5F5F5); text-align: center; font-size: 10px; background: #1A222D; width: 157px;">UPLOAD</button>
+            </div>
+            
+          </div>
+          <div class="block" style="margin-top: 10px;">
+            <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px;">Sponsor logo #3</p>
+            <div class="info" style="display: flex;  justify-content: space-between;">
+              <BaseInput
+              placeholder="banner url" style="margin: 0; width: 339px;"/>
+              <button style="color: var(--white-96, #F5F5F5); text-align: center; font-size: 10px; background: #1A222D; width: 157px;">UPLOAD</button>
+            </div>
+            
+          </div>
+          <button style="color: var(--white-96, #F5F5F5); text-align: center; font-size: 16px; font-weight: 700; display: block; margin: 0 auto; width: 187px; background: #1A222D; margin-top: 35px; padding: 16px 0px;">+ Add Sponsor </button>
         </div>
       </TheAccordion>
 
       <TheAccordion v-if="title === 'Tournament'" title="Rules" :is-active="tournamentRules" @open="tournamentRules = !tournamentRules">
         <div class="new-entry__form">
-
+          <p class="new-entry__form-label">Rules</p>
+          <textarea class="new-entry__form-textarea" />
         </div>
       </TheAccordion>
 
       <TheAccordion v-else-if="title === 'Team'" title="Players" :is-active="teamPlayers" @open="teamPlayers = !teamPlayers">
         <div class="new-entry__form">
-
+          
         </div>
       </TheAccordion>
 
@@ -240,7 +547,7 @@
 
       <TheAccordion v-else-if="title === 'Team'" title="Advanced" :is-active="teamAdvanced" @open="teamAdvanced = !teamAdvanced">
         <div class="new-entry__form">
-
+    
         </div>
       </TheAccordion>
     </div>
@@ -253,8 +560,11 @@ import { useRoute, useRouter } from 'vue-router'
 import TheAccordion from '@/components/TheAccordion.vue'
 import BaseInput from '@/components/UI/BaseInput.vue'
 import BaseSelect from '@/components/UI/BaseSelect.vue'
-
-
+import BaseRadio from '@/components/UI/BaseRadio.vue'
+import BaseCheckbox from '@/components/UI/BaseCheckbox.vue'
+import CompInput from '@/components/Table/Form/Input.vue'
+import BTNform from '@/components/Table/Form/Btn.vue'
+import Timerform from '@/components/Table/Form/Timer.vue'
 const route = useRoute()
 const router = useRouter()
 
@@ -302,7 +612,10 @@ const tournamentRules = ref(false)
 const selectCountry = ref(false)
 const selectGender = ref(false)
 const selectGame = ref(false)
-
+const selectGameTWO = ref(false)
+const selectMode = ref(false);
+const selectMap = ref(false);
+const selectMituntes = ref(false);
 const countries = [
   {name: 'Afghanistan', code: 'AF'},
   {name: 'Åland Islands', code: 'AX'},
@@ -592,12 +905,122 @@ const games = [
     name: 'BrawlStars'
   }
 ]
+const inputText = ref([
+  {
+    id: 0,
+    text: 'Single stage tournament' ,
+    state: true,
+  },
+  {
+    id: 0,
+    text: 'Two stage tournament' ,
+    state: true,
+  }
+])
+function updateStateInputText(index) {
+    inputText.value.forEach((item, i) => {
+      if (i === index) {
+        item.state = false;
+      } else {
+        item.state = true;
+      }
+    });
+  }
 
+const mode = [
+  {
+    name: '5v5',
+  },
+  {
+    name: '4v4',
+  },
+  {
+    name: '3v3',
+  },
+  {
+    name: '2v2',
+  },
+  {
+    name: '1v1',
+  },
+]
+const typeText = ref([
+  {
+    id: 0,
+    text: 'Money' ,
+    state: true,
+  },
+  {
+    id: 1,
+    text: 'Thing' ,
+    state: true,
+  },
+  {
+    id: 2,
+    text: 'Money + Thing' ,
+    state: true,
+  },
+  {
+    id: 3,
+    text: 'Nothing' ,
+    state: true,
+  },
+  {
+    id: 4,
+    text: 'Qualifers' ,
+    state: true,
+  }
+])
+
+const typeSelect = ref([
+  {
+    id: 0,
+    text: 'Active' ,
+    state: true,
+  },
+  {
+    id: 1,
+    text: 'No Active' ,
+    state: true,
+  },
+])
+function updateStateTypeText(index) {
+  typeText.value.forEach((item, i) => {
+      if (i === index) {
+        item.state = false;
+      } else {
+        item.state = true;
+      }
+    });
+  }
+  function updateStateSelectText(index) {
+    typeSelect.value.forEach((item, i) => {
+      if (i === index) {
+        item.state = false;
+      } else {
+        item.state = true;
+      }
+    });
+  }
 function closeSelect() {
   selectCountry.value = false
   selectGender.value = false
   selectGame.value = false
 }
+const minutes = [
+  {
+    id: 0,
+    name: '30 minute',
+  },
+  {
+    id: 1,
+    name: '10 minute',
+  },
+  {
+    id: 2,
+    name: '20 minute',
+  },
+]
 
 const formData = ref({
   userName: '',
@@ -720,5 +1143,11 @@ const formData = ref({
   font-weight: 700;
   line-height: 100%;
   margin-bottom: 12px;
+}
+.btn-block-exponsive{
+  padding: 12px 22px;
+  color: #0A61E1;
+  background: #1A222D;
+  font-weight: 700;
 }
 </style>
