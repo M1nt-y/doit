@@ -434,7 +434,7 @@
                 <BaseCheckbox/>
                 <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">Amercia </p>
               </div>
-              
+
             </div>
             <div class="flex">
               <h4 style="color: #F5F5F5; font-size: 24px;">Platform</h4>
@@ -462,7 +462,7 @@
                 <BaseCheckbox/>
                 <p style="text-transform: uppercase; color: #67707A; font-size: 16px;">Xbox Series X </p>
               </div>
-              
+
             </div>
           </div>
           <div class="block">
@@ -500,29 +500,29 @@
             <div class="info" style="display: flex;  justify-content: space-between;">
               <BaseInput
               placeholder="banner url" style="margin: 0; width: 339px;"/>
-              <button style="color: var(--white-96, #F5F5F5); text-align: center; font-size: 10px; background: #1A222D; width: 157px;">UPLOAD</button>
+              <button style="color: #F5F5F5; text-align: center; font-size: 10px; background: #1A222D; width: 157px;">UPLOAD</button>
             </div>
-            
+
           </div>
           <div class="block" style="margin-top: 10px;">
             <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px;">Sponsor logo #2</p>
             <div class="info" style="display: flex;  justify-content: space-between;">
               <BaseInput
               placeholder="banner url" style="margin: 0; width: 339px;"/>
-              <button style="color: var(--white-96, #F5F5F5); text-align: center; font-size: 10px; background: #1A222D; width: 157px;">UPLOAD</button>
+              <button style="color: #F5F5F5; text-align: center; font-size: 10px; background: #1A222D; width: 157px;">UPLOAD</button>
             </div>
-            
+
           </div>
           <div class="block" style="margin-top: 10px;">
             <p style="color: #CCCDCD; font-size: 16px; font-weight: 700; margin-bottom: 12px;">Sponsor logo #3</p>
             <div class="info" style="display: flex;  justify-content: space-between;">
               <BaseInput
               placeholder="banner url" style="margin: 0; width: 339px;"/>
-              <button style="color: var(--white-96, #F5F5F5); text-align: center; font-size: 10px; background: #1A222D; width: 157px;">UPLOAD</button>
+              <button style="color: #F5F5F5; text-align: center; font-size: 10px; background: #1A222D; width: 157px;">UPLOAD</button>
             </div>
-            
+
           </div>
-          <button style="color: var(--white-96, #F5F5F5); text-align: center; font-size: 16px; font-weight: 700; display: block; margin: 0 auto; width: 187px; background: #1A222D; margin-top: 35px; padding: 16px 0px;">+ Add Sponsor </button>
+          <button style="color: #F5F5F5; text-align: center; font-size: 16px; font-weight: 700; display: block; width: 187px; background: #1A222D; margin: 35px auto 0; padding: 16px 0;">+ Add Sponsor </button>
         </div>
       </TheAccordion>
 
@@ -535,7 +535,7 @@
 
       <TheAccordion v-else-if="title === 'Team'" title="Players" :is-active="teamPlayers" @open="teamPlayers = !teamPlayers">
         <div class="new-entry__form">
-          
+
         </div>
       </TheAccordion>
 
@@ -547,7 +547,7 @@
 
       <TheAccordion v-else-if="title === 'Team'" title="Advanced" :is-active="teamAdvanced" @open="teamAdvanced = !teamAdvanced">
         <div class="new-entry__form">
-    
+
         </div>
       </TheAccordion>
     </div>
@@ -919,11 +919,7 @@ const inputText = ref([
 ])
 function updateStateInputText(index) {
     inputText.value.forEach((item, i) => {
-      if (i === index) {
-        item.state = false;
-      } else {
-        item.state = true;
-      }
+      item.state = i !== index;
     });
   }
 
@@ -986,20 +982,12 @@ const typeSelect = ref([
 ])
 function updateStateTypeText(index) {
   typeText.value.forEach((item, i) => {
-      if (i === index) {
-        item.state = false;
-      } else {
-        item.state = true;
-      }
+      item.state = i !== index;
     });
   }
   function updateStateSelectText(index) {
     typeSelect.value.forEach((item, i) => {
-      if (i === index) {
-        item.state = false;
-      } else {
-        item.state = true;
-      }
+      item.state = i !== index;
     });
   }
 function closeSelect() {
