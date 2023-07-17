@@ -124,7 +124,7 @@ const players = [
         width: 157px;
       }
       img{
-        width: 170x;
+        width: 170px;
         height: 170px;
         @media(max-width: 1863px){
           width: 100%;

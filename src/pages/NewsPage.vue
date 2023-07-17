@@ -175,7 +175,13 @@ const news = [
       }
     }
 
-    &:nth-child(1),
+    &:nth-child(1) {
+
+      @include media-breakpoint-down(lg) {
+        margin-right: 0;
+      }
+    }
+
     &:nth-child(4) {
 
       @include media-breakpoint-down(md) {
@@ -193,7 +199,15 @@ const news = [
         padding: 24px 34px 34px;
       }
 
-      @include media-breakpoint-down(md) {
+      .news__card-img {
+        min-height: 328px;
+
+        @include media-breakpoint-down(sm) {
+          min-height: 160px;
+        }
+      }
+
+      @include media-breakpoint-down(lg) {
         width: 100%;
         margin-bottom: 16px;
 

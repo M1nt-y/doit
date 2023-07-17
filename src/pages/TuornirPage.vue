@@ -59,7 +59,7 @@
             </div>
             </router-link>
           </div>
-            
+
         </div>
         <ElemetTournir
         :array="tournir"
@@ -74,13 +74,13 @@
           <div class="mode">
             <h3>Game mode</h3>
             <div class="con">
-              <div class="item" 
+              <div class="item"
               v-for="(item, index) in mode"
               :class="{ active: item.state }"
               @click="toggleState(index)">
                 <TwoState v-if="item.state"/>
                 <OneState v-else/>
-                
+
                 <p>{{ item.title }}</p>
               </div>
             </div>
@@ -88,13 +88,13 @@
           <div class="status">
             <h4>Status</h4>
             <div class="con">
-              <div class="item" 
+              <div class="item"
               v-for="(item, index) in status"
               :class="{ active: item.state }"
               @click="toggleStateStatus(index)">
                 <TwoState v-if="item.state"/>
                 <OneState v-else/>
-                
+
                 <p>{{ item.title }}</p>
               </div>
             </div>
@@ -102,7 +102,7 @@
           <div class="platform">
             <h4>Platform</h4>
             <div class="con">
-              <div class="item" 
+              <div class="item"
               v-for="(item, index) in platform"
               :class="{ active: item.state }"
               @click="toggleStatePlatform(index)">
@@ -115,7 +115,7 @@
           <div class="region">
             <h4>Server region</h4>
             <div class="con">
-              <div class="item" 
+              <div class="item"
               v-for="(item, index) in region"
               :class="{ active: item.state }"
               @click="toggleStateRegion(index)">
@@ -289,7 +289,7 @@ const mode = ref([
 function toggleState(index) {
   const selectedItem = mode.value[index];
   selectedItem.state = !selectedItem.state;
-  
+
   if (selectedItem.state) {
     clone.value.push(selectedItem);
   } else {
@@ -316,7 +316,7 @@ const status = ref([
 function toggleStateStatus(index){
   const selectedItem = status.value[index];
   selectedItem.state = !selectedItem.state;
-  
+
   if (selectedItem.state) {
     clone.value.push(selectedItem);
   } else {
@@ -395,7 +395,7 @@ const region = ref([
 function toggleStateRegion(index){
   const selectedItem = region.value[index];
   selectedItem.state = !selectedItem.state;
-  
+
   if (selectedItem.state) {
     clone.value.push(selectedItem);
   } else {
@@ -443,7 +443,6 @@ const resetFilters = () => {
 const isMobile = ref(window.innerWidth < 576);
 window.addEventListener('resize', () => {
   isMobile.value = window.innerWidth < 576;
-  console.log(isMobile.value)
 });
 const clone = ref([])
 function deleteElem(index, arrayName) {
@@ -538,6 +537,7 @@ function opened(index){
             margin-bottom: 16px;
           }
           .img{
+            height: 128px;
             position: relative;
             p{
               position: absolute;
@@ -550,6 +550,9 @@ function opened(index){
               padding-left: 14px;
               padding-right: 14px;
               background: #0A68F5;
+            }
+            img {
+              height: 100%;
             }
           }
           .text{
@@ -608,7 +611,7 @@ function opened(index){
     &-right{
       max-width: 281px;
       width: 100%;
-     
+
 
       .info{
         margin-top: 19px;
@@ -636,7 +639,7 @@ function opened(index){
         }
         .mode{
           margin-top: 48px;
-          
+
           h3{
             color: #F5F5F5;
             font-size: 24px;

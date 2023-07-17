@@ -225,6 +225,7 @@ const background = computed(() => {
 
     &-logo {
       width: 100%;
+      height: 64px;
       max-width: 72px;
       margin-right: 8.058%;
 
